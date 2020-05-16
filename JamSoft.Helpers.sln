@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamSoft.Helpers", "JamSoft.Helpers.csproj", "{8A3DBA84-9028-4D4B-B607-C8E0DBE5C3EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamSoft.Helpers", "JamSoft.Helpers\JamSoft.Helpers.csproj", "{8A3DBA84-9028-4D4B-B607-C8E0DBE5C3EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamSoft.Helpers.Tests", "JamSoft.Helpers.Tests\JamSoft.Helpers.Tests.csproj", "{E25C160A-217D-4141-B8B7-386DC1B21A62}"
 EndProject
