@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\JamSoft.Helpers.csproj" />
+      <ProjectReference Include="..\JamSoft.Helpers\JamSoft.Helpers.csproj" />
     </ItemGroup>
 
 </Project>
