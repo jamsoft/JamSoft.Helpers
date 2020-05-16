@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="JamSoft.Helpers.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="JamSoft.Helpers.Tests\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="JamSoft.Helpers.Tests\**" />
+    </ItemGroup>
+
+</Project>
