@@ -69,7 +69,7 @@
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Memento.IMemento">
             <summary>
-            
+            Allows access to a stored state
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.IMemento.GetState">
@@ -80,7 +80,7 @@
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner">
             <summary>
-            An interface to implement mementos
+            An interface to implement mementos (Undo etc)
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.IMementoOwner.Save">

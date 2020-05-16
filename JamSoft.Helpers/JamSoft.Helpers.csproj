@@ -4,10 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.1.0</Version>
-    <Description>A collection of very general things applications and other libraries need</Description>
+    <Description>A collection of very generalised things applications and other libraries need</Description>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>Strings, Percentages, Mvvm, Observer Pattern</PackageTags>
+    <PackageProjectUrl>https://github.com/jamsoft/JamSoft.Helpers</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageIcon>JamSoftLogo-Splat513x513.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,5 +19,12 @@
     <DocumentationFile>D:\Code\jamsoft.helpers\JamSoft.Helpers\JamSoft.Helpers.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\img\JamSoftLogo-Splat513x513.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
