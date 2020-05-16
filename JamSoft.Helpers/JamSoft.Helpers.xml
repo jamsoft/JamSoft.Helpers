@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JamSoft.Helpers</name>
+    </assembly>
+    <members>
+        <member name="T:JamSoft.Helpers.Numbers.MathEx">
+            <summary>
+            A collection of basic Maths operations
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Numbers.MathEx.IsEvenNumber(System.Int32)">
+            <summary>
+            Determines whether [is even number].
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+              <c>true</c> if [is even number] [the specified value]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Numbers.MathEx.IsEvenNumber(System.Decimal)">
+            <summary>
+            Determines whether [is even number].
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+              <c>true</c> if [is even number] [the specified value]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Numbers.Percentages">
+            <summary>
+            Provides a collection of methods for calculating percentages
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Int32,System.Int32)">
+            <summary>
+            Determines whether [is what percentage of] [the specified total].
+            </summary>
+            <param name="value">The value.</param>
+            <param name="total">The total.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Double,System.Double,System.Int32)">
+            <summary>
+            Determines whether [is what percentage of] [the specified total].
+            </summary>
+            <param name="value">The value.</param>
+            <param name="total">The total.</param>
+            <param name="precision">The precision.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Single,System.Single,System.Int32)">
+            <summary>
+            Determines whether [is what percentage of] [the specified total].
+            </summary>
+            <param name="value">The value.</param>
+            <param name="total">The total.</param>
+            <param name="precision">The precision.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Decimal,System.Decimal,System.Int32)">
+            <summary>
+            Determines whether [is what percentage of] [the specified total].
+            </summary>
+            <param name="value">The value.</param>
+            <param name="total">The total.</param>
+            <param name="precision">The precision.</param>
+            <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Memento.IMemento">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.IMemento.GetState">
+            <summary>
+            Gets the state.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner">
+            <summary>
+            An interface to implement mementos
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.IMementoOwner.Save">
+            <summary>
+            Save a new memento
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.IMementoOwner.Restore(JamSoft.Helpers.Patterns.Memento.IMemento)">
+            <summary>
+            Restore a memento
+            </summary>
+            <param name="memento"></param>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Memento.Memento">
+            <summary>
+            A simple object for storing state
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Patterns.Memento.Memento._state">
+            <summary>
+            The stored state
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.Memento.#ctor(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.Memento.GetState">
+            <summary>
+            The the stored state from this instance
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Memento.MementoManager">
+            <summary>
+            Provides a base implementation of the memento pattern
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Patterns.Memento.MementoManager.Mementos">
+            <summary>
+            The list of states
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Patterns.Memento.MementoManager.Originator">
+            <summary>
+            The state owner instance
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.#ctor(JamSoft.Helpers.Patterns.Memento.IMementoOwner)">
+            <summary>
+            Default ctor
+            </summary>
+            <param name="originator"></param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.Snapshot">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.Undo">
+            <summary>
+            Rolls back to the last known state
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase">
+            <summary>
+            An implementation of a Base View Model for use in Mvvm
+            </summary>
+            <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
+        </member>
+        <member name="E:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Sets the property.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="storage">The storage.</param>
+            <param name="value">The value.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:PropertyChanged" /> event.  Allows the use of a specfic static PropertyChangedEventArgs object.  
+            Is the most performant implementation
+            </summary>
+            <param name="prop">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.String)">
+            <summary>
+            Called when [property changed].
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
+        <member name="P:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.IsEditable">
+            <summary>
+            Gets or sets a value indicating whether this instance is editable.
+            </summary>
+            <value>
+            <c>true</c> if this instance is editable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Observer.IObservable">
+            <summary>
+            A contract for observable objects to implement
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.IObservable.Attach(JamSoft.Helpers.Patterns.Observer.IObserver)">
+            <summary>
+            Attach an observer to the observable.
+            </summary>
+            <param name="observer">The observer.</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.IObservable.Detach(JamSoft.Helpers.Patterns.Observer.IObserver)">
+            <summary>
+            Detach an observer from the observable.
+            </summary>
+            <param name="observer">The observer.</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.IObservable.Notify">
+            <summary>
+            Notify all observers about an event.
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Observer.IObserver">
+            <summary>
+            A contract for an observer to implement for change notifications
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.IObserver.Update(JamSoft.Helpers.Patterns.Observer.IObservable)">
+            <summary>
+            Receive update from a observable
+            </summary>
+            <param name="observable">The observable.</param>
+        </member>
+        <member name="T:JamSoft.Helpers.Patterns.Observer.ObservableBase">
+            <summary>
+            A base implementation of an observable object (Subject)
+            </summary>
+            <seealso cref="T:JamSoft.Helpers.Patterns.Observer.IObservable" />
+        </member>
+        <member name="F:JamSoft.Helpers.Patterns.Observer.ObservableBase.Observers">
+            <summary>
+            The list of attached observers
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.ObservableBase.Attach(JamSoft.Helpers.Patterns.Observer.IObserver)">
+            <summary>
+            Attaches the specified observer.
+            </summary>
+            <param name="observer">The observer.</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.ObservableBase.Detach(JamSoft.Helpers.Patterns.Observer.IObserver)">
+            <summary>
+            Detaches the specified observer.
+            </summary>
+            <param name="observer">The observer.</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Observer.ObservableBase.Notify">
+            <summary>
+            Notifies all attached observers of a state change.
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Strings.Distance">
+            <summary>
+            A class containing distance algorithms for string comparisons
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Strings.Distance.HammingDistanceTo(System.String,System.String)">
+            <summary>
+            Returns 0 -> positive integer for distance, or -1 for different length strings
+            </summary>
+            <param name="s"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Strings.Distance.GetHammingDistance(System.String,System.String)">
+            <summary>
+            Returns 0 -> positive integer for distance, or -1 for different length strings
+            </summary>
+            <param name="s"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Strings.Distance.LevenshteinDistanceTo(System.String,System.String)">
+            <summary>
+            Returns the number of edits required to mutate one string into another
+            </summary>
+            <param name="s"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Strings.Distance.GetLevenshteinDistance(System.String,System.String)">
+            <summary>
+            Returns the number of edits required to mutate one string into another
+            </summary>
+            <param name="s"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

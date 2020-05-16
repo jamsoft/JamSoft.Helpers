@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace JamSoft.Helpers.Strings
 {
+	/// <summary>
+	/// A class containing distance algorithms for string comparisons
+	/// </summary>
 	public static class Distance
 	{
 		/// <summary>
