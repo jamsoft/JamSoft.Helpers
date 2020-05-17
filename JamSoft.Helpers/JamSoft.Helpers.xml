@@ -148,6 +148,54 @@
             Rolls back to the last known state
             </summary>
         </member>
+        <member name="T:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1">
+            <summary>
+            A sortable ObservableCollection&lt;T&gt; class with AddRange features
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+        </member>
+        <member name="P:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.SuppressNotification">
+            <summary>
+            The suppress notification flag when set to true prevents any change notifications.
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.#ctor">
+            <summary>Initialises a new instance of the <see cref="T:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1"/> class.</summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>Initialises a new instance of the <see cref="T:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1"/> class.</summary>
+            <param name="coll">The coll.</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            The on collection changed.
+            </summary>
+            <param name="e">
+            The e.
+            </param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            The add range.
+            </summary>
+            <param name="list">
+            The list.
+            </param>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort">
+            <summary>
+            The sort.
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            The sort.
+            </summary>
+            <param name="comparer">
+            The comparer.
+            </param>
+        </member>
         <member name="T:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase">
             <summary>
             An implementation of a Base View Model for use in Mvvm
