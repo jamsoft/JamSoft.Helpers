@@ -359,5 +359,20 @@
             <param name="t"></param>
             <returns></returns>
         </member>
+        <member name="T:JamSoft.Helpers.Strings.Extensions">
+            <summary>
+            Various string helpers
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Strings.Extensions.DotShortenString(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Takes a complete file path and shortens it to the value provided in totalLength filling in with "...".
+            </summary>
+            <param name="input">The input.</param>
+            <param name="endPartLength"></param>
+            <param name="maxLength">The total length.</param>
+            <param name="midPattern">the string pattern to use as the middle pattern</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
