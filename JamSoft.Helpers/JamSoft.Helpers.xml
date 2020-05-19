@@ -300,6 +300,28 @@
             Notifies all attached observers of a state change.
             </summary>
         </member>
+        <member name="T:JamSoft.Helpers.Serialization.UpperCaseUtf8Encoding">
+            <summary>
+            Adds an uppercase UTF-8 XML declaration for conformance
+            </summary>
+            <seealso cref="T:System.Text.UTF8Encoding" />
+        </member>
+        <member name="P:JamSoft.Helpers.Serialization.UpperCaseUtf8Encoding.WebName">
+            <summary>
+            When overridden in a derived class, gets the name registered with the Internet Assigned Numbers Authority (IANA) for the current encoding.
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Serialization.UppercaseUtf8StringWriter">
+            <summary>
+            Adds upper case UTF in XML declaration
+            </summary>
+            <seealso cref="T:System.IO.StringWriter" />
+        </member>
+        <member name="P:JamSoft.Helpers.Serialization.UppercaseUtf8StringWriter.Encoding">
+            <summary>
+            Gets the <see cref="T:System.Text.Encoding"></see> in which the output is written.
+            </summary>
+        </member>
         <member name="T:JamSoft.Helpers.Strings.Distance">
             <summary>
             A class containing distance algorithms for string comparisons
