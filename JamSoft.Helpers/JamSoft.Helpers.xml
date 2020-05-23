@@ -374,5 +374,28 @@
             <param name="midPattern">the string pattern to use as the middle pattern</param>
             <returns></returns>
         </member>
+        <member name="T:JamSoft.Helpers.Ui.Graphics">
+            <summary>
+            Provides helper methods for UI tasks
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.ToHex(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Converts RGB integers to HEX format color string.
+            </summary>
+            <param name="r">The RED component</param>
+            <param name="g">The GREEN component</param>
+            <param name="b">The BLUE component</param>
+            <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.ToHex(System.Int32[],System.Boolean)">
+            <summary>
+            Converts RGB integers to HEX format color string.
+            </summary>
+            <param name="rgb">The RGB values array</param>
+            <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+        </member>
     </members>
 </doc>

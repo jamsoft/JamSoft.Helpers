@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>0.2.0</Version>
     <Description>A collection of very generalised things applications and other libraries need</Description>
     <Copyright>JamSoft Solutions Ltd</Copyright>
@@ -18,6 +19,11 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DocumentationFile>D:\Code\jamsoft.helpers\JamSoft.Helpers\JamSoft.Helpers.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Code\jamsoft.helpers\JamSoft.Helpers\JamSoft.Helpers.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
