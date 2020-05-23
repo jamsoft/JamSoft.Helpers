@@ -6,7 +6,32 @@ A collection of very generalised things applications and libraries may need
 ```
 Install-Package JamSoft.Helpers
 ```
+# Graphics
+## Convert to HEX
+```
+int red = 121;
+int green = 155;
+int blue = 56;
 
+var hex = Graphics.Colors.ToHex(red, green, blue);
+```
+## Convert to RGB
+```
+int red = 255;
+int green = 169;
+int blue = 104;
+
+var color = Graphics.Colors.ToRgb("#FFA968");
+```
+## Convert to ARGB
+```
+int alpha = 255;
+int red = 146;
+int green = 145;
+int blue = 145;
+
+var c = Graphics.Colors.ToArgb("#FF929191");
+```
 # Math Things
 ## Even or Odd
 Even number detection

@@ -126,7 +126,7 @@ namespace JamSoft.Helpers.Tests
         }
 
         [Fact]
-        public void Hex_ToArgb()
+        public void Hex_ToArgb_No_Hash()
         {
             int alpha = 255;
             int red = 146;
@@ -134,6 +134,22 @@ namespace JamSoft.Helpers.Tests
             int blue = 145;
 
             var c = Graphics.Colors.ToArgb("FF929191");
+
+            Assert.Equal(alpha, c.A);
+            Assert.Equal(red, c.R);
+            Assert.Equal(green, c.G);
+            Assert.Equal(blue, c.B);
+        }
+
+        [Fact]
+        public void Hex_ToArgb_With_Hash()
+        {
+            int alpha = 255;
+            int red = 146;
+            int green = 145;
+            int blue = 145;
+
+            var c = Graphics.Colors.ToArgb("#FF929191");
 
             Assert.Equal(alpha, c.A);
             Assert.Equal(red, c.R);
