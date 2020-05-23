@@ -17,12 +17,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>D:\Code\jamsoft.helpers\JamSoft.Helpers\JamSoft.Helpers.xml</DocumentationFile>
+    <DocumentationFile>JamSoft.Helpers.xml</DocumentationFile>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\Code\jamsoft.helpers\JamSoft.Helpers\JamSoft.Helpers.xml</DocumentationFile>
+    <DocumentationFile>JamSoft.Helpers.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
