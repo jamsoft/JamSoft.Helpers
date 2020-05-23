@@ -4,6 +4,111 @@
         <name>JamSoft.Helpers</name>
     </assembly>
     <members>
+        <member name="T:JamSoft.Helpers.EnvExVariableNames">
+            <summary>
+            Core environment names
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExVariableNames.SystemRoot">
+            <summary>
+            Gets the system root variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExVariableNames.UserName">
+            <summary>
+            Get the user name variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExVariableNames.ComputerName">
+            <summary>
+            The computer name variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExVariableNames.Path">
+            <summary>
+            Get the PATH variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExVariableNames.Os">
+            <summary>
+            Get the OS variable name
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.EnvExWinVariableNames">
+            <summary>
+            A collection of standard windows environment variable names
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.AllUsersProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.AppData">
+            <summary>
+            App Data
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.HomePath">
+            <summary>
+            Home Path
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.LocalAppData">
+            <summary>
+            Local App Data
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.ProgramData">
+            <summary>
+            Program data
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Public">
+            <summary>
+            Public
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Temp">
+            <summary>
+            Temp
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Tmp">
+            <summary>
+            Tmp
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.UserProfile">
+            <summary>
+            User Profile
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.OsDrive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.EnvEx">
+            <summary>
+            Provides a wrapper around generalized environment methods
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.EnvEx.GetVariable(System.String,System.EnvironmentVariableTarget)">
+            <summary>
+            Get the value of an environment variables
+            </summary>
+            <remarks>see EnvExWinVariableNames for string values</remarks>
+            <param name="name">The name of the parameter to get</param>
+            <param name="target">Only supported on Windows</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.EnvEx.WhereAmI">
+            <summary>
+            Returns the app domain base directory
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:JamSoft.Helpers.Numbers.MathEx">
             <summary>
             A collection of basic Maths operations
