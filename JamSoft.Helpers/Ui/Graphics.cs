@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Globalization;
 
 namespace JamSoft.Helpers.Ui
 {
@@ -8,39 +10,87 @@ namespace JamSoft.Helpers.Ui
     public static class Graphics
     {
         /// <summary>
-        /// Converts RGB integers to HEX format color string.
+        /// Provides helper methods to work with color values
         /// </summary>
-        /// <param name="r">The RED component</param>
-        /// <param name="g">The GREEN component</param>
-        /// <param name="b">The BLUE component</param>
-        /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
-        /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
-        public static string ToHex(int r, int g, int b, bool prependHash = true)
+        public static class Colors
         {
-            string retVal;
-            if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0)
+            /// <summary>
+            /// Converts RGB integers to HEX format color string.
+            /// </summary>
+            /// <param name="r">The RED component</param>
+            /// <param name="g">The GREEN component</param>
+            /// <param name="b">The BLUE component</param>
+            /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+            public static string ToHex(int r, int g, int b, bool prependHash = true)
             {
-                retVal = "000000";
-            }
-            else
-            {
-                retVal = $"{r:X2}{g:X2}{b:X2}";
+                string retVal;
+                if (r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0)
+                {
+                    retVal = "000000";
+                }
+                else
+                {
+                    retVal = $"{r:X2}{g:X2}{b:X2}";
+                }
+
+                return prependHash ? $"#{retVal}" : retVal;
             }
 
-            return prependHash ? $"#{retVal}" : retVal;
-        }
+            /// <summary>
+            /// Converts RGB integers to HEX format color string.
+            /// </summary>
+            /// <param name="rgb">The RGB values array</param>
+            /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+            /// <exception cref="ArgumentException">Thrown if insufficient number of integer values are provided</exception>
+            public static string ToHex(int[] rgb, bool prependHash = true)
+            {
+                if (rgb.Length < 3) throw new ArgumentException("Insufficient RGB values provided", nameof(rgb));
+                return ToHex(rgb[0], rgb[1], rgb[2], prependHash);
+            }
 
-        /// <summary>
-        /// Converts RGB integers to HEX format color string.
-        /// </summary>
-        /// <param name="rgb">The RGB values array</param>
-        /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
-        /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
-        /// <exception cref="ArgumentException">Thrown if insufficient number of integer values are provided</exception>
-        public static string ToHex(int[] rgb, bool prependHash = true)
-        {
-            if (rgb.Length < 3) throw new ArgumentException("Insufficient RGB values provided", nameof(rgb));
-            return ToHex(rgb[0], rgb[1], rgb[2], prependHash);
+            /// <summary>
+            /// Converts a standard hex string to Color struct
+            /// </summary>
+            /// <param name="hex">The string to convert to a color</param>
+            /// <returns> Color struct based on the provided hex string</returns>
+            /// <exception cref="ArgumentException">Thrown when string is invalid length</exception>
+            public static Color ToRgb(string hex)
+            {
+                if (hex.Length < 6) throw new ArgumentException("Input string invalid length");
+                if (hex.IndexOf('#') != -1)
+                {
+                    hex = hex.Replace("#", "");
+                }
+
+                var r = int.Parse(hex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+                var g = int.Parse(hex.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+                var b = int.Parse(hex.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+
+                return Color.FromArgb(r, g, b);
+            }
+
+            /// <summary>
+            /// Converts a alpha hex string to Color struct
+            /// </summary>
+            /// <param name="hex"></param>
+            /// <returns></returns>
+            public static Color ToArgb(string hex)
+            {
+                if (hex.Length < 8) throw new ArgumentException("Input string invalid length");
+                if (hex.IndexOf('#') != -1)
+                {
+                    hex = hex.Replace("#", "");
+                }
+
+                var a = int.Parse(hex.Substring(0, 2), NumberStyles.AllowHexSpecifier);
+                var r = int.Parse(hex.Substring(2, 2), NumberStyles.AllowHexSpecifier);
+                var g = int.Parse(hex.Substring(4, 2), NumberStyles.AllowHexSpecifier);
+                var b = int.Parse(hex.Substring(6, 2), NumberStyles.AllowHexSpecifier);
+
+                return Color.FromArgb(a,r, g, b);
+            }
         }
     }
 }

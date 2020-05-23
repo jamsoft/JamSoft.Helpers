@@ -2,6 +2,11 @@
 
 A collection of very generalised things applications and libraries may need
 
+# Install Via Nuget
+```
+Install-Package JamSoft.Helpers
+```
+
 # Math Things
 ## Even or Odd
 Even number detection
