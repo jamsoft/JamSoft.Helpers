@@ -1,4 +1,5 @@
-﻿using JamSoft.Helpers.Ui;
+﻿using System;
+using JamSoft.Helpers.Ui;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -59,6 +60,16 @@ namespace JamSoft.Helpers.Tests
             var hex = Graphics.ToHex(new[] {red, green, blue});
             Assert.Equal("#FFA968", hex);
             _outputHelper.WriteLine($"R:{red},G:{green},B:{blue} HEX:{hex}");
+        }
+
+
+        [Fact]
+        public void Throws_Argument_Exception_When_Array_Too_Small()
+        {
+            int red = 255;
+            int green = 169;
+
+            Assert.Throws<ArgumentException>(() => Graphics.ToHex(new[] { red, green }));
         }
 
         [Fact]

@@ -396,6 +396,7 @@
             <param name="rgb">The RGB values array</param>
             <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
             <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+            <exception cref="T:System.ArgumentException">Thrown if insufficient number of integer values are provided</exception>
         </member>
     </members>
 </doc>

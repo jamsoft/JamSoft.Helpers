@@ -1,4 +1,6 @@
-﻿namespace JamSoft.Helpers.Ui
+﻿using System;
+
+namespace JamSoft.Helpers.Ui
 {
     /// <summary>
     /// Provides helper methods for UI tasks
@@ -34,8 +36,10 @@
         /// <param name="rgb">The RGB values array</param>
         /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
         /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+        /// <exception cref="ArgumentException">Thrown if insufficient number of integer values are provided</exception>
         public static string ToHex(int[] rgb, bool prependHash = true)
         {
+            if (rgb.Length < 3) throw new ArgumentException("Insufficient RGB values provided", nameof(rgb));
             return ToHex(rgb[0], rgb[1], rgb[2], prependHash);
         }
     }
