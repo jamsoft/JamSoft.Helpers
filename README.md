@@ -74,7 +74,7 @@ Adds a strict uppercased UTF-8 to XML declarations
 using (var sw = new UppercaseUtf8StringWriter())
 {
     xsSubmit.Serialize(sw, new TestObject { SomeProperty = "SomeValue" });
-    xml = sw.ToString();# Patterns
+    xml = sw.ToString();
 }
 ```
 # Patterns
