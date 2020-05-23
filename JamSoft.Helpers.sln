@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JamSoft.Helpers.Tests", "JamSoft.Helpers.Tests\JamSoft.Helpers.Tests.csproj", "{E25C160A-217D-4141-B8B7-386DC1B21A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JamSoft.Helpers", "JamSoft.Helpers\JamSoft.Helpers.csproj", "{C8E1EA16-7BEA-495B-A231-C3991AFB35BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JamSoft.Helpers", "JamSoft.Helpers\JamSoft.Helpers.csproj", "{C8E1EA16-7BEA-495B-A231-C3991AFB35BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportingFiles", "SupportingFiles", "{949ED164-2FC5-45C2-B6A4-8A259831BB40}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

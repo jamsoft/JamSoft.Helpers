@@ -300,6 +300,28 @@
             Notifies all attached observers of a state change.
             </summary>
         </member>
+        <member name="T:JamSoft.Helpers.Serialization.UpperCaseUtf8Encoding">
+            <summary>
+            Adds an uppercase UTF-8 XML declaration for conformance
+            </summary>
+            <seealso cref="T:System.Text.UTF8Encoding" />
+        </member>
+        <member name="P:JamSoft.Helpers.Serialization.UpperCaseUtf8Encoding.WebName">
+            <summary>
+            When overridden in a derived class, gets the name registered with the Internet Assigned Numbers Authority (IANA) for the current encoding.
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Serialization.UppercaseUtf8StringWriter">
+            <summary>
+            Adds upper case UTF in XML declaration
+            </summary>
+            <seealso cref="T:System.IO.StringWriter" />
+        </member>
+        <member name="P:JamSoft.Helpers.Serialization.UppercaseUtf8StringWriter.Encoding">
+            <summary>
+            Gets the <see cref="T:System.Text.Encoding"></see> in which the output is written.
+            </summary>
+        </member>
         <member name="T:JamSoft.Helpers.Strings.Distance">
             <summary>
             A class containing distance algorithms for string comparisons
@@ -335,6 +357,65 @@
             </summary>
             <param name="s"></param>
             <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Strings.Extensions">
+            <summary>
+            Various string helpers
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Strings.Extensions.DotShortenString(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Takes a complete file path and shortens it to the value provided in totalLength filling in with "...".
+            </summary>
+            <param name="input">The input.</param>
+            <param name="endPartLength"></param>
+            <param name="maxLength">The total length.</param>
+            <param name="midPattern">the string pattern to use as the middle pattern</param>
+            <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.Graphics">
+            <summary>
+            Provides helper methods for UI tasks
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.Graphics.Colors">
+            <summary>
+            Provides helper methods to work with color values
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Converts RGB integers to HEX format color string.
+            </summary>
+            <param name="r">The RED component</param>
+            <param name="g">The GREEN component</param>
+            <param name="b">The BLUE component</param>
+            <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32[],System.Boolean)">
+            <summary>
+            Converts RGB integers to HEX format color string.
+            </summary>
+            <param name="rgb">The RGB values array</param>
+            <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
+            <exception cref="T:System.ArgumentException">Thrown if insufficient number of integer values are provided</exception>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToRgb(System.String)">
+            <summary>
+            Converts a standard hex string to Color struct
+            </summary>
+            <param name="hex">The string to convert to a color</param>
+            <returns> Color struct based on the provided hex string</returns>
+            <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToArgb(System.String)">
+            <summary>
+            Converts a alpha hex string to Color struct
+            </summary>
+            <param name="hex"></param>
             <returns></returns>
         </member>
     </members>
