@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>0.2.0</Version>
+    <Version>0.3.0</Version>
     <Description>A collection of very generalised things applications and other libraries need</Description>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

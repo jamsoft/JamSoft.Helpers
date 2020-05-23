@@ -54,6 +54,11 @@
             Home Path
             </summary>
         </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.HomeDrive">
+            <summary>
+            The home drive
+            </summary>
+        </member>
         <member name="F:JamSoft.Helpers.EnvExWinVariableNames.LocalAppData">
             <summary>
             Local App Data

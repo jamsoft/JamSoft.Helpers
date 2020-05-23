@@ -54,6 +54,11 @@ namespace JamSoft.Helpers
         public const string HomePath = "HOMEPATH";
 
         /// <summary>
+        /// The home drive
+        /// </summary>
+        public const string HomeDrive = "HOMEDRIVE";
+
+        /// <summary>
         /// Local App Data
         /// </summary>
         public const string LocalAppData = "LOCALAPPDATA";
@@ -86,7 +91,7 @@ namespace JamSoft.Helpers
         /// <summary>
         /// 
         /// </summary>
-        public const string OsDrive = "SystemDrive";
+        public const string OsDrive = "SYSTEMDRIVE";
     }
 
     /// <summary>

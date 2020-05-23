@@ -59,5 +59,85 @@ namespace JamSoft.Helpers.Tests
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
+
+        [Fact]
+        public void Gets_AllUsersProfile_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.AllUsersProfile);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_AppData_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.AppData);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_HomePath_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.HomePath);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_HomeDrive_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.HomeDrive);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_LocalAppData_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.LocalAppData);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_ProgramData_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.ProgramData);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_Public_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.Public);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_Temp_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.Temp);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_Tmp_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.Tmp);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
+        public void Gets_UserProfile_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.UserProfile);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
     }
 }
