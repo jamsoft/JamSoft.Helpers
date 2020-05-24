@@ -1,4 +1,5 @@
-﻿using JamSoft.Helpers.Tests.xUnitExt;
+﻿using JamSoft.Helpers.Constants;
+using JamSoft.Helpers.Tests.xUnitExt;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -193,6 +194,30 @@ namespace JamSoft.Helpers.Tests
         public void Osx_Gets_LogName_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExOsxVariableNames.LogName);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_TermProgram_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.TermProgram);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_TermProgramVersion_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.TermProgramVersion);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactLinux]
+        public void Linux_Gets_TermProgramVersion_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }

@@ -4,134 +4,154 @@
         <name>JamSoft.Helpers</name>
     </assembly>
     <members>
-        <member name="T:JamSoft.Helpers.EnvExVariableNames">
-            <summary>
-            Core environment names
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExVariableNames.Path">
-            <summary>
-            Get the PATH variable name
-            </summary>
-        </member>
-        <member name="T:JamSoft.Helpers.EnvExWinVariableNames">
-            <summary>
-            A collection of standard windows environment variable names
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Os">
-            <summary>
-            Get the OS variable name
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.SystemRoot">
-            <summary>
-            Gets the system root variable name
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.UserName">
-            <summary>
-            Get the user name variable name
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.ComputerName">
-            <summary>
-            The computer name variable name
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.AllUsersProfile">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.AppData">
-            <summary>
-            App Data
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.HomePath">
-            <summary>
-            Home Path
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.HomeDrive">
-            <summary>
-            The home drive
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.LocalAppData">
-            <summary>
-            Local App Data
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.ProgramData">
-            <summary>
-            Program data
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Public">
-            <summary>
-            Public
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Temp">
-            <summary>
-            Temp
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Tmp">
-            <summary>
-            Tmp
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.UserProfile">
-            <summary>
-            User Profile
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.OsDrive">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:JamSoft.Helpers.EnvExOsxVariableNames">
+        <member name="T:JamSoft.Helpers.Constants.EnvExLinuxVariableNames">
             <summary>
             Standard variable names for Mac OSX
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Shell">
+        <member name="F:JamSoft.Helpers.Constants.EnvExLinuxVariableNames.ManPath">
             <summary>
             The shell
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Term">
+        <member name="T:JamSoft.Helpers.Constants.EnvExOsxVariableNames">
+            <summary>
+            Standard variable names for Mac OSX
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Shell">
+            <summary>
+            The shell
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Term">
             <summary>
             The term
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Display">
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Display">
             <summary>
             The display
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Home">
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Home">
             <summary>
             The home
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.TempDir">
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TempDir">
             <summary>
             The home
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.User">
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.User">
             <summary>
             The home
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.LogName">
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.LogName">
             <summary>
             The home
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TermProgram">
+            <summary>
+            The term program
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TermProgramVersion">
+            <summary>
+            The term program version
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Constants.EnvExVariableNames">
+            <summary>
+            Core environment names
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExVariableNames.Path">
+            <summary>
+            Get the PATH variable name
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Constants.EnvExWinVariableNames">
+            <summary>
+            A collection of standard windows environment variable names
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Os">
+            <summary>
+            Get the OS variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.SystemRoot">
+            <summary>
+            Gets the system root variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.UserName">
+            <summary>
+            Get the user name variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.ComputerName">
+            <summary>
+            The computer name variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.AllUsersProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.AppData">
+            <summary>
+            App Data
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.HomePath">
+            <summary>
+            Home Path
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.HomeDrive">
+            <summary>
+            The home drive
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.LocalAppData">
+            <summary>
+            Local App Data
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.ProgramData">
+            <summary>
+            Program data
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Public">
+            <summary>
+            Public
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Temp">
+            <summary>
+            Temp
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Tmp">
+            <summary>
+            Tmp
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.UserProfile">
+            <summary>
+            User Profile
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.OsDrive">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JamSoft.Helpers.EnvExLinuxVariableNames">

@@ -9,7 +9,7 @@ namespace JamSoft.Helpers.Tests.xUnitExt
         { 
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                Skip = $"Not running on Osx";
+                Skip = "Not running on Osx";
             }
         }
     }
