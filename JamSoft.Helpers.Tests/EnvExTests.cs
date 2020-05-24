@@ -15,6 +15,14 @@ namespace JamSoft.Helpers.Tests
         }
 
         [Fact]
+        public void Gets_Where_Am_I()
+        {
+            var p = EnvEx.WhereAmI();
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [Fact]
         public void Gets_Path_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExVariableNames.Path);
