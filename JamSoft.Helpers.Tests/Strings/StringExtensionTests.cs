@@ -1,7 +1,7 @@
 ﻿using JamSoft.Helpers.Strings;
 using Xunit;
 
-namespace JamSoft.Helpers.Tests
+namespace JamSoft.Helpers.Tests.Strings
 {
     public class StringExtensionTests
     {

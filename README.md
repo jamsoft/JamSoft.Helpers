@@ -1,6 +1,6 @@
 # JamSoft.Helpers
 
-A collection of very generalised things applications and libraries may need
+A collection of very generalised helpers applications and libraries may need. The idea is provide really just convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.
 
 # Install Via Nuget
 ```
@@ -162,3 +162,6 @@ public class MementoManager
     ...
 }
 ```
+# xUnit Tests
+
+There is a high level of test coverage at about 80+% at the moment, The the library has been tested on Windows, OSX and Linux.

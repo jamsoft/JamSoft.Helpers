@@ -2,7 +2,7 @@
 using JamSoft.Helpers.Numbers;
 using Xunit;
 
-namespace JamSoft.Helpers.Tests
+namespace JamSoft.Helpers.Tests.Numbers
 {
 	public class PercentageTests
 	{

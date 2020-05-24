@@ -1,7 +1,7 @@
 ﻿using JamSoft.Helpers.Patterns.Mvvm;
 using Xunit;
 
-namespace JamSoft.Helpers.Tests
+namespace JamSoft.Helpers.Tests.Patterns
 {
     public class SuperObservableTests
     {

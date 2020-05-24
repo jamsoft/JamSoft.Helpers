@@ -3,7 +3,7 @@ using JamSoft.Helpers.Ui;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace JamSoft.Helpers.Tests
+namespace JamSoft.Helpers.Tests.Ui
 {
     public class UiGraphicsTests
     {
