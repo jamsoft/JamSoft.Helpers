@@ -9,34 +9,34 @@
             Core environment names
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExVariableNames.SystemRoot">
-            <summary>
-            Gets the system root variable name
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExVariableNames.UserName">
-            <summary>
-            Get the user name variable name
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExVariableNames.ComputerName">
-            <summary>
-            The computer name variable name
-            </summary>
-        </member>
         <member name="F:JamSoft.Helpers.EnvExVariableNames.Path">
             <summary>
             Get the PATH variable name
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExVariableNames.Os">
+        <member name="T:JamSoft.Helpers.EnvExWinVariableNames">
+            <summary>
+            A collection of standard windows environment variable names
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.Os">
             <summary>
             Get the OS variable name
             </summary>
         </member>
-        <member name="T:JamSoft.Helpers.EnvExWinVariableNames">
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.SystemRoot">
             <summary>
-            A collection of standard windows environment variable names
+            Gets the system root variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.UserName">
+            <summary>
+            Get the user name variable name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExWinVariableNames.ComputerName">
+            <summary>
+            The computer name variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.EnvExWinVariableNames.AllUsersProfile">
@@ -99,16 +99,6 @@
             Standard variable names for Mac OSX
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.ManPath">
-            <summary>
-            The man path
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.HostName">
-            <summary>
-            The host name
-            </summary>
-        </member>
         <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Shell">
             <summary>
             The shell
@@ -119,34 +109,39 @@
             The term
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.XTermShell">
-            <summary>
-            The x term shell
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Editor">
-            <summary>
-            The editor
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.BashEnv">
-            <summary>
-            The bash env
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.InfoPath">
-            <summary>
-            The information path
-            </summary>
-        </member>
         <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Display">
             <summary>
             The display
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.PackageConfigPath">
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Home">
             <summary>
-            The package configuration path
+            The home
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.TempDir">
+            <summary>
+            The home
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.User">
+            <summary>
+            The home
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.LogName">
+            <summary>
+            The home
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.EnvExLinuxVariableNames">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExLinuxVariableNames.ManPath">
+            <summary>
+            The man path
             </summary>
         </member>
         <member name="T:JamSoft.Helpers.EnvEx">

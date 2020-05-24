@@ -9,6 +9,22 @@ namespace JamSoft.Helpers
     public static class EnvExVariableNames
     {
         /// <summary>
+        /// Get the PATH variable name
+        /// </summary>
+        public const string Path = "PATH";
+    }
+
+    /// <summary>
+    /// A collection of standard windows environment variable names
+    /// </summary>
+    public static class EnvExWinVariableNames
+    {
+        /// <summary>
+        /// Get the OS variable name
+        /// </summary>
+        public const string Os = "OS";
+
+        /// <summary>
         /// Gets the system root variable name
         /// </summary>
         public const string SystemRoot = "SYSTEMROOT";
@@ -23,22 +39,6 @@ namespace JamSoft.Helpers
         /// </summary>
         public const string ComputerName = "COMPUTERNAME";
 
-        /// <summary>
-        /// Get the PATH variable name
-        /// </summary>
-        public const string Path = "PATH";
-
-        /// <summary>
-        /// Get the OS variable name
-        /// </summary>
-        public const string Os = "OS";
-    }
-
-    /// <summary>
-    /// A collection of standard windows environment variable names
-    /// </summary>
-    public static class EnvExWinVariableNames
-    {
         /// <summary>
         /// 
         /// </summary>
@@ -101,16 +101,6 @@ namespace JamSoft.Helpers
     public static class EnvExOsxVariableNames
     {
         /// <summary>
-        /// The man path
-        /// </summary>
-        public const string ManPath = "MANPATH";
-
-        /// <summary>
-        /// The host name
-        /// </summary>
-        public const string HostName = "HOSTNAME";
-
-        /// <summary>
         /// The shell
         /// </summary>
         public const string Shell = "SHELL";
@@ -121,34 +111,40 @@ namespace JamSoft.Helpers
         public const string Term = "TERM";
 
         /// <summary>
-        /// The x term shell
-        /// </summary>
-        public const string XTermShell = "XTERM_SHELL";
-
-        /// <summary>
-        /// The editor
-        /// </summary>
-        public const string Editor = "EDITOR";
-
-        /// <summary>
-        /// The bash env
-        /// </summary>
-        public const string BashEnv = "BASH_ENV";
-
-        /// <summary>
-        /// The information path
-        /// </summary>
-        public const string InfoPath = "INFOPATH";
-
-        /// <summary>
         /// The display
         /// </summary>
         public const string Display = "DISPLAY";
 
         /// <summary>
-        /// The package configuration path
+        /// The home
         /// </summary>
-        public const string PackageConfigPath = "PKG_CONFIG_PATH";
+        public const string Home = "HOME";
+
+        /// <summary>
+        /// The home
+        /// </summary>
+        public const string TempDir = "TMPDIR";
+
+        /// <summary>
+        /// The home
+        /// </summary>
+        public const string User = "USER";
+
+        /// <summary>
+        /// The home
+        /// </summary>
+        public const string LogName = "LOGNAME";
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class EnvExLinuxVariableNames
+    {
+        /// <summary>
+        /// The man path
+        /// </summary>
+        public const string ManPath = "MANPATH";
     }
 
     /// <summary>
@@ -166,7 +162,7 @@ namespace JamSoft.Helpers
         public static string GetVariable(string name, EnvironmentVariableTarget target = EnvironmentVariableTarget.Process)
         {
             if (target != EnvironmentVariableTarget.Process &&
-                (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)  ||
+                (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ||
                  RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
             {
                 // target is only supported on Windows

@@ -13,14 +13,6 @@ namespace JamSoft.Helpers.Tests
             _outputHelper = outputHelper;
         }
 
-        [FactWin]
-        public void Gets_Environment_Value()
-        {
-            var p = EnvEx.GetVariable(EnvExWinVariableNames.OsDrive);
-            Assert.NotNull(p);
-            _outputHelper.WriteLine(p);
-        }   
-
         [Fact]
         public void Gets_Path_Environment_Value()
         {
@@ -29,34 +21,42 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
+        public void Gets_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.OsDrive);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }   
+
+        [FactWin]
         public void Gets_Os_Environment_Value()
         {
-            var p = EnvEx.GetVariable(EnvExVariableNames.Os);
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.Os);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_Computer_Name_Environment_Value()
         {
-            var p = EnvEx.GetVariable(EnvExVariableNames.ComputerName);
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.ComputerName);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_User_Name_Environment_Value()
         {
-            var p = EnvEx.GetVariable(EnvExVariableNames.UserName);
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.UserName);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_System_Root_Environment_Value()
         {
-            var p = EnvEx.GetVariable(EnvExVariableNames.SystemRoot);
+            var p = EnvEx.GetVariable(EnvExWinVariableNames.SystemRoot);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
@@ -142,9 +142,57 @@ namespace JamSoft.Helpers.Tests
         }
 
         [FactOsx]
-        public void Osx_Gets_InfoPath_Environment_Value()
+        public void Osx_Gets_Shell_Environment_Value()
         {
-            var p = EnvEx.GetVariable(EnvExOsxVariableNames.InfoPath);
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.Shell);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_Term_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.Term);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_Display_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.Display);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_Home_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.Home);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_TempDir_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.TempDir);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_User_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.User);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_LogName_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.LogName);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
