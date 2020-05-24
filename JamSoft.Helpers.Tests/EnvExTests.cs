@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using JamSoft.Helpers.Tests.xUnitExt;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace JamSoft.Helpers.Tests
@@ -12,7 +13,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper = outputHelper;
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.OsDrive);
@@ -60,7 +61,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_AllUsersProfile_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.AllUsersProfile);
@@ -68,7 +69,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_AppData_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.AppData);
@@ -76,7 +77,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_HomePath_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.HomePath);
@@ -84,7 +85,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_HomeDrive_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.HomeDrive);
@@ -92,7 +93,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_LocalAppData_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.LocalAppData);
@@ -100,7 +101,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_ProgramData_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.ProgramData);
@@ -108,7 +109,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_Public_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.Public);
@@ -116,7 +117,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_Temp_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.Temp);
@@ -124,7 +125,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_Tmp_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.Tmp);
@@ -132,10 +133,18 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        [Fact]
+        [FactWin]
         public void Gets_UserProfile_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExWinVariableNames.UserProfile);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
+
+        [FactOsx]
+        public void Osx_Gets_InfoPath_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExOsxVariableNames.InfoPath);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }

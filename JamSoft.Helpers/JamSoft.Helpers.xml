@@ -94,6 +94,61 @@
             
             </summary>
         </member>
+        <member name="T:JamSoft.Helpers.EnvExOsxVariableNames">
+            <summary>
+            Standard variable names for Mac OSX
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.ManPath">
+            <summary>
+            The man path
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.HostName">
+            <summary>
+            The host name
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Shell">
+            <summary>
+            The shell
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Term">
+            <summary>
+            The term
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.XTermShell">
+            <summary>
+            The x term shell
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Editor">
+            <summary>
+            The editor
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.BashEnv">
+            <summary>
+            The bash env
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.InfoPath">
+            <summary>
+            The information path
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.Display">
+            <summary>
+            The display
+            </summary>
+        </member>
+        <member name="F:JamSoft.Helpers.EnvExOsxVariableNames.PackageConfigPath">
+            <summary>
+            The package configuration path
+            </summary>
+        </member>
         <member name="T:JamSoft.Helpers.EnvEx">
             <summary>
             Provides a wrapper around generalized environment methods

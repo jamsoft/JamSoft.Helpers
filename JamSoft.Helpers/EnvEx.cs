@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace JamSoft.Helpers
 {
@@ -95,6 +96,62 @@ namespace JamSoft.Helpers
     }
 
     /// <summary>
+    /// Standard variable names for Mac OSX
+    /// </summary>
+    public static class EnvExOsxVariableNames
+    {
+        /// <summary>
+        /// The man path
+        /// </summary>
+        public const string ManPath = "MANPATH";
+
+        /// <summary>
+        /// The host name
+        /// </summary>
+        public const string HostName = "HOSTNAME";
+
+        /// <summary>
+        /// The shell
+        /// </summary>
+        public const string Shell = "SHELL";
+
+        /// <summary>
+        /// The term
+        /// </summary>
+        public const string Term = "TERM";
+
+        /// <summary>
+        /// The x term shell
+        /// </summary>
+        public const string XTermShell = "XTERM_SHELL";
+
+        /// <summary>
+        /// The editor
+        /// </summary>
+        public const string Editor = "EDITOR";
+
+        /// <summary>
+        /// The bash env
+        /// </summary>
+        public const string BashEnv = "BASH_ENV";
+
+        /// <summary>
+        /// The information path
+        /// </summary>
+        public const string InfoPath = "INFOPATH";
+
+        /// <summary>
+        /// The display
+        /// </summary>
+        public const string Display = "DISPLAY";
+
+        /// <summary>
+        /// The package configuration path
+        /// </summary>
+        public const string PackageConfigPath = "PKG_CONFIG_PATH";
+    }
+
+    /// <summary>
     /// Provides a wrapper around generalized environment methods
     /// </summary>
     public static class EnvEx
@@ -109,9 +166,10 @@ namespace JamSoft.Helpers
         public static string GetVariable(string name, EnvironmentVariableTarget target = EnvironmentVariableTarget.Process)
         {
             if (target != EnvironmentVariableTarget.Process &&
-                (Environment.OSVersion.Platform == PlatformID.MacOSX ||
-                 Environment.OSVersion.Platform == PlatformID.Unix))
+                (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)  ||
+                 RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
             {
+                // target is only supported on Windows
                 target = EnvironmentVariableTarget.Process;
             }
 
