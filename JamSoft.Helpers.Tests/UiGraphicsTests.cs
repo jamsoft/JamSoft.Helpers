@@ -110,18 +110,12 @@ namespace JamSoft.Helpers.Tests
         [Fact]
         public void Rgb_Throws_Argument_Exception_When_String_Too_Small()
         {
-            int red = 255;
-            int green = 169;
-
             Assert.Throws<ArgumentException>(() => Graphics.Colors.ToRgb("#0000"));
         }
 
         [Fact]
         public void Argb_Throws_Argument_Exception_When_String_Too_Small()
         {
-            int red = 255;
-            int green = 169;
-
             Assert.Throws<ArgumentException>(() => Graphics.Colors.ToArgb("#000000"));
         }
 
