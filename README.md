@@ -18,7 +18,7 @@ var appData = EnvEx.GetVariable(EnvExWinVariableNames.AppData); // C:\Users\user
 ``
 ## OSX Variables
 ``
-var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // 
+var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // "/bin/bash"
 ``
 ## Linux Variables
 ``
