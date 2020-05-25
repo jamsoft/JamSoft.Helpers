@@ -57,7 +57,6 @@ int total = 2000;
 var percent = value.IsWhatPercentageOf(total) // 25
 ```
 # String Distances
-
 ## Hamming Distance
 Calculates the number of edits required to go from one string to another must be equal lengths to start
 ```
@@ -75,6 +74,15 @@ var inputTwo = "InputString2";
 
 var distance = Distance.GetLevenshteinDistance(inputOne, inputTwo);
 inputOne.LevenshteinDistanceTo(inputTwo)
+```
+## Shorten Strings
+This method allows you to shorten strings to a predetermined length and pad with `...` or any pattern you provide.
+```
+string input = "Thisismylongstringthatneedsshortening";
+var result = input.DotShortenString(10, 20); // "Thisism...shortening"
+
+string input = "Thisismylongstringthatneedsshortening";
+var result = input.DotShortenString(10, 20, ";;;"); // "Thisism;;;shortening"
 ```
 ## Secure Strings
 ```
