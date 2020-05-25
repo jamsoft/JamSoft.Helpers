@@ -38,16 +38,45 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
+            /// Converts to hex.
+            /// </summary>
+            /// <param name="a">a.</param>
+            /// <param name="r">The r.</param>
+            /// <param name="g">The g.</param>
+            /// <param name="b">The b.</param>
+            /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            /// <returns></returns>
+            public static string ToHex(int a, int r, int g, int b, bool prependHash = true)
+            {
+                string retVal;
+                if (a > 255 || r > 255 || g > 255 || b > 255 || a < 0 || r < 0 || g < 0 || b < 0)
+                {
+                    retVal = "FF000000";
+                }
+                else
+                {
+                    retVal = $"{a:X2}{r:X2}{g:X2}{b:X2}";
+                }
+
+                return prependHash ? $"#{retVal}" : retVal;
+            }
+
+            /// <summary>
             /// Converts RGB integers to HEX format color string.
             /// </summary>
-            /// <param name="rgb">The RGB values array</param>
+            /// <param name="values">The RGB values array</param>
             /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
             /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
             /// <exception cref="ArgumentException">Thrown if insufficient number of integer values are provided</exception>
-            public static string ToHex(int[] rgb, bool prependHash = true)
+            public static string ToHex(int[] values, bool prependHash = true)
             {
-                if (rgb.Length < 3) throw new ArgumentException("Insufficient RGB values provided", nameof(rgb));
-                return ToHex(rgb[0], rgb[1], rgb[2], prependHash);
+                if (values.Length < 3) throw new ArgumentException("Insufficient values provided", nameof(values));
+                if (values.Length < 4)
+                {
+                    return ToHex(values[0], values[1], values[2], prependHash);
+                }
+
+                return ToHex(values[0], values[1], values[2], values[3], prependHash);
             }
 
             /// <summary>

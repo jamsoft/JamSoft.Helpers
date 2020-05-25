@@ -574,11 +574,22 @@
             <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
             <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
         </member>
+        <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Converts to hex.
+            </summary>
+            <param name="a">a.</param>
+            <param name="r">The r.</param>
+            <param name="g">The g.</param>
+            <param name="b">The b.</param>
+            <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
+            <returns></returns>
+        </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32[],System.Boolean)">
             <summary>
             Converts RGB integers to HEX format color string.
             </summary>
-            <param name="rgb">The RGB values array</param>
+            <param name="values">The RGB values array</param>
             <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
             <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
             <exception cref="T:System.ArgumentException">Thrown if insufficient number of integer values are provided</exception>
