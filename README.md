@@ -7,7 +7,7 @@ A collection of very generalised helpers for applications and libraries. The ide
 Install-Package JamSoft.Helpers
 ```
 # Environment Variables
-There are a handful of helper methods for access environment variables on various platforms.
+There are a handful of helper methods and classes for access environment variables on various platforms.
 ## Common Variables
 ```csharp
 var path = EnvEx.GetVariable(EnvExVariableNames.Path);
@@ -22,9 +22,19 @@ var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // "/bin/bash"
 ```
 ## Linux Variables
 ```csharp
-var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // ":"
+var manPath = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // ":"
 ```
-More variables names are included in the library than are shown above.
+More variables names are included in the library than are shown above. You can make use of these via helper constants in the following classes:
+- EnvExVariableNames (Common)
+- EnvExWinVariableNames
+- EnvExOsxVariableNames
+- EnvExLinuxVariableNames
+Since the `EnvEx.GetVariable` method just takes a string, any value can be passed, such as:
+```csharp
+var envValue = EnvEx.GetVariable("MYVARIABLENAME");
+```
+On Window you can also pass a target parameter of type `EnvironmentVariableTarget`. The default for this is `Process` as Linux and OSX do not support this parameter. If anything
+other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
 # Graphics
 ## Convert to HEX
 ```csharp
@@ -240,3 +250,9 @@ public class MementoManager
 # xUnit Tests
 
 There is a high level of test coverage at about 90+% at the moment, The the library has been tested on Windows, OSX and Linux.
+
+The following test classes also show basic implementations and uses of the pattern classes.
+
+- ObserverTests
+- MementoTests
+- MyTestViewModel
