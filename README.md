@@ -9,25 +9,25 @@ Install-Package JamSoft.Helpers
 # Environment Variables
 There are a handful of helper methods for access environment variables on various platforms.
 ## Common Variables
-```
+```csharp
 var path = EnvEx.GetVariable(EnvExVariableNames.Path);
 ```
 ## Windows Variables
-```
+```csharp
 var appData = EnvEx.GetVariable(EnvExWinVariableNames.AppData); // C:\Users\username\AppData\Roaming
 ```
 ## OSX Variables
-```
+```csharp
 var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // "/bin/bash"
 ```
 ## Linux Variables
-```
+```csharp
 var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // ":"
 ```
 More variables names are included in the library than are shown above.
 # Graphics
 ## Convert to HEX
-```
+```csharp
 int red = 121;
 int green = 155;
 int blue = 56;
@@ -35,15 +35,15 @@ int blue = 56;
 var hex = Graphics.Colors.ToHex(red, green, blue);
 ```
 Or you can also use an alpha value.
-```
+```csharp
 var hex = Graphics.Colors.ToHex(alpha, red, green, blue);
 ```
 You can also pass values as an array
-```
+```csharp
 var hex = Graphics.Colors.ToHex(new[] { alpha, red, green, blue });
 ```
 ## Convert to RGB
-```
+```csharp
 int red = 255;
 int green = 169;
 int blue = 104;
@@ -52,7 +52,7 @@ var color = Graphics.Colors.ToRgb("#FFA968");
 ```
 ## Convert to ARGB
 This can be useful for WPF and XAML which supports an alpha value in the HEX.
-```
+```csharp
 int alpha = 255;
 int red = 146;
 int green = 145;
@@ -63,13 +63,13 @@ var c = Graphics.Colors.ToArgb("#FF929191");
 # Math Things
 ## Even or Odd
 Even number detection
-```
+```csharp
 int value = 2;
 var isMyNumberEven = value.IsEvenNumber();
 ```
 ## Percentages
 Basic percentage calculations
-```
+```csharp
 int value = 500;
 int total = 2000;
 
@@ -78,7 +78,7 @@ var percent = value.IsWhatPercentageOf(total) // 25
 # String Distances
 ## Hamming Distance
 Calculates the number of edits required to go from one string to another must be equal lengths to start
-```
+```csharp
 var inputOne = "InputString1";
 var inputTwo = "InputString2";
 
@@ -87,7 +87,7 @@ inputOne.HammingDistanceTo(inputTwo)
 ```
 ## Levenshtein Distance
 Calculates the number of edits required to go from one string to another
-```
+```csharp
 var inputOne = "InputString1";
 var inputTwo = "InputString2";
 
@@ -96,7 +96,7 @@ inputOne.LevenshteinDistanceTo(inputTwo)
 ```
 ## Shorten Strings
 This method allows you to shorten strings to a predetermined length and pad with `...` or any pattern you provide.
-```
+```csharp
 string input = "Thisismylongstringthatneedsshortening";
 var result = input.DotShortenString(10, 20); // "Thisism...shortening"
 
@@ -104,27 +104,27 @@ string input = "Thisismylongstringthatneedsshortening";
 var result = input.DotShortenString(10, 20, ";;;"); // "Thisism;;;shortening"
 ```
 ## Remove All Multispaces
-``
+```csharp
 var input = "  This  has    too  many  spaces   ";
 input.RemoveAllMultiSpace(); // " This has too many spaces "
-``
-``
+```
+```csharp
 var input = "  This  has    too  many  spaces   ";
 input.RemoveAllMultiSpace(trim:true); // "This has too many spaces"
-``
-``
+```
+```csharp
 var input = "  This  has    too  many  spaces   ";
 input.RemoveAllMultiSpace("--"); // "--This--has--too--many--spaces--"
-``
-## String Compare
 ```
+## String Compare
+```csharp
 string input = "string1";
 string pattern = "strinG1";
 
 input.IsExactlySameAs(pattern); // false
 ```
 ## Secure Strings Compare
-```
+```csharp
 // #dontdothisinproduction
 var input1 = new SecureString();
 foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!".ToCharArray())
@@ -145,7 +145,7 @@ input1.IsExactlySameAs(input2); // true
 # Serialization
 ## XML Encoding Formatting
 Adds a strict uppercased UTF-8 to XML declarations
-```
+```csharp
 using (var sw = new UppercaseUtf8StringWriter())
 {
     xsSubmit.Serialize(sw, new TestObject { SomeProperty = "SomeValue" });
@@ -156,7 +156,7 @@ using (var sw = new UppercaseUtf8StringWriter())
 
 ## Mvvm - ViewModelBase
 A very bare bones view model with property changed updates
-```
+```csharp
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
     ...
@@ -170,7 +170,7 @@ public abstract class ViewModelBase : INotifyPropertyChanged
 ```
 ## Mvvm - SuperObservableCollection<T>
 An observable collection that mutes change notifications when adding a range of objects and allows sorting
-```
+```csharp
 public class SuperObservableCollection<T> : ObservableCollection<T>
 {
     public SuperObservableCollection(IEnumerable<T> coll)
@@ -195,7 +195,7 @@ public class SuperObservableCollection<T> : ObservableCollection<T>
 ```
 ## Observer
 A very basic implementation of the core bits of the observer pattern
-```
+```csharp
 public interface IObservable
 {
     void Attach(IObserver observer);
@@ -205,25 +205,25 @@ public interface IObservable
     void Notify();
 }
 ```
-```
+```csharp
 public interface IObserver
 {
     void Update(IObservable observable);
 }
 ```
-```
+```csharp
 public abstract class ObservableBase : IObservable
 {
 }
 ```
 ## Memento
-```
+```csharp
 public interface IMemento
 {
     object GetState();
 }
 ```
-```
+```csharp
 public interface IMementoOwner
 {
     IMemento Save();
@@ -231,7 +231,7 @@ public interface IMementoOwner
     void Restore(IMemento memento);
 }
 ```
-```
+```csharp
 public class MementoManager
 {
     ...
