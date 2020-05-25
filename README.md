@@ -9,21 +9,21 @@ Install-Package JamSoft.Helpers
 # Environment Variables
 There are a handful of helper methods for access environment variables on various platforms.
 ## Common Variables
-``
+```
 var path = EnvEx.GetVariable(EnvExVariableNames.Path);
-``
+```
 ## Windows Variables
-``
+```
 var appData = EnvEx.GetVariable(EnvExWinVariableNames.AppData); // C:\Users\username\AppData\Roaming
-``
+```
 ## OSX Variables
-``
+```
 var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // "/bin/bash"
-``
+```
 ## Linux Variables
-``
+```
 var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // ":"
-``
+```
 More variables names are included in the library than are shown above.
 # Graphics
 ## Convert to HEX
