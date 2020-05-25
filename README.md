@@ -15,6 +15,14 @@ int blue = 56;
 
 var hex = Graphics.Colors.ToHex(red, green, blue);
 ```
+Or you can also use an alpha value.
+```
+var hex = Graphics.Colors.ToHex(alpha, red, green, blue);
+```
+You can also pass values as an array
+```
+var hex = Graphics.Colors.ToHex(new[] { alpha, red, green, blue });
+```
 ## Convert to RGB
 ```
 int red = 255;
@@ -24,6 +32,7 @@ int blue = 104;
 var color = Graphics.Colors.ToRgb("#FFA968");
 ```
 ## Convert to ARGB
+This can be useful for WPF and XAML which supports an alpha value in the HEX.
 ```
 int alpha = 255;
 int red = 146;
@@ -67,6 +76,25 @@ var inputTwo = "InputString2";
 var distance = Distance.GetLevenshteinDistance(inputOne, inputTwo);
 inputOne.LevenshteinDistanceTo(inputTwo)
 ```
+## Secure Strings
+```
+// #dontdothisinproduction
+var input1 = new SecureString();
+foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!".ToCharArray())
+{
+    input1.AppendChar(c);
+}
+
+// #dontdothisinproduction
+var input2 = new SecureString();
+foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!".ToCharArray())
+{
+    input2.AppendChar(c);
+}
+
+input1.IsExactlySameAs(input2);
+```
+
 # Serialization
 ## XML Encoding Formatting
 Adds a strict uppercased UTF-8 to XML declarations
