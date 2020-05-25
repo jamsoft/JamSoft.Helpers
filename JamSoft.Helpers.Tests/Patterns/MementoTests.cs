@@ -4,7 +4,7 @@ using JamSoft.Helpers.Patterns.Memento;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace JamSoft.Helpers.Tests
+namespace JamSoft.Helpers.Tests.Patterns
 {
     public class MementoTests
     {

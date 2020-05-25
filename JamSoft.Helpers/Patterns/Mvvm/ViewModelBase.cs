@@ -66,7 +66,7 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         public bool IsEditable
         {
             get { return _isEditable; }
-            set { _isEditable = value; OnPropertyChanged(); }
+            set { SetProperty(ref _isEditable, value); }
         }
     }
 }
