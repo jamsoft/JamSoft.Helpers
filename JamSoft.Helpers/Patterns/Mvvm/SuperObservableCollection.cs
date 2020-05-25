@@ -8,7 +8,6 @@ namespace JamSoft.Helpers.Patterns.Mvvm
     /// A sortable ObservableCollection&lt;T&gt; class with AddRange features
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <seealso cref="System.Collections.ObjectModel.ObservableCollection{T}" />
     public class SuperObservableCollection<T> : ObservableCollection<T>
     {
         /// <summary>
@@ -17,23 +16,23 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         public bool SuppressNotification { private get; set; }
 
         /// <summary>Initialises a new instance of the <see cref="SuperObservableCollection{T}"/> class.</summary>
+        /// <seealso cref="System.Collections.ObjectModel.ObservableCollection{T}" />
         public SuperObservableCollection()
         {
         }
 
         /// <summary>Initialises a new instance of the <see cref="SuperObservableCollection{T}"/> class.</summary>
         /// <param name="coll">The coll.</param>
+        /// <seealso cref="System.Collections.ObjectModel.ObservableCollection{T}" />
         public SuperObservableCollection(IEnumerable<T> coll)
         {
             AddRange(coll);
         }
 
         /// <summary>
-        /// The on collection changed.
+        /// The on collection changed handler.
         /// </summary>
-        /// <param name="e">
-        /// The e.
-        /// </param>
+        /// <param name="e">The event args</param>
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             if (!SuppressNotification)
@@ -43,11 +42,10 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         }
 
         /// <summary>
-        /// The add range.
+        /// Adds the provided collection of <seealso cref="IEnumerable{T}"></seealso> and surpresses collection changed events until all objects have been added.<para />
+        /// Once all objects have been added a single <seealso cref="NotifyCollectionChangedEventArgs"></seealso> is created and the OnCollectionChanged event is fired
         /// </summary>
-        /// <param name="list">
-        /// The list.
-        /// </param>
+        /// <param name="list">The collection of obejct to add</param>
         public void AddRange(IEnumerable<T> list)
         {
             SuppressNotification = true;
@@ -62,19 +60,19 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         }
 
         /// <summary>
-        /// The sort.
+        /// Sorts the collection using the the default <seealso cref="Comparer{T}"></seealso> comparer
         /// </summary>
+        /// <seealso cref="IComparer{T}"></seealso>
         public void Sort()
         {
             Sort(Comparer<T>.Default);
         }
 
         /// <summary>
-        /// The sort.
+        /// Sorts the collection using the provided <seealso cref="IComparer{T}"></seealso>instance
         /// </summary>
-        /// <param name="comparer">
-        /// The comparer.
-        /// </param>
+        /// <param name="comparer">The comparer.</param>
+        /// <seealso cref="IComparer{T}"></seealso>
         public void Sort(IComparer<T> comparer)
         {
             int i;

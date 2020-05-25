@@ -6,47 +6,47 @@
     public static class EnvExOsxVariableNames
     {
         /// <summary>
-        /// The shell
+        /// The shell variable name
         /// </summary>
         public const string Shell = "SHELL";
 
         /// <summary>
-        /// The term
+        /// The term variable name
         /// </summary>
         public const string Term = "TERM";
 
         /// <summary>
-        /// The display
+        /// The display variable name
         /// </summary>
         public const string Display = "DISPLAY";
 
         /// <summary>
-        /// The home
+        /// The home variable name
         /// </summary>
         public const string Home = "HOME";
 
         /// <summary>
-        /// The home
+        /// The tmpdir variable name
         /// </summary>
         public const string TempDir = "TMPDIR";
 
         /// <summary>
-        /// The home
+        /// The user variable name
         /// </summary>
         public const string User = "USER";
 
         /// <summary>
-        /// The home
+        /// The logname variable name
         /// </summary>
         public const string LogName = "LOGNAME";
 
         /// <summary>
-        /// The term program
+        /// The term_program variable name
         /// </summary>
         public const string TermProgram = "TERM_PROGRAM";
 
         /// <summary>
-        /// The term program version
+        /// The term_program_version variable name
         /// </summary>
         public const string TermProgramVersion = "TERM_PROGRAM_VERSION";
     }

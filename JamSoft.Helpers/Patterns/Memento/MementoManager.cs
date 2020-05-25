@@ -20,7 +20,7 @@ namespace JamSoft.Helpers.Patterns.Memento
         protected readonly IMementoOwner Originator;
 
         /// <summary>
-        /// Default ctor
+        /// Default ctor that accepts a <seealso cref="IMementoOwner"></seealso> instance
         /// </summary>
         /// <param name="originator"></param>
         public MementoManager(IMementoOwner originator)
@@ -29,7 +29,7 @@ namespace JamSoft.Helpers.Patterns.Memento
         }
 
         /// <summary>
-        /// 
+        /// Asks the <seealso cref="IMementoOwner"></seealso> insance to create an <seealso cref="IMemento"></seealso> instance and stores the memento
         /// </summary>
         public virtual void Snapshot()
         {

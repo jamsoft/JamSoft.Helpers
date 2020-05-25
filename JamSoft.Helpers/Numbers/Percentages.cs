@@ -8,11 +8,11 @@ namespace JamSoft.Helpers.Numbers
 	public static class Percentages
 	{
 		/// <summary>
-		/// Determines whether [is what percentage of] [the specified total].
+		/// Determines what percentage of the total the provided value is.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <param name="total">The total.</param>
-		/// <returns></returns>
+		/// <returns>the percentage</returns>
 		public static int IsWhatPercentageOf(this int value, int total)
 		{
 			if (total < value) return -1;
@@ -21,12 +21,12 @@ namespace JamSoft.Helpers.Numbers
 		}
 
 		/// <summary>
-		/// Determines whether [is what percentage of] [the specified total].
+		/// Determines what percentage of the total the provided value is.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <param name="total">The total.</param>
-		/// <param name="precision">The precision.</param>
-		/// <returns></returns>
+        /// <param name="precision">The precision of the result.</param>
+		/// <returns>the percentage</returns>
 		public static double IsWhatPercentageOf(this double value, double total, int precision = 0)
 		{
 			if (total < value) return -1;
@@ -40,12 +40,12 @@ namespace JamSoft.Helpers.Numbers
 		}
 
 		/// <summary>
-		/// Determines whether [is what percentage of] [the specified total].
+		/// Determines what percentage of the total the provided value is.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <param name="total">The total.</param>
-		/// <param name="precision">The precision.</param>
-		/// <returns></returns>
+        /// <param name="precision">The precision of the result.</param>
+		/// <returns>the percentage</returns>
 		public static double IsWhatPercentageOf(this float value, float total, int precision = 0)
 		{
 			if (total < value) return -1;
@@ -59,12 +59,12 @@ namespace JamSoft.Helpers.Numbers
 		}
 
 		/// <summary>
-		/// Determines whether [is what percentage of] [the specified total].
+        /// Determines what percentage of the total the provided value is.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <param name="total">The total.</param>
-		/// <param name="precision">The precision.</param>
-		/// <returns></returns>
+		/// <param name="precision">The precision of the result.</param>
+		/// <returns>the percentage</returns>
 		public static decimal IsWhatPercentageOf(this decimal value, decimal total, int precision = 0)
 		{
 			if (total < value) return -1;

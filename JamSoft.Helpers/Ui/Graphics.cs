@@ -80,10 +80,11 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
-            /// Converts a standard hex string to Color struct
+            /// Converts a standard hex string to <seealso cref="Color"/> struct
             /// </summary>
             /// <param name="hex">The string to convert to a color</param>
             /// <returns> Color struct based on the provided hex string</returns>
+            /// <seealso cref="Color"/>
             /// <exception cref="ArgumentException">Thrown when string is invalid length</exception>
             public static Color ToRgb(string hex)
             {
@@ -101,7 +102,7 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
-            /// Converts a alpha hex string to Color struct
+            /// Converts a alpha hex string to <seealso cref="Color"/> struct
             /// </summary>
             /// <param name="hex"></param>
             /// <returns></returns>

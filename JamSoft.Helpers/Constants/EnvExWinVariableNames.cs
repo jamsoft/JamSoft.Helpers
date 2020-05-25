@@ -26,57 +26,57 @@
         public const string ComputerName = "COMPUTERNAME";
 
         /// <summary>
-        /// 
+        /// The all users profile variable name
         /// </summary>
         public const string AllUsersProfile = "ALLUSERSPROFILE";
 
         /// <summary>
-        /// App Data
+        /// App Data variable name
         /// </summary>
         public const string AppData = "APPDATA";
 
         /// <summary>
-        /// Home Path
+        /// Home Path variable name
         /// </summary>
         public const string HomePath = "HOMEPATH";
 
         /// <summary>
-        /// The home drive
+        /// The home drive variable name
         /// </summary>
         public const string HomeDrive = "HOMEDRIVE";
 
         /// <summary>
-        /// Local App Data
+        /// Local App Data variable name
         /// </summary>
         public const string LocalAppData = "LOCALAPPDATA";
 
         /// <summary>
-        /// Program data
+        /// Program data variable name
         /// </summary>
         public const string ProgramData = "PROGRAMDATA";
 
         /// <summary>
-        /// Public
+        /// The public variable name
         /// </summary>
         public const string Public = "PUBLIC";
 
         /// <summary>
-        /// Temp
+        /// The temp variable name
         /// </summary>
         public const string Temp = "TEMP";
 
         /// <summary>
-        /// Tmp
+        /// The tmp variable name
         /// </summary>
         public const string Tmp = "TMP";
 
         /// <summary>
-        /// User Profile
+        /// The user profile variable name
         /// </summary>
         public const string UserProfile = "USERPROFILE";
 
         /// <summary>
-        /// 
+        /// The system drive variable name
         /// </summary>
         public const string OsDrive = "SYSTEMDRIVE";
     }
