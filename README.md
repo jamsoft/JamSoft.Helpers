@@ -22,7 +22,7 @@ var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); //
 ``
 ## Linux Variables
 ``
-var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // 
+var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // ":"
 ``
 More variables names are included in the library than are shown above.
 # Graphics
