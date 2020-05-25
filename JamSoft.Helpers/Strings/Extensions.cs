@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Text.RegularExpressions;
 
 namespace JamSoft.Helpers.Strings
 {
@@ -10,13 +11,26 @@ namespace JamSoft.Helpers.Strings
     public static class Extensions
     {
         /// <summary>
+        /// Removes all instances of multi-whitespace substrings.
+        /// </summary>
+        /// <param name="input">The input string</param>
+        /// <param name="replacePattern">Optional replace pattern</param>
+        /// <param name="trim">set to true to trim leading and trailing spaces</param>
+        /// <returns>the sanitised result</returns>
+        public static string RemoveAllMultiSpace(this string input, string replacePattern = " ", bool trim = false)
+        {
+            return trim ? Regex.Replace(input, @"\s+", replacePattern).Trim(replacePattern.ToCharArray()) 
+                : Regex.Replace(input, @"\s+", replacePattern);
+        }
+
+        /// <summary>
         /// Takes a complete file path and shortens it to the value provided in totalLength filling in with "...".
         /// </summary>
         /// <param name="input">The input.</param>
         /// <param name="endPartLength"></param>
         /// <param name="maxLength">The total length.</param>
         /// <param name="midPattern">the string pattern to use as the middle pattern</param>
-        /// <returns></returns>
+        /// <returns>The shortened string using either the standard dot notation or a pattern if provided</returns>
         public static string DotShortenString(this string input, int endPartLength, int maxLength, string midPattern = "...")
         {
             if (input == null) return null;

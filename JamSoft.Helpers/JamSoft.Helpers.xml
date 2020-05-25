@@ -544,6 +544,15 @@
             Various string helper methods
             </summary>
         </member>
+        <member name="M:JamSoft.Helpers.Strings.Extensions.RemoveAllMultiSpace(System.String,System.String,System.Boolean)">
+            <summary>
+            Removes all instances of multi-whitespace substrings.
+            </summary>
+            <param name="input">The input string</param>
+            <param name="replacePattern">Optional replace pattern</param>
+            <param name="trim">set to true to trim leading and trailing spaces</param>
+            <returns>the sanitised result</returns>
+        </member>
         <member name="M:JamSoft.Helpers.Strings.Extensions.DotShortenString(System.String,System.Int32,System.Int32,System.String)">
             <summary>
             Takes a complete file path and shortens it to the value provided in totalLength filling in with "...".
@@ -552,7 +561,7 @@
             <param name="endPartLength"></param>
             <param name="maxLength">The total length.</param>
             <param name="midPattern">the string pattern to use as the middle pattern</param>
-            <returns></returns>
+            <returns>The shortened string using either the standard dot notation or a pattern if provided</returns>
         </member>
         <member name="M:JamSoft.Helpers.Strings.Extensions.IsExactlySameAs(System.String,System.String)">
             <summary>

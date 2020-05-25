@@ -6,13 +6,23 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Version>0.3.0</Version>
     <Description>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</Description>
+    <PackageDescription>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</PackageDescription>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization</PackageTags>
     <PackageProjectUrl>https://github.com/jamsoft/JamSoft.Helpers</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>master</RepositoryBranch>
     <PackageIcon>JamSoftLogo-Splat513x513.png</PackageIcon>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Company>JamSoft Solutions Ltd</Company>
+    <Authors>JamesGreen</Authors>
+    <Owners>JamesGreen</Owners>
+    <Title>JamSoft Helper Library</Title>
+    <PackageId>JamSoft.Helpers</PackageId>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

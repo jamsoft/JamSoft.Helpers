@@ -6,6 +6,25 @@ A collection of very generalised helpers for applications and libraries. The ide
 ```
 Install-Package JamSoft.Helpers
 ```
+# Environment Variables
+There are a handful of helper methods for access environment variables on various platforms.
+## Common Variables
+``
+var path = EnvEx.GetVariable(EnvExVariableNames.Path);
+``
+## Windows Variables
+``
+var appData = EnvEx.GetVariable(EnvExWinVariableNames.AppData); // C:\Users\username\AppData\Roaming
+``
+## OSX Variables
+``
+var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // 
+``
+## Linux Variables
+``
+var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // 
+``
+More variables names are included in the library than are shown above.
 # Graphics
 ## Convert to HEX
 ```
@@ -84,7 +103,27 @@ var result = input.DotShortenString(10, 20); // "Thisism...shortening"
 string input = "Thisismylongstringthatneedsshortening";
 var result = input.DotShortenString(10, 20, ";;;"); // "Thisism;;;shortening"
 ```
-## Secure Strings
+## Remove All Multispaces
+``
+var input = "  This  has    too  many  spaces   ";
+input.RemoveAllMultiSpace(); // " This has too many spaces "
+``
+``
+var input = "  This  has    too  many  spaces   ";
+input.RemoveAllMultiSpace(trim:true); // "This has too many spaces"
+``
+``
+var input = "  This  has    too  many  spaces   ";
+input.RemoveAllMultiSpace("--"); // "--This--has--too--many--spaces--"
+``
+## String Compare
+```
+string input = "string1";
+string pattern = "strinG1";
+
+input.IsExactlySameAs(pattern); // false
+```
+## Secure Strings Compare
 ```
 // #dontdothisinproduction
 var input1 = new SecureString();
@@ -100,7 +139,7 @@ foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!".ToCharArray())
     input2.AppendChar(c);
 }
 
-input1.IsExactlySameAs(input2);
+input1.IsExactlySameAs(input2); // true
 ```
 
 # Serialization
@@ -200,4 +239,4 @@ public class MementoManager
 ```
 # xUnit Tests
 
-There is a high level of test coverage at about 87+% at the moment, The the library has been tested on Windows, OSX and Linux.
+There is a high level of test coverage at about 90+% at the moment, The the library has been tested on Windows, OSX and Linux.
