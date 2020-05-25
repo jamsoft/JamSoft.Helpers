@@ -6,11 +6,11 @@
 	public static class MathEx
 	{
 		/// <summary>
-		/// Determines whether [is even number].
+		/// Determines whether the numer is even.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns>
-		///   <c>true</c> if [is even number] [the specified value]; otherwise, <c>false</c>.
+		///   <c>true</c> if is even number otherwise, <c>false</c>.
 		/// </returns>
 		public static bool IsEvenNumber(this int value)
 		{
@@ -18,11 +18,11 @@
 		}
 
 		/// <summary>
-		/// Determines whether [is even number].
+		/// Determines whether the numer is even.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns>
-		///   <c>true</c> if [is even number] [the specified value]; otherwise, <c>false</c>.
+		///   <c>true</c> if is even number; otherwise, <c>false</c>.
 		/// </returns>
 		public static bool IsEvenNumber(this decimal value)
 		{

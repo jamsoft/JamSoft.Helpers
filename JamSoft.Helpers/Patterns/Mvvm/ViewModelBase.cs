@@ -7,7 +7,6 @@ namespace JamSoft.Helpers.Patterns.Mvvm
     /// <summary>
     /// An implementation of a Base View Model for use in Mvvm
     /// </summary>
-    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isEditable;
@@ -15,11 +14,12 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        /// <returns></returns>
+        /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Sets the property.
+        /// Sets the property value only if the provided value is different from the stored value.<para />
+        /// If set to a new value, then the <seealso cref="System.ComponentModel.INotifyPropertyChanged" /> event will be fired
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="storage">The storage.</param>
@@ -39,7 +39,7 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         }
 
         /// <summary>
-        /// Raises the <see cref="E:PropertyChanged" /> event.  Allows the use of a specfic static PropertyChangedEventArgs object.  
+        /// Raises the <see cref="E:PropertyChanged" /> event. Allows the use of a specfic PropertyChangedEventArgs object.  
         /// Is the most performant implementation
         /// </summary>
         /// <param name="prop">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
@@ -49,7 +49,7 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         }
 
         /// <summary>
-        /// Called when [property changed].
+        /// Fires the property changed event using either the <seealso cref="CallerMemberNameAttribute" /> or the provded string property name.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -65,8 +65,8 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         /// </value>
         public bool IsEditable
         {
-            get { return _isEditable; }
-            set { SetProperty(ref _isEditable, value); }
+            get => _isEditable;
+            set => SetProperty(ref _isEditable, value);
         }
     }
 }

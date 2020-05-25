@@ -6,26 +6,26 @@
     public abstract class Memento : IMemento
     {
         /// <summary>
-        /// The stored state
+        /// The stored state object instance
         /// </summary>
-        private object _state;
+        protected readonly object State;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="Memento"/> class.
         /// </summary>
-        /// <param name="state"></param>
+        /// <param name="state">The state.</param>
         protected Memento(object state)
         {
-            _state = state;
+            State = state;
         }
 
         /// <summary>
-        /// The the stored state from this instance
+        /// Gets the stored state from this instance
         /// </summary>
         /// <returns></returns>
         public virtual object GetState()
         {
-            return _state;
+            return State;
         }
     }
 }

@@ -4,27 +4,16 @@ using System.Runtime.InteropServices;
 namespace JamSoft.Helpers
 {
     /// <summary>
-    /// 
-    /// </summary>
-    public static class EnvExLinuxVariableNames
-    {
-        /// <summary>
-        /// The man path
-        /// </summary>
-        public const string ManPath = "MANPATH";
-    }
-
-    /// <summary>
     /// Provides a wrapper around generalized environment methods
     /// </summary>
     public static class EnvEx
     {
         /// <summary>
-        /// Get the value of an environment variables
+        /// Get the value of an environment variable
         /// </summary>
         /// <remarks>see EnvExWinVariableNames for string values</remarks>
-        /// <param name="name">The name of the parameter to get</param>
-        /// <param name="target">Only supported on Windows</param>
+        /// <param name="name">The name of the parameter to get </param>
+        /// <param name="target">Only supported on Windows <seealso cref="EnvironmentVariableTarget"/></param>
         /// <returns></returns>
         public static string GetVariable(string name, EnvironmentVariableTarget target = EnvironmentVariableTarget.Process)
         {

@@ -1,11 +1,19 @@
 ﻿using System.Security;
 using JamSoft.Helpers.Strings;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace JamSoft.Helpers.Tests.Strings
 {
     public class StringExtensionTests
     {
+        private readonly ITestOutputHelper _outputHelper;
+
+        public StringExtensionTests(ITestOutputHelper outputHelper)
+        {
+            _outputHelper = outputHelper;
+        }
+
         [Fact]
         public void Shortens_Correctly()
         {
@@ -113,6 +121,45 @@ namespace JamSoft.Helpers.Tests.Strings
             }
 
             Assert.False(input1.IsExactlySameAs(input2));
+        }
+
+        [Fact]
+        public void String_Removes_All_MultiSpaces()
+        {
+            string expected = " QqN#c1rFz9 ^Xl8rAO! #Xzo4nUk0bEOxI1x$ !FWrY@ TSYWA16Q@ cxZpOY5RUR! 1IhHiBlHM6 cW7";
+            string input = "    QqN#c1rFz9  ^Xl8rAO!  #Xzo4nUk0bEOxI1x$   !FWrY@   TSYWA16Q@     cxZpOY5RUR!       1IhHiBlHM6      cW7";
+
+            Assert.Equal(expected, input.RemoveAllMultiSpace());
+        }
+
+        [Fact]
+        public void String_Removes_All_MultiSpaces_Using_Pattern()
+        {
+            string expected = "--QqNK8f#X4t7lZYomTC#c1rFz9--^Xl8rAO!--#Xzo4nUk0bEOxI1x$--!FWrC0Sf71RpN7Y@--TSYWA16Q@--cxZpOY5RUR!--1IhHiBlHM6--cW7";
+            string input = "    QqNK8f#X4t7lZYomTC#c1rFz9  ^Xl8rAO!  #Xzo4nUk0bEOxI1x$   !FWrC0Sf71RpN7Y@   TSYWA16Q@     cxZpOY5RUR!       1IhHiBlHM6      cW7";
+
+            Assert.Equal(expected, input.RemoveAllMultiSpace("--"));
+            _outputHelper.WriteLine(input.RemoveAllMultiSpace("--"));
+        }
+
+        [Fact]
+        public void String_Removes_All_MultiSpaces_And_Trim()
+        {
+            string expected = "This has too many spaces";
+            string input = "  This  has    too  many  spaces   ";
+
+            Assert.Equal(expected, input.RemoveAllMultiSpace(trim:true));
+            _outputHelper.WriteLine(input.RemoveAllMultiSpace(trim: true));
+        }
+
+        [Fact]
+        public void String_Removes_All_MultiSpaces_And_Pattern_And_Trim()
+        {
+            string expected = "This--has--too--many--spaces";
+            string input = "  This  has    too  many  spaces   ";
+
+            Assert.Equal(expected, input.RemoveAllMultiSpace("--", true));
+            _outputHelper.WriteLine(input.RemoveAllMultiSpace("--", true));
         }
     }
 }

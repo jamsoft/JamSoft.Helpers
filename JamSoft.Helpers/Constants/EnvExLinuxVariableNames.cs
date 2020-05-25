@@ -6,7 +6,7 @@
     public static class EnvExLinuxVariableNames
     {
         /// <summary>
-        /// The shell
+        /// The MANPATH variable name
         /// </summary>
         public const string ManPath = "MANPATH";
     }

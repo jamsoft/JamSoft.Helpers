@@ -11,7 +11,7 @@
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExLinuxVariableNames.ManPath">
             <summary>
-            The shell
+            The MANPATH variable name
             </summary>
         </member>
         <member name="T:JamSoft.Helpers.Constants.EnvExOsxVariableNames">
@@ -21,47 +21,47 @@
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Shell">
             <summary>
-            The shell
+            The shell variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Term">
             <summary>
-            The term
+            The term variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Display">
             <summary>
-            The display
+            The display variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.Home">
             <summary>
-            The home
+            The home variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TempDir">
             <summary>
-            The home
+            The tmpdir variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.User">
             <summary>
-            The home
+            The user variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.LogName">
             <summary>
-            The home
+            The logname variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TermProgram">
             <summary>
-            The term program
+            The term_program variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TermProgramVersion">
             <summary>
-            The term program version
+            The term_program_version variable name
             </summary>
         </member>
         <member name="T:JamSoft.Helpers.Constants.EnvExVariableNames">
@@ -101,67 +101,57 @@
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.AllUsersProfile">
             <summary>
-            
+            The all users profile variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.AppData">
             <summary>
-            App Data
+            App Data variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.HomePath">
             <summary>
-            Home Path
+            Home Path variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.HomeDrive">
             <summary>
-            The home drive
+            The home drive variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.LocalAppData">
             <summary>
-            Local App Data
+            Local App Data variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.ProgramData">
             <summary>
-            Program data
+            Program data variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Public">
             <summary>
-            Public
+            The public variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Temp">
             <summary>
-            Temp
+            The temp variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Tmp">
             <summary>
-            Tmp
+            The tmp variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.UserProfile">
             <summary>
-            User Profile
+            The user profile variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.OsDrive">
             <summary>
-            
-            </summary>
-        </member>
-        <member name="T:JamSoft.Helpers.EnvExLinuxVariableNames">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:JamSoft.Helpers.EnvExLinuxVariableNames.ManPath">
-            <summary>
-            The man path
+            The system drive variable name
             </summary>
         </member>
         <member name="T:JamSoft.Helpers.EnvEx">
@@ -171,11 +161,11 @@
         </member>
         <member name="M:JamSoft.Helpers.EnvEx.GetVariable(System.String,System.EnvironmentVariableTarget)">
             <summary>
-            Get the value of an environment variables
+            Get the value of an environment variable
             </summary>
             <remarks>see EnvExWinVariableNames for string values</remarks>
-            <param name="name">The name of the parameter to get</param>
-            <param name="target">Only supported on Windows</param>
+            <param name="name">The name of the parameter to get </param>
+            <param name="target">Only supported on Windows <seealso cref="T:System.EnvironmentVariableTarget"/></param>
             <returns></returns>
         </member>
         <member name="M:JamSoft.Helpers.EnvEx.WhereAmI">
@@ -191,20 +181,20 @@
         </member>
         <member name="M:JamSoft.Helpers.Numbers.MathEx.IsEvenNumber(System.Int32)">
             <summary>
-            Determines whether [is even number].
+            Determines whether the numer is even.
             </summary>
             <param name="value">The value.</param>
             <returns>
-              <c>true</c> if [is even number] [the specified value]; otherwise, <c>false</c>.
+              <c>true</c> if is even number otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="M:JamSoft.Helpers.Numbers.MathEx.IsEvenNumber(System.Decimal)">
             <summary>
-            Determines whether [is even number].
+            Determines whether the numer is even.
             </summary>
             <param name="value">The value.</param>
             <returns>
-              <c>true</c> if [is even number] [the specified value]; otherwise, <c>false</c>.
+              <c>true</c> if is even number; otherwise, <c>false</c>.
             </returns>
         </member>
         <member name="T:JamSoft.Helpers.Numbers.Percentages">
@@ -214,38 +204,38 @@
         </member>
         <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Int32,System.Int32)">
             <summary>
-            Determines whether [is what percentage of] [the specified total].
+            Determines what percentage of the total the provided value is.
             </summary>
             <param name="value">The value.</param>
             <param name="total">The total.</param>
-            <returns></returns>
+            <returns>the percentage</returns>
         </member>
         <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Double,System.Double,System.Int32)">
             <summary>
-            Determines whether [is what percentage of] [the specified total].
+            Determines what percentage of the total the provided value is.
             </summary>
             <param name="value">The value.</param>
             <param name="total">The total.</param>
-            <param name="precision">The precision.</param>
-            <returns></returns>
+            <param name="precision">The precision of the result.</param>
+            <returns>the percentage</returns>
         </member>
         <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Single,System.Single,System.Int32)">
             <summary>
-            Determines whether [is what percentage of] [the specified total].
+            Determines what percentage of the total the provided value is.
             </summary>
             <param name="value">The value.</param>
             <param name="total">The total.</param>
-            <param name="precision">The precision.</param>
-            <returns></returns>
+            <param name="precision">The precision of the result.</param>
+            <returns>the percentage</returns>
         </member>
         <member name="M:JamSoft.Helpers.Numbers.Percentages.IsWhatPercentageOf(System.Decimal,System.Decimal,System.Int32)">
             <summary>
-            Determines whether [is what percentage of] [the specified total].
+            Determines what percentage of the total the provided value is.
             </summary>
             <param name="value">The value.</param>
             <param name="total">The total.</param>
-            <param name="precision">The precision.</param>
-            <returns></returns>
+            <param name="precision">The precision of the result.</param>
+            <returns>the percentage</returns>
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Memento.IMemento">
             <summary>
@@ -265,13 +255,13 @@
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.IMementoOwner.Save">
             <summary>
-            Save a new memento
+            Save a new memento instance
             </summary>
             <returns></returns>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.IMementoOwner.Restore(JamSoft.Helpers.Patterns.Memento.IMemento)">
             <summary>
-            Restore a memento
+            Restore a memento instance
             </summary>
             <param name="memento"></param>
         </member>
@@ -280,20 +270,20 @@
             A simple object for storing state
             </summary>
         </member>
-        <member name="F:JamSoft.Helpers.Patterns.Memento.Memento._state">
+        <member name="F:JamSoft.Helpers.Patterns.Memento.Memento.State">
             <summary>
-            The stored state
+            The stored state object instance
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.Memento.#ctor(System.Object)">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:JamSoft.Helpers.Patterns.Memento.Memento"/> class.
             </summary>
-            <param name="state"></param>
+            <param name="state">The state.</param>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.Memento.GetState">
             <summary>
-            The the stored state from this instance
+            Gets the stored state from this instance
             </summary>
             <returns></returns>
         </member>
@@ -314,13 +304,13 @@
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.#ctor(JamSoft.Helpers.Patterns.Memento.IMementoOwner)">
             <summary>
-            Default ctor
+            Default ctor that accepts a <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner"></seealso> instance
             </summary>
             <param name="originator"></param>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.Snapshot">
             <summary>
-            
+            Asks the <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner"></seealso> insance to create an <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMemento"></seealso> instance and stores the memento
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.Undo">
@@ -333,7 +323,6 @@
             A sortable ObservableCollection&lt;T&gt; class with AddRange features
             </summary>
             <typeparam name="T"></typeparam>
-            <seealso cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
         </member>
         <member name="P:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.SuppressNotification">
             <summary>
@@ -342,55 +331,54 @@
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.#ctor">
             <summary>Initialises a new instance of the <see cref="T:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1"/> class.</summary>
+            <seealso cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
             <summary>Initialises a new instance of the <see cref="T:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1"/> class.</summary>
             <param name="coll">The coll.</param>
+            <seealso cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
             <summary>
-            The on collection changed.
+            The on collection changed handler.
             </summary>
-            <param name="e">
-            The e.
-            </param>
+            <param name="e">The event args</param>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-            The add range.
+            Adds the provided collection of <seealso cref="T:System.Collections.Generic.IEnumerable`1"></seealso> and surpresses collection changed events until all objects have been added.<para />
+            Once all objects have been added a single <seealso cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"></seealso> is created and the OnCollectionChanged event is fired
             </summary>
-            <param name="list">
-            The list.
-            </param>
+            <param name="list">The collection of obejct to add</param>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort">
             <summary>
-            The sort.
+            Sorts the collection using the the default <seealso cref="T:System.Collections.Generic.Comparer`1"></seealso> comparer
             </summary>
+            <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort(System.Collections.Generic.IComparer{`0})">
             <summary>
-            The sort.
+            Sorts the collection using the provided <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>instance
             </summary>
-            <param name="comparer">
-            The comparer.
-            </param>
+            <param name="comparer">The comparer.</param>
+            <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase">
             <summary>
             An implementation of a Base View Model for use in Mvvm
             </summary>
-            <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
         </member>
         <member name="E:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.PropertyChanged">
             <summary>
             Occurs when a property value changes.
             </summary>
-            <returns></returns>
+            <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.SetProperty``1(``0@,``0,System.String)">
             <summary>
-            Sets the property.
+            Sets the property value only if the provided value is different from the stored value.<para />
+            If set to a new value, then the <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" /> event will be fired
             </summary>
             <typeparam name="T"></typeparam>
             <param name="storage">The storage.</param>
@@ -400,14 +388,14 @@
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
             <summary>
-            Raises the <see cref="E:PropertyChanged" /> event.  Allows the use of a specfic static PropertyChangedEventArgs object.  
+            Raises the <see cref="E:PropertyChanged" /> event. Allows the use of a specfic PropertyChangedEventArgs object.  
             Is the most performant implementation
             </summary>
             <param name="prop">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.String)">
             <summary>
-            Called when [property changed].
+            Fires the property changed event using either the <seealso cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute" /> or the provded string property name.
             </summary>
             <param name="propertyName">Name of the property.</param>
         </member>
@@ -544,6 +532,15 @@
             Various string helper methods
             </summary>
         </member>
+        <member name="M:JamSoft.Helpers.Strings.Extensions.RemoveAllMultiSpace(System.String,System.String,System.Boolean)">
+            <summary>
+            Removes all instances of multi-whitespace substrings.
+            </summary>
+            <param name="input">The input string</param>
+            <param name="replacePattern">Optional replace pattern</param>
+            <param name="trim">set to true to trim leading and trailing spaces</param>
+            <returns>the sanitised result</returns>
+        </member>
         <member name="M:JamSoft.Helpers.Strings.Extensions.DotShortenString(System.String,System.Int32,System.Int32,System.String)">
             <summary>
             Takes a complete file path and shortens it to the value provided in totalLength filling in with "...".
@@ -552,7 +549,7 @@
             <param name="endPartLength"></param>
             <param name="maxLength">The total length.</param>
             <param name="midPattern">the string pattern to use as the middle pattern</param>
-            <returns></returns>
+            <returns>The shortened string using either the standard dot notation or a pattern if provided</returns>
         </member>
         <member name="M:JamSoft.Helpers.Strings.Extensions.IsExactlySameAs(System.String,System.String)">
             <summary>
@@ -614,15 +611,16 @@
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToRgb(System.String)">
             <summary>
-            Converts a standard hex string to Color struct
+            Converts a standard hex string to <seealso cref="T:System.Drawing.Color"/> struct
             </summary>
             <param name="hex">The string to convert to a color</param>
             <returns> Color struct based on the provided hex string</returns>
+            <seealso cref="T:System.Drawing.Color"/>
             <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToArgb(System.String)">
             <summary>
-            Converts a alpha hex string to Color struct
+            Converts a alpha hex string to <seealso cref="T:System.Drawing.Color"/> struct
             </summary>
             <param name="hex"></param>
             <returns></returns>

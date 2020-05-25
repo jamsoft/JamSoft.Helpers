@@ -6,13 +6,13 @@
     public interface IMementoOwner
     {
         /// <summary>
-        /// Save a new memento
+        /// Save a new memento instance
         /// </summary>
         /// <returns></returns>
         IMemento Save();
 
         /// <summary>
-        /// Restore a memento
+        /// Restore a memento instance
         /// </summary>
         /// <param name="memento"></param>
         void Restore(IMemento memento);
