@@ -126,6 +126,10 @@ input.RemoveAllMultiSpace(trim:true); // "This has too many spaces"
 var input = "  This  has    too  many  spaces   ";
 input.RemoveAllMultiSpace("--"); // "--This--has--too--many--spaces--"
 ```
+```csharp
+var input = "  This  has    too  many  spaces   ";
+input.RemoveAllMultiSpace(pattern:"--", trim:true) // "This--has--too--many--spaces"
+```
 ## String Compare
 ```csharp
 string input = "string1";

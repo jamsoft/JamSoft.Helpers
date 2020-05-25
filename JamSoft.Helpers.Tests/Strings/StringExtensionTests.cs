@@ -159,7 +159,7 @@ namespace JamSoft.Helpers.Tests.Strings
             string input = "  This  has    too  many  spaces   ";
 
             Assert.Equal(expected, input.RemoveAllMultiSpace("--", true));
-            _outputHelper.WriteLine(input.RemoveAllMultiSpace(trim: true));
+            _outputHelper.WriteLine(input.RemoveAllMultiSpace("--", true));
         }
     }
 }
