@@ -45,7 +45,7 @@ namespace JamSoft.Helpers.Ui
             /// <param name="g">The g.</param>
             /// <param name="b">The b.</param>
             /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
-            /// <returns></returns>
+            /// <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
             public static string ToHex(int a, int r, int g, int b, bool prependHash = true)
             {
                 string retVal;
@@ -84,7 +84,6 @@ namespace JamSoft.Helpers.Ui
             /// </summary>
             /// <param name="hex">The string to convert to a color</param>
             /// <returns> Color struct based on the provided hex string</returns>
-            /// <seealso cref="Color"/>
             /// <exception cref="ArgumentException">Thrown when string is invalid length</exception>
             public static Color ToRgb(string hex)
             {
@@ -105,7 +104,8 @@ namespace JamSoft.Helpers.Ui
             /// Converts a alpha hex string to <seealso cref="Color"/> struct
             /// </summary>
             /// <param name="hex"></param>
-            /// <returns></returns>
+            /// <returns> Color struct based on the provided hex string</returns>
+            /// <exception cref="ArgumentException">Thrown when string is invalid length</exception>
             public static Color ToArgb(string hex)
             {
                 if (hex.Length < 8) throw new ArgumentException("Input string invalid length");
