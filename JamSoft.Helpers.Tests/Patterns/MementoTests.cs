@@ -16,7 +16,19 @@ namespace JamSoft.Helpers.Tests.Patterns
         }
 
         [Fact]
-        public void Works()
+        public void MementoManager_Undo_Without_Snapshots()
+        {
+            var originalState = "Super-duper-super-puper-super.";
+
+            // Client code.
+            var originator = new Originator(originalState, _outputHelper);
+            var caretaker = new MementoManager(originator);
+            caretaker.Undo();
+            Assert.Equal(originalState, originator.WhatIsMyState());
+        }
+
+        [Fact]
+        public void MementoManager_State_Management()
         {
             var originalState = "Super-duper-super-puper-super.";
 
@@ -122,19 +134,11 @@ namespace JamSoft.Helpers.Tests.Patterns
         }
     }
 
-    class ConcreteMemento : IMemento
+    public class ConcreteMemento : Memento
     {
-        private readonly string _state;
-
         public ConcreteMemento(string state)
+            :base(state)
         {
-            _state = state;
-        }
-
-        // The Originator uses this method when restoring its state.
-        public object GetState()
-        {
-            return _state;
         }
     }
 }

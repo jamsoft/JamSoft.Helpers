@@ -1,6 +1,6 @@
 # JamSoft.Helpers
 
-A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.
+A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.
 
 ![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)

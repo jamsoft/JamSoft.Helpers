@@ -222,12 +222,12 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
-        //[FactLinux]
-        //public void Linux_Gets_TermProgramVersion_Environment_Value()
-        //{
-        //    var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath);
-        //    Assert.NotNull(p);
-        //    _outputHelper.WriteLine(p);
-        //}
+        [FactLinux(Skip = "Limited permissions in GitHub prevents this from running in the .net core pipeline")]
+        public void Linux_Gets_TermProgramVersion_Environment_Value()
+        {
+            var p = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath);
+            Assert.NotNull(p);
+            _outputHelper.WriteLine(p);
+        }
     }
 }
