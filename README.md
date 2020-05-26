@@ -5,10 +5,25 @@ A collection of very generalised helpers for applications and libraries. The ide
 ![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)
 
+# GitHub Pages Site
+
+https://jamsoft.github.io/JamSoft.Helpers/
+
 # Install Via Nuget
 ```
 Install-Package JamSoft.Helpers
 ```
+# xUnit Tests
+
+There is a high level of test coverage as shown in the badge above, however, at the moment the pipeline executes on Linux with limited permissions which means some tests cannot be run in this environment.
+The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
+
+The following test classes also show basic example implementations and uses of the provided pattern classes.
+
+- ObserverTests
+- MementoTests
+- MyTestViewModel
+
 # Environment Variables
 There are a handful of helper methods and classes for access environment variables on various platforms.
 ## Common Variables
@@ -28,17 +43,21 @@ var shell = EnvEx.GetVariable(EnvExOsxVariableNames.Shell); // "/bin/bash"
 var manPath = EnvEx.GetVariable(EnvExLinuxVariableNames.ManPath); // ":"
 ```
 More variables names are included in the library than are shown above. You can make use of these via helper constants in the following classes:
+
 - EnvExVariableNames (Common)
 - EnvExWinVariableNames
 - EnvExOsxVariableNames
 - EnvExLinuxVariableNames
+
 Since the `EnvEx.GetVariable` method just takes a string, any value can be passed, such as:
 ```csharp
 var envValue = EnvEx.GetVariable("MYVARIABLENAME");
 ```
 On Window you can also pass a target parameter of type `EnvironmentVariableTarget`. The default for this is `Process` as Linux and OSX do not support this parameter. If anything
 other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
+
 # Graphics
+
 ## Convert to HEX
 ```csharp
 int red = 121;
@@ -74,6 +93,7 @@ int blue = 145;
 var c = Graphics.Colors.ToArgb("#FF929191");
 ```
 # Math Things
+
 ## Even or Odd
 Even number detection
 ```csharp
@@ -89,6 +109,7 @@ int total = 2000;
 var percent = value.IsWhatPercentageOf(total) // 25
 ```
 # String Distances
+
 ## Hamming Distance
 Calculates the number of edits required to go from one string to another must be equal lengths to start
 ```csharp
@@ -160,6 +181,7 @@ input1.IsExactlySameAs(input2); // true
 ```
 
 # Serialization
+
 ## XML Encoding Formatting
 Adds a strict uppercased UTF-8 to XML declarations
 ```csharp
@@ -254,12 +276,3 @@ public class MementoManager
     ...
 }
 ```
-# xUnit Tests
-
-There is a high level of test coverage at about 90+% at the moment, The the library has been tested on Windows, OSX and Linux.
-
-The following test classes also show basic implementations and uses of the pattern classes.
-
-- ObserverTests
-- MementoTests
-- MyTestViewModel
