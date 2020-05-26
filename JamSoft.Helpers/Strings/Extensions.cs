@@ -33,7 +33,6 @@ namespace JamSoft.Helpers.Strings
         /// <returns>The shortened string using either the standard dot notation or a pattern if provided</returns>
         public static string DotShortenString(this string input, int endPartLength, int maxLength, string midPattern = "...")
         {
-            if (input == null) return null;
             if (input.Length < maxLength || input.Length < endPartLength) return input;
             if (endPartLength > maxLength) return input;
             

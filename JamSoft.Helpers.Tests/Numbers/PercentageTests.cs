@@ -56,7 +56,19 @@ namespace JamSoft.Helpers.Tests.Numbers
 		{
 			Assert.Equal(expected, value.IsWhatPercentageOf(total));
 		}
-		
+
+        [Theory]
+        [InlineData(7900, 12000, 65.83334, 5)]
+        [InlineData(7900, 2000.00000, -1, 5)]
+        [InlineData(500, 2000.00000, 25, 5)]
+        [InlineData(100, 2000.00000, 5, 5)]
+        [InlineData(50, 2000.00000, 2.5, 5)]
+        [InlineData(723123, 12314141, 5.8723, 5)]
+        public void Gets_Correct_Float_Percentage_Of_Total_With_Precision(float value, float total, double expected, int places)
+        {
+            Assert.Equal(expected, value.IsWhatPercentageOf(total, places));
+        }
+
 		public static IEnumerable<object[]> Data =>
 			new List<object[]>
 			{

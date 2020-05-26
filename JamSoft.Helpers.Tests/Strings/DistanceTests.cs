@@ -79,7 +79,29 @@ namespace JamSoft.Helpers.Tests.Strings
 			
 			Assert.Equal(1, distance);
 		}
-		
+
+        [Fact]
+        public void GetLevenshteinDistance_Input_One_Zero_Length()
+        {
+            var inputOne = "";
+            var inputTwo = "InputString2";
+
+            var distance = Distance.GetLevenshteinDistance(inputOne, inputTwo);
+
+            Assert.Equal(inputTwo.Length, distance);
+        }
+
+        [Fact]
+        public void GetLevenshteinDistance_Input_Two_Zero_Length()
+        {
+            var inputOne = "InputString1";
+            var inputTwo = "";
+
+            var distance = Distance.GetLevenshteinDistance(inputOne, inputTwo);
+
+            Assert.Equal(inputOne.Length, distance);
+        }
+
 		[Fact]
 		public void GetLevenshteinDistance_Distance_One_Ext()
 		{

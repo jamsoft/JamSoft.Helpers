@@ -26,6 +26,14 @@ namespace JamSoft.Helpers.Tests.Patterns
         }
 
         [Fact]
+        public void PropertyChanged_Is_Fired_SetProperty_IsEditable_Returns_True()
+        {
+            var sut = new MyTestViewModel();
+            Assert.PropertyChanged(sut, nameof(sut.IsEditable), () => sut.IsEditable = true);
+            Assert.True(sut.IsEditable);
+        }
+
+        [Fact]
         public void PropertyChanged_Is_Fired_OnPropertyChanged()
         {
             var sut = new MyTestViewModel();

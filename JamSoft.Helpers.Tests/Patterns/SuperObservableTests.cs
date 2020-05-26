@@ -6,6 +6,18 @@ namespace JamSoft.Helpers.Tests.Patterns
     public class SuperObservableTests
     {
         [Fact]
+        public void AddRange_Ctor_Adds_Items()
+        {
+            var stringA = "aaaaa";
+            var stringB = "bbbbb";
+            var stringC = "ccccc";
+
+            var sut = new SuperObservableCollection<string>(new[] { stringA, stringB, stringC });
+
+            Assert.Equal(3, sut.Count);
+        }
+
+        [Fact]
         public void AddRange_Adds_Items()
         {
             var stringA = "aaaaa";
