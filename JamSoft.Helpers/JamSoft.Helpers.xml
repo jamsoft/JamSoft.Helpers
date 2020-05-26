@@ -598,7 +598,7 @@
             <param name="g">The g.</param>
             <param name="b">The b.</param>
             <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
-            <returns></returns>
+            <returns>The hex representation or black when passed any component value greater than 255 or less than 0</returns>
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32[],System.Boolean)">
             <summary>
@@ -615,7 +615,6 @@
             </summary>
             <param name="hex">The string to convert to a color</param>
             <returns> Color struct based on the provided hex string</returns>
-            <seealso cref="T:System.Drawing.Color"/>
             <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToArgb(System.String)">
@@ -623,7 +622,8 @@
             Converts a alpha hex string to <seealso cref="T:System.Drawing.Color"/> struct
             </summary>
             <param name="hex"></param>
-            <returns></returns>
+            <returns> Color struct based on the provided hex string</returns>
+            <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
         </member>
     </members>
 </doc>
