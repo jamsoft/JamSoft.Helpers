@@ -2,6 +2,8 @@
 
 A collection of very generalised things applications and libraries may need
 
+![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
+
 # Install Via Nuget
 ```
 Install-Package JamSoft.Helpers
