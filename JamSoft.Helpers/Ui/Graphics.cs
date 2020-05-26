@@ -15,7 +15,7 @@ namespace JamSoft.Helpers.Ui
         public static class Colors
         {
             /// <summary>
-            /// Converts RGB integers to HEX format color string.
+            /// Converts RGB integers to HEX format color string
             /// </summary>
             /// <param name="r">The RED component</param>
             /// <param name="g">The GREEN component</param>
@@ -38,7 +38,7 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
-            /// Converts to hex.
+            /// Converts ARGB integers to HEX format color string
             /// </summary>
             /// <param name="a">a.</param>
             /// <param name="r">The r.</param>
@@ -62,7 +62,7 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
-            /// Converts RGB integers to HEX format color string.
+            /// Converts RGB or ARGB integer arrays to HEX format color string.
             /// </summary>
             /// <param name="values">The RGB values array</param>
             /// <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
@@ -80,7 +80,7 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
-            /// Converts a standard hex string to <seealso cref="Color"/> struct
+            /// Converts a standard HEX string to <seealso cref="Color"/> struct
             /// </summary>
             /// <param name="hex">The string to convert to a color</param>
             /// <returns> Color struct based on the provided hex string</returns>
@@ -101,7 +101,7 @@ namespace JamSoft.Helpers.Ui
             }
 
             /// <summary>
-            /// Converts a alpha hex string to <seealso cref="Color"/> struct
+            /// Converts a alpha HEX string to <seealso cref="Color"/> struct
             /// </summary>
             /// <param name="hex"></param>
             /// <returns> Color struct based on the provided hex string</returns>

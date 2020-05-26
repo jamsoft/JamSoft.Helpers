@@ -55,7 +55,7 @@ namespace JamSoft.Helpers.Strings
         }
 
         /// <summary>
-        /// Determines whether secureStringOne [is equal to] [the specified secureStringTwo].
+        /// Determines whether secureStringOne is equal to the specified secureStringTwo.
         /// </summary>
         /// <param name="secureStringOne">The secureStringOne.</param>
         /// <param name="secureStringTwo">The secureStringTwo.</param>
