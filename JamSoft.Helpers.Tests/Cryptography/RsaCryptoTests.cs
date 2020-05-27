@@ -1,0 +1,271 @@
+﻿using System;
+using System.Security.Cryptography;
+using System.Text;
+using JamSoft.Helpers.Crypto;
+using Xunit;
+using Xunit.Abstractions;
+
+namespace JamSoft.Helpers.Tests.Cryptography
+{
+    public class RsaCryptoTests
+    {
+        private readonly ITestOutputHelper _outputHelper;
+        private readonly string _privateKey = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<RSAParameters xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Exponent>AQAB</Exponent>\r\n  <Modulus>nyo4kg83PebAPi/YyYXxdGDbf1M+ThEDySqYkOsBU9/Ubav5A1VbW1W/6DyWjiwTi+1me5XL62P2IbP+vI1OfsGF8n81qxlty2lxUWl6u1SDRPFPIEtV8S/jm3Gn989+UB/bWnI+K9Dk6iKABgS5FBsN1hO+VM0lgAZdiXSabGQFjn7c+2MAK3I5cvjpbK4aqjYMDpD4JtXZMlFwrY2ISz3cUBlelnv2aH4G5jYFJXtfgvta5CaEUXDkZMllFnWEsjtJbN6TVmpgHFgYRGl04NQ3YdrjuD+dWiIwcawymMXp1jmyc5fbajf6U7gu09b4D7LdBBh6Tew5lMjKNUsGnQ==</Modulus>\r\n  <P>zfBrXYnTcRsWOFuhgbCJYCdRZC0LjsQe0u0Dna07GAaGIuIF8x2MZzNkKuF/QUBmtnVdI1D56vg2NYa9qFTHRczSG3QSY3HzsWKG3bRFKyKW7j1RWceowcsnlGIGgITT6ZQKwKkbpD/aKoXzMymeu1UE2sM8eLyTfDvsJzMiJ7c=</P>\r\n  <Q>xdsLiJ2fRJ3JoCN9dI9STq1icaJD3hZZi0xfxRjoKY1+dxmE7Rrlhhc8w7gd5RVqxpVl3fyrwjLAPTtd2voS98qRx2eIaSlzM9JUimMczxz7AKn630ufJZwPEEvSj7YlBQt3dvmfRzOJ2s/AWsDfmHLrC6PxlFZLdXSroF3ZvEs=</Q>\r\n  <DP>L1IGKako172EnpCXjOhWuKxwLFeZZ0WzW34wrYOHp56gJdXPzixE/dW2N5A3IHQ+5cAUFbBerNo6ApSicdKBM4273akPLKCbgXAFU14/4oiBK98VGU8ifN1Ei/j2S4O5+dsVmW2CN3ygkdLTrjbrDVqc0fO4qnmSXiKawesi9wM=</DP>\r\n  <DQ>K5RCpxWotfFXLqmCgYDr7R5td3/5GNqtYGwzD/Obd0OOHmeFisAI3A8UODu+ge3EtfbEGDAGGOEazKHd21SHhwKcN2KLfjY+BKUIL+8Csm+8rXnDIxnB9QO5oapBt5uz7beH2bHDrmggrgxiXtrqpOZy9P5oQHb9aeKHxuvFAJ8=</DQ>\r\n  <InverseQ>c0GtENRAO8FhPOnsUEfI3nnrzr+1Cpm4JpDEVW3EzolbP0YOGU0/KDNBEaymJa/cOeIr9XfAtWC9ZC5TzU5Casqe8z6AaktiKURjR0oirv+J4YxbrnWxTWq6w+ZBahUc3FYpxacygMxPHhESgO09A4EcBL5KBoBIwGIhuwCkGbw=</InverseQ>\r\n  <D>Fzo2HzqROTtferPI0z/0yKMJ5T7krMfW4ZiRwzRIcVEM0yRxpobiWiXdZ6rP3deY0qbGeeqWY7emx6xY1HNarSzYu1bNIjcHytOMcfEOtB/VOE5u2auk0xnGAX1IoeVp7Y94l25snEBT58c5H6e4yrJYBpHDCOUXP+Ot6s1Va9PB/lA/ORasBqRN+cgosLXUfsgN2pVaGr7Zn1I+PTNJNpvojiZtUpPsWKtXTHZSrcOBBUJT8J7Exxy/UJpHhLWoXsZodXKKoegUG4waubeJsdbWdOw1AvYTW2v8bYt2THIJhyaniat0aXTtH9TVFriU4NQW4Tdk0WVSxH5SgF/8EQ==</D>\r\n</RSAParameters>";
+        private readonly string _publicKey = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<RSAParameters xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <Exponent>AQAB</Exponent>\r\n  <Modulus>nyo4kg83PebAPi/YyYXxdGDbf1M+ThEDySqYkOsBU9/Ubav5A1VbW1W/6DyWjiwTi+1me5XL62P2IbP+vI1OfsGF8n81qxlty2lxUWl6u1SDRPFPIEtV8S/jm3Gn989+UB/bWnI+K9Dk6iKABgS5FBsN1hO+VM0lgAZdiXSabGQFjn7c+2MAK3I5cvjpbK4aqjYMDpD4JtXZMlFwrY2ISz3cUBlelnv2aH4G5jYFJXtfgvta5CaEUXDkZMllFnWEsjtJbN6TVmpgHFgYRGl04NQ3YdrjuD+dWiIwcawymMXp1jmyc5fbajf6U7gu09b4D7LdBBh6Tew5lMjKNUsGnQ==</Modulus>\r\n</RSAParameters>";
+
+        private readonly string _userData = "some-unique-thing";
+        private readonly string _userDataAlt = "some-different-thing";
+
+        public RsaCryptoTests(ITestOutputHelper outputHelper)
+        {
+            _outputHelper = outputHelper;
+        }
+
+        internal IRsaCrypto GetGenerator() => new CryptoFactory().Create(_privateKey, null);
+        internal IRsaCrypto GetVerifier() => new CryptoFactory().Create(null, _publicKey);
+        
+        [Fact]
+        public void Initialised_True_Factory_Default()
+        {
+            var sut = new CryptoFactory().Create();
+            Assert.True(sut.Initialised);
+        }
+
+        [Fact]
+        public void Initialised_True_Factory_KeySize()
+        {
+            var sut = new CryptoFactory().Create(512);
+            Assert.True(sut.Initialised);
+            _outputHelper.WriteLine($"KeySize: 512   Val: {sut.PrivateKey}");
+
+            var sut2 = new CryptoFactory().Create(1024);
+            Assert.True(sut2.Initialised);
+            _outputHelper.WriteLine($"KeySize: 1024  Val: {sut2.PrivateKey}");
+        }
+
+        [Fact]
+        public void Creates_Keys_And_Initialised_True()
+        {
+            var sut = new CryptoFactory().Create();
+            sut.KeyGen();
+            Assert.True(sut.Initialised);
+        }
+
+        [Fact]
+        public void RSA_KeyGen_Creates_Public_Key()
+        {
+            var sut = new CryptoFactory().Create();
+            sut.KeyGen();
+            Assert.NotNull(sut.PublicKey);
+        }
+
+        [Fact]
+        public void RSA_KeyGen_Creates_Private_Key()
+        {
+            var sut = new CryptoFactory().Create();
+            sut.KeyGen();
+            Assert.NotNull(sut.PrivateKey);
+        }
+
+        [Fact]
+        public void Sign_With_Public_Key_Throws_CryptographicException()
+        {
+            var verifier = GetVerifier();
+
+            var userLicense = Format(_userData, 1);
+
+            Assert.Throws<CryptographicException>(() => verifier.SignData(userLicense));
+        }
+
+        [Fact]
+        public void Sign_Verify_Correct_Data_Success()
+        {
+            var generator = GetGenerator();
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignData(licenseText);
+
+            Assert.NotNull(signed);
+
+            var verifier = GetVerifier();
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyData(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Sign_Verify_Correct_Data_Large_String_Success()
+        {
+            var generator = GetGenerator();
+
+            var longUserData = $"{_userData}{_userData}{_userData}{_userData}{_userData}{_userData}{_userData}{_userData}";
+
+            var licenseText = Format(longUserData, 1);
+
+            var signed = generator.SignData(licenseText);
+
+            Assert.NotNull(signed);
+
+            var verifier = GetVerifier();
+
+            var userLicense = Format(longUserData, 1);
+            var verified = verifier.VerifyData(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Hash_Sign_Verify_Correct_Data_Success()
+        {
+            var generator = GetGenerator();
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            Assert.NotNull(signed);
+
+            var verifier = GetVerifier();
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Sign_Verify_Incorrect_Data_Fails()
+        {
+            var generator = GetGenerator();
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignData(licenseText);
+
+            Assert.NotNull(signed);
+
+            var verifier = GetVerifier();
+
+            var userLicense = Format(_userDataAlt, 1);
+            var verified = verifier.VerifyData(userLicense, signed);
+
+            Assert.False(verified);
+        }
+
+        [Fact]
+        public void Hash_Sign_Verify_Incorrect_Data_Fails()
+        {
+            var generator = GetGenerator();
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            Assert.NotNull(signed);
+
+            var verifier = GetVerifier();
+
+            var userLicense = Format(_userDataAlt, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.False(verified);
+        }
+
+        [Fact]
+        public void Sign_Returns_Value()
+        {
+            var sut = GetGenerator();
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = sut.SignData(licenseText);
+
+            Assert.NotNull(signed);
+        }
+
+        [Fact]
+        public void Returns_False_When_Verifying_Not_Initialised()
+        {
+            var encoder = new UTF8Encoding();
+            byte[] ba = encoder.GetBytes(_userData);
+            var b64 = Convert.ToBase64String(ba);
+            Assert.False(new CryptoFactory().Create().VerifyData(_userData, b64));
+        }
+
+        [Fact]
+        public void Throws_When_SignData_Message_Null()
+        {
+            var cryptoService = GetGenerator();
+            Assert.Null(cryptoService.SignData(null));
+        }
+
+        [Fact]
+        public void Throws_When_SignHash_Message_Null()
+        {
+            var cryptoService = GetGenerator();
+            Assert.Null(cryptoService.SignHash(null));
+        }
+
+        [Fact]
+        public void Throws_When_VerifyHash_SignedMessage_Null()
+        {
+            var cryptoService = GetVerifier();
+            Assert.False(cryptoService.VerifyHash("s", null));
+        }
+
+        [Fact]
+        public void Throws_When_VerifyHash_OriginalMessage_Null()
+        {
+            var cryptoService = GetVerifier();
+            Assert.False(cryptoService.VerifyHash(null, "c"));
+        }
+
+        [Fact]
+        public void Throws_When_Keys_Invalid()
+        {
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var cryptoService = new CryptoFactory().Create("c", "c");
+            });
+        }
+
+        [Fact]
+        public void Throws_When_VerifyData_SignedMessage_Null()
+        {
+            var cryptoService = GetVerifier();
+            Assert.False(cryptoService.VerifyData("d", null));
+        }
+
+        [Fact]
+        public void Throws_When_VerifyData_OriginalMessage_Null()
+        {
+            var cryptoService = GetVerifier();
+            Assert.False(cryptoService.VerifyData(null, "c"));
+        }
+
+        [Fact]
+        public void Throws_When_No_Keys_Initialised()
+        {
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var cryptoService = new CryptoFactory().Create(null, null);
+            });
+        }
+
+        [Fact]
+        public void Crypto_Factory_Overrde_Instance()
+        {
+            var sut = new CryptoFactory().Create(new RSACryptoServiceProvider(512));
+            Assert.NotNull(sut);
+            Assert.True(sut.Initialised);
+        }
+
+        private string Format(string s, int i)
+        {
+            return $"{s}{i}";
+        }
+    }
+}

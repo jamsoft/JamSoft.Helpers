@@ -9,8 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JamSoft.Helpers", "JamSoft.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SupportingFiles", "SupportingFiles", "{949ED164-2FC5-45C2-B6A4-8A259831BB40}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		.github\workflows\dotnetcore.yml = .github\workflows\dotnetcore.yml
 		Notes.txt = Notes.txt
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
