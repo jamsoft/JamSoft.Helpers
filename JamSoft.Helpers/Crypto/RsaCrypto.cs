@@ -6,8 +6,9 @@ using System.Xml.Serialization;
 
 namespace JamSoft.Helpers.Crypto
 {
-    internal class RsaCrypto : IRsaCrypto
+    internal sealed class RsaCrypto : IRsaCrypto
     {
+        private bool _disposed;
         private readonly RSA _rsa;
 
         public string PrivateKey { get; private set; }
@@ -57,6 +58,11 @@ namespace JamSoft.Helpers.Crypto
 
         public RsaCrypto(RSAParameters privateKey, RSAParameters publicKey)
         {
+            if (privateKey.IsNull() && publicKey.IsNull())
+            {
+                throw new ArgumentException($"Ctor requires at least one key, {nameof(privateKey)} and {nameof(publicKey)} are null or empty");
+            }
+
             _privateKey = privateKey;
             PrivateKey = RsaParamToString(_privateKey);
             _publicKey = publicKey;
@@ -298,7 +304,23 @@ namespace JamSoft.Helpers.Crypto
 
         public void Dispose()
         {
-            _rsa?.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    PublicKey = null;
+                    PrivateKey = null;
+                }
+
+                _rsa?.Clear();
+                _disposed = true;
+            }
         }
     }
 }

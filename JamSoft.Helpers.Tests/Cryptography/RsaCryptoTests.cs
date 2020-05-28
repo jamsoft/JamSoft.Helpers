@@ -309,6 +309,21 @@ namespace JamSoft.Helpers.Tests.Cryptography
             });
         }
 
+
+        [Fact]
+        public void ISDisposed()
+        {
+            var sut = new CryptoFactory().Create(_privateKey, _publicKey);
+            using (sut)
+            {
+                Assert.NotNull(sut.PublicKey);
+                Assert.NotNull(sut.PrivateKey);
+            }
+
+            Assert.Null(sut.PublicKey);
+            Assert.Null(sut.PrivateKey);
+        }
+
         private string Format(string s, int i)
         {
             return $"{s}{i}";
