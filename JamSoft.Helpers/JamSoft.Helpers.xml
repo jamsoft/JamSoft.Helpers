@@ -166,6 +166,14 @@
             </summary>
             <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
+        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size
+            </summary>
+            <param name="keySize">The integer key size to use</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
         <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.String,System.String)">
             <summary>
             Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
@@ -176,6 +184,7 @@
             <param name="privateKeyXml">The private key xml.</param>
             <param name="publicKeyXml">The public key xml.</param>
             <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+            <exception cref="T:System.ArgumentException">thrown when both the public key and private keys a null or empty</exception>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
@@ -217,14 +226,6 @@
             </summary>
             <param name="hashAlgorithmName">The hashing algorithm to use</param>
             <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size
-            </summary>
-            <param name="keySize">The integer key size to use</param>
             <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
