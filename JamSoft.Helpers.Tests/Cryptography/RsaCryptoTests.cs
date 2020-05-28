@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Serialization;
 using JamSoft.Helpers.Crypto;
 using Xunit;
 using Xunit.Abstractions;
@@ -25,56 +27,108 @@ namespace JamSoft.Helpers.Tests.Cryptography
         internal IRsaCrypto GetVerifier() => new CryptoFactory().Create(null, _publicKey);
         
         [Fact]
-        public void Initialised_True_Factory_Default()
+        public void Ctr_Factory_Default()
         {
             var sut = new CryptoFactory().Create();
-            Assert.True(sut.Initialised);
+            Assert.NotNull(sut);
         }
 
         [Fact]
-        public void Initialised_True_Factory_KeySize()
+        public void Ctr_Factory_Default_PublicKey_Null()
+        {
+            var sut = new CryptoFactory().Create();
+            Assert.Null(sut.PublicKey);
+        }
+
+        [Fact]
+        public void Ctr_Factory_Default_PrivateKey_Null()
+        {
+            var sut = new CryptoFactory().Create();
+            Assert.Null(sut.PrivateKey);
+        }
+
+        [Fact]
+        public void Ctr_Factory_KeySize()
         {
             var sut = new CryptoFactory().Create(512);
-            Assert.True(sut.Initialised);
             _outputHelper.WriteLine($"KeySize: 512   Val: {sut.PrivateKey}");
 
             var sut2 = new CryptoFactory().Create(1024);
-            Assert.True(sut2.Initialised);
             _outputHelper.WriteLine($"KeySize: 1024  Val: {sut2.PrivateKey}");
+            Assert.NotNull(sut);
         }
 
         [Fact]
-        public void Creates_Keys_And_Initialised_True()
+        public void Ctr_Factory_Xml_Keys()
         {
-            var sut = new CryptoFactory().Create();
-            sut.KeyGen();
-            Assert.True(sut.Initialised);
-        }
-
-        [Fact]
-        public void RSA_KeyGen_Creates_Public_Key()
-        {
-            var sut = new CryptoFactory().Create();
-            sut.KeyGen();
+            var sut = new CryptoFactory().Create(_privateKey, _publicKey);
+            Assert.NotNull(sut);
             Assert.NotNull(sut.PublicKey);
-        }
-
-        [Fact]
-        public void RSA_KeyGen_Creates_Private_Key()
-        {
-            var sut = new CryptoFactory().Create();
-            sut.KeyGen();
             Assert.NotNull(sut.PrivateKey);
         }
 
         [Fact]
-        public void Sign_With_Public_Key_Throws_CryptographicException()
+        public void Ctr_Factory_Xml_Keys_Hash_Padding()
         {
-            var verifier = GetVerifier();
+            var sut = new CryptoFactory().Create(_privateKey, _publicKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            Assert.NotNull(sut);
+            Assert.NotNull(sut.PublicKey);
+            Assert.NotNull(sut.PrivateKey);
+        }
 
-            var userLicense = Format(_userData, 1);
+        [Fact]
+        public void Ctr_Factory_Rsa()
+        {
+            var sut = new CryptoFactory().Create(new RSACryptoServiceProvider(512));
+            Assert.NotNull(sut);
+        }
 
-            Assert.Throws<CryptographicException>(() => verifier.SignData(userLicense));
+        [Fact]
+        public void Ctr_Factory_Rsa_Keys()
+        {
+            var sr1 = new StringReader(_privateKey);
+            var sr2 = new StringReader((_publicKey));
+            var xs = new XmlSerializer(typeof(RSAParameters));
+            var privateKey = (RSAParameters)xs.Deserialize(sr1);
+            var publicKey = (RSAParameters)xs.Deserialize(sr2);
+            
+            var sut = new CryptoFactory().Create(privateKey, publicKey);
+            Assert.NotNull(sut);
+            Assert.NotNull(sut.PublicKey);
+            Assert.NotNull(sut.PrivateKey);
+        }
+
+        [Fact]
+        public void Ctr_Factory_Rsa_Keys_Hash_Padding()
+        {
+            var sr1 = new StringReader(_privateKey);
+            var sr2 = new StringReader((_publicKey));
+            var xs = new XmlSerializer(typeof(RSAParameters));
+            var privateKey = (RSAParameters)xs.Deserialize(sr1);
+            var publicKey = (RSAParameters)xs.Deserialize(sr2);
+
+            var sut = new CryptoFactory().Create(privateKey, publicKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            Assert.NotNull(sut);
+            Assert.NotNull(sut.PublicKey);
+            Assert.NotNull(sut.PrivateKey);
+        }
+
+        [Fact]
+        public void Ctr_Factory_KeySize_Hash_Padding()
+        {
+            var sut = new CryptoFactory().Create(512, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            Assert.NotNull(sut);
+            Assert.Null(sut.PublicKey);
+            Assert.Null(sut.PrivateKey);
+        }
+
+        [Fact]
+        public void Ctr_Factory_Hash_Padding()
+        {
+            var sut = new CryptoFactory().Create(HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            Assert.NotNull(sut);
+            Assert.Null(sut.PublicKey);
+            Assert.Null(sut.PrivateKey);
         }
 
         [Fact]
@@ -253,14 +307,6 @@ namespace JamSoft.Helpers.Tests.Cryptography
             {
                 var cryptoService = new CryptoFactory().Create(null, null);
             });
-        }
-
-        [Fact]
-        public void Crypto_Factory_Overrde_Instance()
-        {
-            var sut = new CryptoFactory().Create(new RSACryptoServiceProvider(512));
-            Assert.NotNull(sut);
-            Assert.True(sut.Initialised);
         }
 
         private string Format(string s, int i)

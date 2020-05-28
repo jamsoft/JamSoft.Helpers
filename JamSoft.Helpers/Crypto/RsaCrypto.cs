@@ -10,8 +10,6 @@ namespace JamSoft.Helpers.Crypto
     {
         private readonly RSA _rsa;
 
-        public bool Initialised { get; private set; }
-
         public string PrivateKey { get; private set; }
 
         public string PublicKey { get; private set; }
@@ -19,34 +17,66 @@ namespace JamSoft.Helpers.Crypto
         private RSAParameters _privateKey;
         private RSAParameters _publicKey;
         private int _keySize = 2048;
+        private HashAlgorithmName _hashAlgorithmName = HashAlgorithmName.SHA512;
+        private RSASignaturePadding _rsaSignaturePadding = RSASignaturePadding.Pkcs1;
+
+        public RsaCrypto(string privateKeyXml, string publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+            : this(privateKeyXml, publicKeyXml)
+        {
+            _hashAlgorithmName = hashAlgorithmName;
+            _rsaSignaturePadding = padding;
+        }
 
         public RsaCrypto(string privateKeyXml, string publicKeyXml)
         {
             if (string.IsNullOrEmpty(privateKeyXml) &&
                 string.IsNullOrEmpty(publicKeyXml))
             {
-                throw new ArgumentException("Ctor requires either a public or private key");
+                throw new ArgumentException($"Ctor requires at least one key, {nameof(privateKeyXml)} and {nameof(publicKeyXml)} are null or empty");
             }
 
             if (!string.IsNullOrEmpty(privateKeyXml))
             {
                 _privateKey = StringToRsaParam(privateKeyXml);
+                PrivateKey = privateKeyXml;
             }
 
             if (!string.IsNullOrEmpty(publicKeyXml))
             {
                 _publicKey = StringToRsaParam(publicKeyXml);
+                PublicKey = publicKeyXml;
             }
+        }
+
+        public RsaCrypto(RSAParameters privateKey, RSAParameters publicKey, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+            :this (privateKey, publicKey)
+        {
+            _hashAlgorithmName = hashAlgorithmName;
+            _rsaSignaturePadding = padding;
         }
 
         public RsaCrypto(RSAParameters privateKey, RSAParameters publicKey)
         {
             _privateKey = privateKey;
+            PrivateKey = RsaParamToString(_privateKey);
             _publicKey = publicKey;
-            Initialised = true;
+            PublicKey = RsaParamToString(_publicKey);
         }
 
         public RsaCrypto() { }
+
+        public RsaCrypto(HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
+            _hashAlgorithmName = hashAlgorithmName;
+            _rsaSignaturePadding = padding;
+        }
+
+        public RsaCrypto(int keySize, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+            :this(keySize)
+        {
+            _hashAlgorithmName = hashAlgorithmName;
+            _rsaSignaturePadding = padding;
+        }
 
         public RsaCrypto(int keySize)
         {
@@ -58,36 +88,20 @@ namespace JamSoft.Helpers.Crypto
             _rsa = rsa;
 
             SetKeys(_rsa);
-
-            Initialised = true;
         }
 
         private void SetKeys(RSA rsa)
         {
             _privateKey = rsa.ExportParameters(true);
-            PrivateKey = rsa.ToXmlString(true);
+            PrivateKey = RsaParamToString(_privateKey);
 
             _publicKey = rsa.ExportParameters(false);
-            PublicKey = rsa.ToXmlString(false);
-        }
-
-        public void KeyGen()
-        {
-            using (var rsa = CreateCrypto())
-            {
-                SetKeys(rsa);
-                Initialised = true;
-            }
+            PublicKey = RsaParamToString(_publicKey);
         }
 
         public string SignData(string message)
         {
             if (string.IsNullOrEmpty(message))
-            {
-                return null;
-            }
-
-            if (!Initialised)
             {
                 return null;
             }
@@ -98,9 +112,17 @@ namespace JamSoft.Helpers.Crypto
                 var encoder = new UTF8Encoding();
                 byte[] originalData = encoder.GetBytes(message);
 
-                rsa.ImportParameters(_privateKey);
+                if (!_privateKey.IsNull())
+                {
+                    rsa.ImportParameters(_privateKey);
+                }
+                else
+                {
+                    // make new keys accesible to consumers for storage
+                    SetKeys(rsa);
+                }
 
-                signedBytes = rsa.SignData(originalData, 0, originalData.Length, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+                signedBytes = rsa.SignData(originalData, 0, originalData.Length, _hashAlgorithmName, _rsaSignaturePadding);
             }
 
             return Convert.ToBase64String(signedBytes);
@@ -118,11 +140,6 @@ namespace JamSoft.Helpers.Crypto
                 return false;
             }
 
-            if (!Initialised)
-            {
-                return false;
-            }
-
             bool success;
             using (var rsa = CreateCrypto())
             {
@@ -130,9 +147,17 @@ namespace JamSoft.Helpers.Crypto
                 byte[] bytesToVerify = encoder.GetBytes(originalMessage);
                 byte[] signedBytes = Convert.FromBase64String(signedMessage);
 
-                rsa.ImportParameters(_publicKey);
+                if (!_publicKey.IsNull())
+                {
+                    rsa.ImportParameters(_publicKey);
+                }
+                else
+                {
+                    // make new keys accesible to consumers for storage
+                    SetKeys(rsa);
+                }
 
-                success = rsa.VerifyData(bytesToVerify, signedBytes, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+                success = rsa.VerifyData(bytesToVerify, signedBytes, _hashAlgorithmName, _rsaSignaturePadding);
             }
 
             return success;
@@ -145,22 +170,25 @@ namespace JamSoft.Helpers.Crypto
                 return null;
             }
 
-            if (!Initialised)
-            {
-                return null;
-            }
-
             byte[] signedBytes;
             using (var rsa = CreateCrypto())
             {
                 var encoder = new UTF8Encoding();
                 byte[] originalData = encoder.GetBytes(message);
 
-                rsa.ImportParameters(_privateKey);
-
-                using (var hash = SHA512.Create())
+                if (!_privateKey.IsNull())
                 {
-                    signedBytes = rsa.SignHash(hash.ComputeHash(originalData), HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+                    rsa.ImportParameters(_privateKey);
+                }
+                else
+                {
+                    // make new keys accesible to consumers for storage
+                    SetKeys(rsa);
+                }
+
+                using (var hash = GetHasher(_hashAlgorithmName))
+                {
+                    signedBytes = rsa.SignHash(hash.ComputeHash(originalData), _hashAlgorithmName, _rsaSignaturePadding);
                 }
             }
 
@@ -179,11 +207,6 @@ namespace JamSoft.Helpers.Crypto
                 return false;
             }
 
-            if (!Initialised)
-            {
-                return false;
-            }
-
             bool success;
             using (var rsa = CreateCrypto())
             {
@@ -191,16 +214,33 @@ namespace JamSoft.Helpers.Crypto
                 byte[] bytesToVerify = encoder.GetBytes(originalMessage);
                 byte[] signedBytes = Convert.FromBase64String(signedMessage);
 
-                rsa.ImportParameters(_publicKey);
-
-                using (var hash = SHA512.Create())
+                if (!_publicKey.IsNull())
                 {
-                    var h = hash.ComputeHash(bytesToVerify);
-                    success = rsa.VerifyHash(h, signedBytes, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
+                    rsa.ImportParameters(_publicKey);
+                }
+                else
+                {
+                    // make new keys accesible to consumers for storage
+                    SetKeys(rsa);
+                }
+
+                using (var hasher = GetHasher(_hashAlgorithmName))
+                {
+                    var h = hasher.ComputeHash(bytesToVerify);
+                    success = rsa.VerifyHash(h, signedBytes, _hashAlgorithmName, _rsaSignaturePadding);
                 }
             }
 
             return success;
+        }
+
+        // ToXmlString() is not supported in .Net Core 2.x so have implemented for compatibility
+        private string RsaParamToString(RSAParameters p)
+        {
+            var sw = new StringWriter();
+            var xs = new XmlSerializer(typeof(RSAParameters));
+            xs.Serialize(sw, p);
+            return sw.ToString();
         }
 
         private RSAParameters StringToRsaParam(string p)
@@ -208,8 +248,32 @@ namespace JamSoft.Helpers.Crypto
             var sr = new StringReader(p);
             var xs = new XmlSerializer(typeof(RSAParameters));
             var key = xs.Deserialize(sr);
-            Initialised = true;
             return (RSAParameters)key;
+        }
+
+        private HashAlgorithm GetHasher(HashAlgorithmName name)
+        {
+            HashAlgorithm algo;
+            switch (name.Name)
+            {
+                case "MD5":
+                    algo = MD5.Create();
+                    break;
+                case "SHA1":
+                    algo = SHA1.Create();
+                    break;
+                case "SHA256":
+                    algo = SHA256.Create();
+                    break;
+                case "SHA384":
+                    algo = SHA384.Create();
+                    break;
+                default:
+                    algo = SHA512.Create();
+                    break;
+            }
+
+            return algo;
         }
 
         private RSA CreateCrypto()
@@ -230,6 +294,11 @@ namespace JamSoft.Helpers.Crypto
             c.KeySize = _keySize;
             return c;
 #endif
+        }
+
+        public void Dispose()
+        {
+            _rsa?.Dispose();
         }
     }
 }

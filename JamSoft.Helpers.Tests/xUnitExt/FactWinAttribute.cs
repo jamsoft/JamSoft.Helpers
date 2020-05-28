@@ -7,10 +7,12 @@ namespace JamSoft.Helpers.Tests.xUnitExt
     {
         public FactWinAttribute()
         {
+#if NETCOREAPP
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 Skip = "Not running on Windows";
             }
+#endif
         }
     }
 }

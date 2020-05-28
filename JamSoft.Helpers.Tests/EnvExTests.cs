@@ -150,6 +150,7 @@ namespace JamSoft.Helpers.Tests
             _outputHelper.WriteLine(p);
         }
 
+#if NETCOREAPP
         [FactOsx]
         public void Osx_Gets_Shell_Environment_Value()
         {
@@ -229,5 +230,6 @@ namespace JamSoft.Helpers.Tests
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
+#endif
     }
 }

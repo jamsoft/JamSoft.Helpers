@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using JamSoft.Helpers.Ui;
 using Xunit;
 using Xunit.Abstractions;
