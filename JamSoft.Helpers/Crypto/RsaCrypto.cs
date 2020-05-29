@@ -146,6 +146,11 @@ namespace JamSoft.Helpers.Crypto
                 return false;
             }
 
+            if (_publicKey.IsNull())
+            {
+                throw new ArgumentException("The public key value for verification has not been provided, you must either provide them or call SignData before attempting to verify data", nameof(PublicKey));
+            }
+
             bool success;
             using (var rsa = CreateCrypto())
             {
@@ -153,15 +158,7 @@ namespace JamSoft.Helpers.Crypto
                 byte[] bytesToVerify = encoder.GetBytes(originalMessage);
                 byte[] signedBytes = Convert.FromBase64String(signedMessage);
 
-                if (!_publicKey.IsNull())
-                {
-                    rsa.ImportParameters(_publicKey);
-                }
-                else
-                {
-                    // make new keys accesible to consumers for storage
-                    SetKeys(rsa);
-                }
+                rsa.ImportParameters(_publicKey);
 
                 success = rsa.VerifyData(bytesToVerify, signedBytes, _hashAlgorithmName, _rsaSignaturePadding);
             }
@@ -213,6 +210,11 @@ namespace JamSoft.Helpers.Crypto
                 return false;
             }
 
+            if (_publicKey.IsNull())
+            {
+                throw new ArgumentException("The public key value for verification has not been provided, you must either provide them or call SignData before attempting to verify data", nameof(PublicKey));
+            }
+
             bool success;
             using (var rsa = CreateCrypto())
             {
@@ -220,16 +222,7 @@ namespace JamSoft.Helpers.Crypto
                 byte[] bytesToVerify = encoder.GetBytes(originalMessage);
                 byte[] signedBytes = Convert.FromBase64String(signedMessage);
 
-                if (!_publicKey.IsNull())
-                {
-                    rsa.ImportParameters(_publicKey);
-                }
-                else
-                {
-                    // make new keys accesible to consumers for storage
-                    SetKeys(rsa);
-                }
-
+                rsa.ImportParameters(_publicKey);
                 using (var hasher = GetHasher(_hashAlgorithmName))
                 {
                     var h = hasher.ComputeHash(bytesToVerify);

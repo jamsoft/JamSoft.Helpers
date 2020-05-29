@@ -151,6 +151,91 @@ namespace JamSoft.Helpers.Tests.Cryptography
         }
 
         [Fact]
+        public void Sign_Verify_Correct_Data_Success_Sha256()
+        {
+            var generator = new CryptoFactory().Create(HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            Assert.NotNull(signed);
+            Assert.NotNull(generator.PublicKey);
+
+            var publicKeyXml = generator.PublicKey;
+
+            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Sign_Verify_Correct_Data_Success_Md5()
+        {
+            var generator = new CryptoFactory().Create(HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            var publicKeyXml = generator.PublicKey;
+
+            Assert.NotNull(signed);
+
+            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Sign_Verify_Correct_Data_Success_Sha384()
+        {
+            var generator = new CryptoFactory().Create(HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            var publicKeyXml = generator.PublicKey;
+
+            Assert.NotNull(signed);
+
+            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Sign_Verify_Correct_Data_Success_Sha1()
+        {
+            var generator = new CryptoFactory().Create(HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            var publicKeyXml = generator.PublicKey;
+
+            Assert.NotNull(signed);
+
+            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
         public void Sign_Verify_Correct_Data_Large_String_Success()
         {
             var generator = GetGenerator();
@@ -172,6 +257,29 @@ namespace JamSoft.Helpers.Tests.Cryptography
         }
 
         [Fact]
+        public void SignData_Verify_Correct_Data()
+        {
+            var generator = new CryptoFactory().Create();
+
+            var longUserData = $"{_userData}";
+
+            var licenseText = Format(longUserData, 1);
+
+            var signed = generator.SignData(licenseText);
+
+            Assert.NotNull(signed);
+            Assert.NotNull(generator.PrivateKey);
+            Assert.NotNull(generator.PublicKey);
+            
+            var verifier = new CryptoFactory().Create(null, generator.PublicKey);
+
+            var userLicense = Format(longUserData, 1);
+            var verified = verifier.VerifyData(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
         public void Hash_Sign_Verify_Correct_Data_Success()
         {
             var generator = GetGenerator();
@@ -183,6 +291,27 @@ namespace JamSoft.Helpers.Tests.Cryptography
             Assert.NotNull(signed);
 
             var verifier = GetVerifier();
+
+            var userLicense = Format(_userData, 1);
+            var verified = verifier.VerifyHash(userLicense, signed);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void Hash_Sign_Verify_No_Keys_Correct_Data_Success()
+        {
+            var generator = new CryptoFactory().Create();
+
+            var licenseText = Format(_userData, 1);
+
+            var signed = generator.SignHash(licenseText);
+
+            var publicKey = generator.PublicKey;
+
+            Assert.NotNull(signed);
+
+            var verifier = new CryptoFactory().Create(null, publicKey);
 
             var userLicense = Format(_userData, 1);
             var verified = verifier.VerifyHash(userLicense, signed);
@@ -241,12 +370,21 @@ namespace JamSoft.Helpers.Tests.Cryptography
         }
 
         [Fact]
-        public void Returns_False_When_Verifying_Not_Initialised()
+        public void Throws_When_Verifying_Data_Not_Initialised()
         {
             var encoder = new UTF8Encoding();
             byte[] ba = encoder.GetBytes(_userData);
             var b64 = Convert.ToBase64String(ba);
-            Assert.False(new CryptoFactory().Create().VerifyData(_userData, b64));
+            Assert.Throws<ArgumentException>(() => new CryptoFactory().Create().VerifyData(_userData, b64));
+        }
+
+        [Fact]
+        public void Throws_When_Verifying_Hash_Not_Initialised()
+        {
+            var encoder = new UTF8Encoding();
+            byte[] ba = encoder.GetBytes(_userData);
+            var b64 = Convert.ToBase64String(ba);
+            Assert.Throws<ArgumentException>(() => new CryptoFactory().Create().VerifyHash(_userData, b64));
         }
 
         [Fact]
@@ -282,7 +420,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         {
             Assert.Throws<InvalidOperationException>(() =>
             {
-                var cryptoService = new CryptoFactory().Create("c", "c");
+                new CryptoFactory().Create("c", "c");
             });
         }
 
@@ -301,17 +439,28 @@ namespace JamSoft.Helpers.Tests.Cryptography
         }
 
         [Fact]
-        public void Throws_When_No_Keys_Initialised()
+        public void Throws_When_No_Xml_Keys_Initialised()
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                var cryptoService = new CryptoFactory().Create(null, null);
+                new CryptoFactory().Create(null, null);
             });
         }
 
+        [Fact]
+        public void Throws_When_No_RSAParameters_Keys_Initialised()
+        {
+            var rsaPrivate = new RSAParameters();
+            var rsaPublic = new RSAParameters();
+
+            Assert.Throws<ArgumentException>(() =>
+            {
+                new CryptoFactory().Create(rsaPrivate, rsaPublic);
+            });
+        }
 
         [Fact]
-        public void ISDisposed()
+        public void IsDisposed()
         {
             var sut = new CryptoFactory().Create(_privateKey, _publicKey);
             using (sut)
