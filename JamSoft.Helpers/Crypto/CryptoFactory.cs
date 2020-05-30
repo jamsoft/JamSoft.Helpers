@@ -4,10 +4,10 @@ using System.Security.Cryptography;
 namespace JamSoft.Helpers.Crypto
 {
     /// <summary>
-    /// Provides access to the various Crypto classes
+    /// Creates instances of the RsaCrypto class and implements <see cref="ICryptoFactory"/><para />
+    /// Designed as a DI container friendly factory class
     /// </summary>
-    // ReSharper disable once ClassNeverInstantiated.Global
-    public class CryptoFactory : ICryptoFactory
+    public sealed class CryptoFactory : ICryptoFactory
     {
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto" /><para />
@@ -21,7 +21,7 @@ namespace JamSoft.Helpers.Crypto
         }
 
         /// <summary>
-        /// Creates an instance of <seealso cref="IRsaCrypto" /> using the provided key size
+        /// Creates an instance of <seealso cref="IRsaCrypto" /> using the provided key size<para />
         /// Defaults to using <see cref="HashAlgorithmName.SHA512"/> and <see cref="RSASignaturePadding.Pkcs1"/> and using the provided key size
         /// </summary>
         /// <param name="keySize">The integer key size to use</param>
@@ -103,7 +103,7 @@ namespace JamSoft.Helpers.Crypto
         }
 
         /// <summary>
-        /// Creates an instance of <seealso cref="IRsaCrypto" /> using the provided key size
+        /// Creates an instance of <seealso cref="IRsaCrypto" /> using the provided key size, hashing and padding values<para />
         /// </summary>
         /// <param name="keySize">The integer key size to use</param>
         /// <param name="hashAlgorithmName">The hashing algorithm to use</param>

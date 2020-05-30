@@ -156,7 +156,8 @@
         </member>
         <member name="T:JamSoft.Helpers.Crypto.CryptoFactory">
             <summary>
-            Provides access to the various Crypto classes
+            Creates instances of the RsaCrypto class and implements <see cref="T:JamSoft.Helpers.Crypto.ICryptoFactory"/><para />
+            Designed as a DI container friendly factory class
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create">
@@ -168,7 +169,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32)">
             <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size<para />
             Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size
             </summary>
             <param name="keySize">The integer key size to use</param>
@@ -230,7 +231,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size, hashing and padding values<para />
             </summary>
             <param name="keySize">The integer key size to use</param>
             <param name="hashAlgorithmName">The hashing algorithm to use</param>

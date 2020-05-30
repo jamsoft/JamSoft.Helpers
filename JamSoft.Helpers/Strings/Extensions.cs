@@ -20,7 +20,7 @@ namespace JamSoft.Helpers.Strings
         public static string RemoveAllMultiSpace(this string input, string replacePattern = " ", bool trim = false)
         {
             return trim ? Regex.Replace(input, @"\s+", replacePattern).Trim(replacePattern.ToCharArray()) 
-                : Regex.Replace(input, @"\s+", replacePattern);
+                        : Regex.Replace(input, @"\s+", replacePattern);
         }
 
         /// <summary>
