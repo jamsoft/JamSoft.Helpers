@@ -17,6 +17,7 @@ namespace JamSoft.Helpers
         /// <returns></returns>
         public static string GetVariable(string name, EnvironmentVariableTarget target = EnvironmentVariableTarget.Process)
         {
+#if NETSTANDARD2_0
             if (target != EnvironmentVariableTarget.Process &&
                 (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ||
                  RuntimeInformation.IsOSPlatform(OSPlatform.Linux)))
@@ -24,6 +25,7 @@ namespace JamSoft.Helpers
                 // target is only supported on Windows
                 target = EnvironmentVariableTarget.Process;
             }
+#endif
 
             return Environment.GetEnvironmentVariable(name, target);
         }

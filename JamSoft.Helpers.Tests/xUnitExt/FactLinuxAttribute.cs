@@ -7,10 +7,12 @@ namespace JamSoft.Helpers.Tests.xUnitExt
     {
         public FactLinuxAttribute()
         {
+#if NETCOREAPP
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 Skip = "Not running on Linux";
             }
+#endif
         }
     }
 }
