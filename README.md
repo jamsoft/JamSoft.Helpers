@@ -58,6 +58,34 @@ var envValue = EnvEx.GetVariable("MYVARIABLENAME");
 On Window you can also pass a target parameter of type `EnvironmentVariableTarget`. The default for this is `Process` as Linux and OSX do not support this parameter. If anything
 other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
 
+# RSA Cryptography
+There is a new little class to help digitall sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
+```
+public interface ICryptoFactory
+{
+}
+
+container.Register<ICryptoFactory, CryptoFactory>();
+```
+You can then use this factory to obtain instances of the service.
+```
+var crypto = cryptoFactory.Create();
+```
+There are many overloads of the create method to control how the service is built and how you want it configued.
+
+You should also wrap each use of this within a using statement such as:
+```
+using(var crypto = cryptoFactory.Create(_privateKey, _publicKey, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1))
+{
+   // do your stuff.
+}
+```
+Once you have created an instance if you do not provide either of the keys, you can obtain the used keys for storage via the two properties, such as:
+```
+var crypto = cryptoFactory.Create();
+var publicKey = sut.PublicKey
+var privateKey = sut.PrivateKey
+```
 # Graphics
 
 ## Convert to HEX
