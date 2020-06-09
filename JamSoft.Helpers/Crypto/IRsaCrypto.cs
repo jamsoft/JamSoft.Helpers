@@ -8,7 +8,7 @@ namespace JamSoft.Helpers.Crypto
     public interface IRsaCrypto : IDisposable
     {
         /// <summary>
-        /// Gets the private key.
+        /// Gets the private key in XML format.
         /// </summary>
         /// <value>
         /// The private key.
@@ -16,7 +16,7 @@ namespace JamSoft.Helpers.Crypto
         string PrivateKey { get; }
 
         /// <summary>
-        /// Gets the public key.
+        /// Gets the public key in XML format.
         /// </summary>
         /// <value>
         /// The public key.
@@ -31,7 +31,7 @@ namespace JamSoft.Helpers.Crypto
         string SignData(string message);
 
         /// <summary>
-        /// Verifies the data.
+        /// Verifies the signed data.
         /// </summary>
         /// <param name="originalMessage">The original message.</param>
         /// <param name="signedMessage">The signed message.</param>
@@ -39,14 +39,14 @@ namespace JamSoft.Helpers.Crypto
         bool VerifyData(string originalMessage, string signedMessage);
 
         /// <summary>
-        /// Signs the hash.
+        /// Signs the hashed data .
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns></returns>
         string SignHash(string message);
 
         /// <summary>
-        /// Verifies the hash.
+        /// Verifies the hashed data.
         /// </summary>
         /// <param name="originalMessage">The original message.</param>
         /// <param name="signedMessage">The signed message.</param>

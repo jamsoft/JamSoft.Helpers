@@ -342,7 +342,7 @@
         </member>
         <member name="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey">
             <summary>
-            Gets the private key.
+            Gets the private key in XML format.
             </summary>
             <value>
             The private key.
@@ -350,7 +350,7 @@
         </member>
         <member name="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey">
             <summary>
-            Gets the public key.
+            Gets the public key in XML format.
             </summary>
             <value>
             The public key.
@@ -365,7 +365,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCrypto.VerifyData(System.String,System.String)">
             <summary>
-            Verifies the data.
+            Verifies the signed data.
             </summary>
             <param name="originalMessage">The original message.</param>
             <param name="signedMessage">The signed message.</param>
@@ -373,14 +373,14 @@
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCrypto.SignHash(System.String)">
             <summary>
-            Signs the hash.
+            Signs the hashed data .
             </summary>
             <param name="message">The message.</param>
             <returns></returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCrypto.VerifyHash(System.String,System.String)">
             <summary>
-            Verifies the hash.
+            Verifies the hashed data.
             </summary>
             <param name="originalMessage">The original message.</param>
             <param name="signedMessage">The signed message.</param>

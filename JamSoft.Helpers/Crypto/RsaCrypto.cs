@@ -18,8 +18,13 @@ namespace JamSoft.Helpers.Crypto
         private RSAParameters _privateKey;
         private RSAParameters _publicKey;
         private int _keySize = 2048;
-        private HashAlgorithmName _hashAlgorithmName = HashAlgorithmName.SHA512;
-        private RSASignaturePadding _rsaSignaturePadding = RSASignaturePadding.Pkcs1;
+        private readonly HashAlgorithmName _hashAlgorithmName = HashAlgorithmName.SHA512;
+        private readonly RSASignaturePadding _rsaSignaturePadding = RSASignaturePadding.Pkcs1;
+
+        ~RsaCrypto()
+        {
+            Dispose(false);
+        }
 
         public RsaCrypto(string privateKeyXml, string publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
             : this(privateKeyXml, publicKeyXml)
