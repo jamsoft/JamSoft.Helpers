@@ -10,7 +10,7 @@
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization</PackageTags>
-    <PackageProjectUrl>https://github.com/jamsoft/JamSoft.Helpers</PackageProjectUrl>
+    <PackageProjectUrl>https://jamsoft.github.io/JamSoft.Helpers/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>master</RepositoryBranch>
