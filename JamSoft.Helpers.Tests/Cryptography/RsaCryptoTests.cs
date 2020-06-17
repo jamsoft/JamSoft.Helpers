@@ -23,37 +23,37 @@ namespace JamSoft.Helpers.Tests.Cryptography
             _outputHelper = outputHelper;
         }
 
-        internal IRsaCrypto GetGenerator() => new CryptoFactory().Create(_privateKey, null);
-        internal IRsaCrypto GetVerifier() => new CryptoFactory().Create(null, _publicKey);
+        internal IRsaCrypto GetGenerator() => new RsaCryptoFactory().Create(_privateKey, null);
+        internal IRsaCrypto GetVerifier() => new RsaCryptoFactory().Create(null, _publicKey);
         
         [Fact]
         public void Ctr_Factory_Default()
         {
-            var sut = new CryptoFactory().Create();
+            var sut = new RsaCryptoFactory().Create();
             Assert.NotNull(sut);
         }
 
         [Fact]
         public void Ctr_Factory_Default_PublicKey_Null()
         {
-            var sut = new CryptoFactory().Create();
+            var sut = new RsaCryptoFactory().Create();
             Assert.Null(sut.PublicKey);
         }
 
         [Fact]
         public void Ctr_Factory_Default_PrivateKey_Null()
         {
-            var sut = new CryptoFactory().Create();
+            var sut = new RsaCryptoFactory().Create();
             Assert.Null(sut.PrivateKey);
         }
 
         [Fact]
         public void Ctr_Factory_KeySize()
         {
-            var sut = new CryptoFactory().Create(512);
+            var sut = new RsaCryptoFactory().Create(512);
             _outputHelper.WriteLine($"KeySize: 512   Val: {sut.PrivateKey}");
 
-            var sut2 = new CryptoFactory().Create(1024);
+            var sut2 = new RsaCryptoFactory().Create(1024);
             _outputHelper.WriteLine($"KeySize: 1024  Val: {sut2.PrivateKey}");
             Assert.NotNull(sut);
         }
@@ -61,7 +61,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Ctr_Factory_Xml_Keys()
         {
-            var sut = new CryptoFactory().Create(_privateKey, _publicKey);
+            var sut = new RsaCryptoFactory().Create(_privateKey, _publicKey);
             Assert.NotNull(sut);
             Assert.NotNull(sut.PublicKey);
             Assert.NotNull(sut.PrivateKey);
@@ -70,7 +70,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Ctr_Factory_Xml_Keys_Hash_Padding()
         {
-            var sut = new CryptoFactory().Create(_privateKey, _publicKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            var sut = new RsaCryptoFactory().Create(_privateKey, _publicKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
             Assert.NotNull(sut);
             Assert.NotNull(sut.PublicKey);
             Assert.NotNull(sut.PrivateKey);
@@ -79,7 +79,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Ctr_Factory_Rsa()
         {
-            var sut = new CryptoFactory().Create(new RSACryptoServiceProvider(512));
+            var sut = new RsaCryptoFactory().Create(new RSACryptoServiceProvider(512));
             Assert.NotNull(sut);
         }
 
@@ -92,7 +92,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
             var privateKey = (RSAParameters)xs.Deserialize(sr1);
             var publicKey = (RSAParameters)xs.Deserialize(sr2);
             
-            var sut = new CryptoFactory().Create(privateKey, publicKey);
+            var sut = new RsaCryptoFactory().Create(privateKey, publicKey);
             Assert.NotNull(sut);
             Assert.NotNull(sut.PublicKey);
             Assert.NotNull(sut.PrivateKey);
@@ -107,7 +107,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
             var privateKey = (RSAParameters)xs.Deserialize(sr1);
             var publicKey = (RSAParameters)xs.Deserialize(sr2);
 
-            var sut = new CryptoFactory().Create(privateKey, publicKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            var sut = new RsaCryptoFactory().Create(privateKey, publicKey, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
             Assert.NotNull(sut);
             Assert.NotNull(sut.PublicKey);
             Assert.NotNull(sut.PrivateKey);
@@ -116,7 +116,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Ctr_Factory_KeySize_Hash_Padding()
         {
-            var sut = new CryptoFactory().Create(512, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            var sut = new RsaCryptoFactory().Create(512, HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
             Assert.NotNull(sut);
             Assert.Null(sut.PublicKey);
             Assert.Null(sut.PrivateKey);
@@ -125,7 +125,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Ctr_Factory_Hash_Padding()
         {
-            var sut = new CryptoFactory().Create(HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
+            var sut = new RsaCryptoFactory().Create(HashAlgorithmName.SHA256, RSASignaturePadding.Pss);
             Assert.NotNull(sut);
             Assert.Null(sut.PublicKey);
             Assert.Null(sut.PrivateKey);
@@ -153,7 +153,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Sign_Verify_Correct_Data_Success_Sha256()
         {
-            var generator = new CryptoFactory().Create(HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            var generator = new RsaCryptoFactory().Create(HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
             var licenseText = Format(_userData, 1);
 
@@ -164,7 +164,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
 
             var publicKeyXml = generator.PublicKey;
 
-            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+            var verifier = new RsaCryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
             var userLicense = Format(_userData, 1);
             var verified = verifier.VerifyHash(userLicense, signed);
@@ -175,7 +175,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Sign_Verify_Correct_Data_Success_Md5()
         {
-            var generator = new CryptoFactory().Create(HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
+            var generator = new RsaCryptoFactory().Create(HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
 
             var licenseText = Format(_userData, 1);
 
@@ -185,7 +185,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
 
             Assert.NotNull(signed);
 
-            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
+            var verifier = new RsaCryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.MD5, RSASignaturePadding.Pkcs1);
 
             var userLicense = Format(_userData, 1);
             var verified = verifier.VerifyHash(userLicense, signed);
@@ -196,7 +196,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Sign_Verify_Correct_Data_Success_Sha384()
         {
-            var generator = new CryptoFactory().Create(HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+            var generator = new RsaCryptoFactory().Create(HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
 
             var licenseText = Format(_userData, 1);
 
@@ -206,7 +206,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
 
             Assert.NotNull(signed);
 
-            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+            var verifier = new RsaCryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
 
             var userLicense = Format(_userData, 1);
             var verified = verifier.VerifyHash(userLicense, signed);
@@ -217,7 +217,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Sign_Verify_Correct_Data_Success_Sha1()
         {
-            var generator = new CryptoFactory().Create(HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+            var generator = new RsaCryptoFactory().Create(HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
 
             var licenseText = Format(_userData, 1);
 
@@ -227,7 +227,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
 
             Assert.NotNull(signed);
 
-            var verifier = new CryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+            var verifier = new RsaCryptoFactory().Create(null, publicKeyXml, HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
 
             var userLicense = Format(_userData, 1);
             var verified = verifier.VerifyHash(userLicense, signed);
@@ -259,7 +259,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void SignData_Verify_Correct_Data()
         {
-            var generator = new CryptoFactory().Create();
+            var generator = new RsaCryptoFactory().Create();
 
             var longUserData = $"{_userData}";
 
@@ -271,7 +271,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
             Assert.NotNull(generator.PrivateKey);
             Assert.NotNull(generator.PublicKey);
             
-            var verifier = new CryptoFactory().Create(null, generator.PublicKey);
+            var verifier = new RsaCryptoFactory().Create(null, generator.PublicKey);
 
             var userLicense = Format(longUserData, 1);
             var verified = verifier.VerifyData(userLicense, signed);
@@ -301,7 +301,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Hash_Sign_Verify_No_Keys_Correct_Data_Success()
         {
-            var generator = new CryptoFactory().Create();
+            var generator = new RsaCryptoFactory().Create();
 
             var licenseText = Format(_userData, 1);
 
@@ -311,7 +311,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
 
             Assert.NotNull(signed);
 
-            var verifier = new CryptoFactory().Create(null, publicKey);
+            var verifier = new RsaCryptoFactory().Create(null, publicKey);
 
             var userLicense = Format(_userData, 1);
             var verified = verifier.VerifyHash(userLicense, signed);
@@ -375,7 +375,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
             var encoder = new UTF8Encoding();
             byte[] ba = encoder.GetBytes(_userData);
             var b64 = Convert.ToBase64String(ba);
-            Assert.Throws<ArgumentException>(() => new CryptoFactory().Create().VerifyData(_userData, b64));
+            Assert.Throws<ArgumentException>(() => new RsaCryptoFactory().Create().VerifyData(_userData, b64));
         }
 
         [Fact]
@@ -384,7 +384,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
             var encoder = new UTF8Encoding();
             byte[] ba = encoder.GetBytes(_userData);
             var b64 = Convert.ToBase64String(ba);
-            Assert.Throws<ArgumentException>(() => new CryptoFactory().Create().VerifyHash(_userData, b64));
+            Assert.Throws<ArgumentException>(() => new RsaCryptoFactory().Create().VerifyHash(_userData, b64));
         }
 
         [Fact]
@@ -420,7 +420,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         {
             Assert.Throws<InvalidOperationException>(() =>
             {
-                new CryptoFactory().Create("c", "c");
+                new RsaCryptoFactory().Create("c", "c");
             });
         }
 
@@ -443,7 +443,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                new CryptoFactory().Create(null, null);
+                new RsaCryptoFactory().Create(null, null);
             });
         }
 
@@ -455,14 +455,14 @@ namespace JamSoft.Helpers.Tests.Cryptography
 
             Assert.Throws<ArgumentException>(() =>
             {
-                new CryptoFactory().Create(rsaPrivate, rsaPublic);
+                new RsaCryptoFactory().Create(rsaPrivate, rsaPublic);
             });
         }
 
         [Fact]
         public void IsDisposed()
         {
-            var sut = new CryptoFactory().Create(_privateKey, _publicKey);
+            var sut = new RsaCryptoFactory().Create(_privateKey, _publicKey);
             using (sut)
             {
                 Assert.NotNull(sut.PublicKey);

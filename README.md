@@ -59,13 +59,13 @@ On Window you can also pass a target parameter of type `EnvironmentVariableTarge
 other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
 
 # RSA Cryptography
-There is a new little class to help digitall sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
+There is a new little class to help digitally sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
 ```
-public interface ICryptoFactory
+public interface IRsaCryptoFactory
 {
 }
 
-container.Register<ICryptoFactory, CryptoFactory>();
+container.Register<IRsaCryptoFactory, RsaCryptoFactory>();
 ```
 You can then use this factory to obtain instances of the service.
 ```
