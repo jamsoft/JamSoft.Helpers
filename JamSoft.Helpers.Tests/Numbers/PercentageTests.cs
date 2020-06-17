@@ -46,19 +46,16 @@ namespace JamSoft.Helpers.Tests.Numbers
 		}
 		
 		[Theory]
-		//[InlineData(7900, 12000, 65.83333587646484)]
 		[InlineData(7900, 2000, -1)]
 		[InlineData(500, 2000, 25)]
 		[InlineData(100, 2000, 5)]
 		[InlineData(50, 2000, 2.5)]
-		//[InlineData(723123, 12314141, 5.87229776382446)]
 		public void Gets_Correct_Float_Percentage_Of_Total(float value, float total, double expected)
 		{
 			Assert.Equal(expected, value.IsWhatPercentageOf(total));
 		}
 
         [Theory]
-        //[InlineData(7900, 12000, 65.83334, 5)]
         [InlineData(7900, 2000.00000, -1, 5)]
         [InlineData(500, 2000.00000, 25, 5)]
         [InlineData(100, 2000.00000, 5, 5)]
