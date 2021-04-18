@@ -3,7 +3,7 @@
 namespace JamSoft.Helpers.Serialization
 {
     /// <summary>
-    /// Adds an uppercase UTF-8 XML declaration for conformance
+    /// Adds an upper-case UTF-8 XML declaration for conformance
     /// </summary>
     /// <seealso cref="System.Text.UTF8Encoding" />
     public class UpperCaseUtf8Encoding : UTF8Encoding

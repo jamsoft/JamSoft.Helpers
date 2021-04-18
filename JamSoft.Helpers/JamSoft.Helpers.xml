@@ -41,7 +41,7 @@
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TempDir">
             <summary>
-            The tmpdir variable name
+            The temp dir variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.User">
@@ -51,7 +51,7 @@
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.LogName">
             <summary>
-            The logname variable name
+            The log name variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExOsxVariableNames.TermProgram">
@@ -141,7 +141,7 @@
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.Tmp">
             <summary>
-            The tmp variable name
+            The temp variable name
             </summary>
         </member>
         <member name="F:JamSoft.Helpers.Constants.EnvExWinVariableNames.UserProfile">
@@ -153,97 +153,6 @@
             <summary>
             The system drive variable name
             </summary>
-        </member>
-        <member name="T:JamSoft.Helpers.Crypto.CryptoFactory">
-            <summary>
-            Creates instances of the RsaCrypto class and implements <see cref="T:JamSoft.Helpers.Crypto.ICryptoFactory"/><para />
-            Designed as a DI container friendly factory class
-            </summary>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /><para />
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
-            </summary>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size<para />
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size
-            </summary>
-            <param name="keySize">The integer key size to use</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.String,System.String)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification<para />
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
-            The keys can be extracted in xml format from the <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey"/> and <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey"/> properties<para />
-            </summary>
-            <param name="privateKeyXml">The private key xml.</param>
-            <param name="publicKeyXml">The public key xml.</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-            <exception cref="T:System.ArgumentException">thrown when both the public key and private keys a null or empty</exception>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification<para />
-            The keys can be extracted in xml format from the <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey"/> and <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey"/> properties<para />
-            </summary>
-            <param name="privateKeyXml">The private key xml.</param>
-            <param name="publicKeyXml">The public key xml.</param>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided RSAParameters objects.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification<para />
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
-            </summary>
-            <param name="privateKey">The private key.</param>
-            <param name="publicKey">The public key.</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided RSAParameters objects.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification<para />
-            </summary>
-            <param name="privateKey">The private key.</param>
-            <param name="publicKey">The public key.</param>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /><para />
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
-            </summary>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size, hashing and padding values<para />
-            </summary>
-            <param name="keySize">The integer key size to use</param>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.CryptoFactory.Create(System.Security.Cryptography.RSA)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> and uses the provided RSA implementation
-            </summary>
-            <param name="rsa">The RSA.</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="T:JamSoft.Helpers.Crypto.Extensions">
             <summary>
@@ -258,82 +167,6 @@
             <returns>
               <c>true</c> if the specified parameters is null; otherwise, <c>false</c>.
             </returns>
-        </member>
-        <member name="T:JamSoft.Helpers.Crypto.ICryptoFactory">
-            <summary>
-            Facilitates the registration of a factory in a DI container
-            </summary>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.String,System.String)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys in Xml format.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification
-            </summary>
-            <param name="privateKeyXml">The private key Xml.</param>
-            <param name="publicKeyXml">The public key Xml.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification<para />
-            The keys can be extracted in xml format from the <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey"/> and <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey"/> properties<para />
-            </summary>
-            <param name="privateKeyXml">The private key xml.</param>
-            <param name="publicKeyXml">The public key xml.</param>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided RSAParameters objects.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification
-            </summary>
-            <param name="privateKey">The private key.</param>
-            <param name="publicKey">The public key.</param>
-            <returns></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided RSAParameters objects.<para />
-            You can provide both keys or just the private key for signing, or just the public key for verification<para />
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
-            </summary>
-            <param name="privateKey">The private key.</param>
-            <param name="publicKey">The public key.</param>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/>.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.Int32)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/>.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size
-            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size<para />
-            </summary>
-            <param name="keySize">The integer key size to use</param>
-            <param name="hashAlgorithmName">The hashing algorithm to use</param>
-            <param name="padding">The padding to be used</param>
-            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
-        </member>
-        <member name="M:JamSoft.Helpers.Crypto.ICryptoFactory.Create(System.Security.Cryptography.RSA)">
-            <summary>
-            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> and uses the provided RSA implementation
-            </summary>
-            <param name="rsa">The RSA.</param>
-            <returns></returns>
         </member>
         <member name="T:JamSoft.Helpers.Crypto.IRsaCrypto">
             <summary>
@@ -361,7 +194,7 @@
             Signs the data.
             </summary>
             <param name="message">The message.</param>
-            <returns></returns>
+            <returns>The signed data encoded in Base64</returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCrypto.VerifyData(System.String,System.String)">
             <summary>
@@ -385,6 +218,173 @@
             <param name="originalMessage">The original message.</param>
             <param name="signedMessage">The signed message.</param>
             <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Crypto.IRsaCryptoFactory">
+            <summary>
+            Facilitates the registration of a factory in a DI container
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.String,System.String)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys in Xml format.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification
+            </summary>
+            <param name="privateKeyXml">The private key Xml.</param>
+            <param name="publicKeyXml">The public key Xml.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification<para />
+            The keys can be extracted in xml format from the <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey"/> and <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey"/> properties<para />
+            </summary>
+            <param name="privateKeyXml">The private key xml.</param>
+            <param name="publicKeyXml">The public key xml.</param>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided RSAParameters objects.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification
+            </summary>
+            <param name="privateKey">The private key.</param>
+            <param name="publicKey">The public key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided RSAParameters objects.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification<para />
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
+            </summary>
+            <param name="privateKey">The private key.</param>
+            <param name="publicKey">The public key.</param>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Int32)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size<para />
+            </summary>
+            <param name="keySize">The integer key size to use</param>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Security.Cryptography.RSA)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> and uses the provided RSA implementation
+            </summary>
+            <param name="rsa">The RSA.</param>
+            <returns></returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Crypto.RsaCryptoFactory">
+            <summary>
+            Creates instances of the RsaCrypto class and implements <see cref="T:JamSoft.Helpers.Crypto.IRsaCryptoFactory"/><para />
+            Designed as a DI container friendly factory class
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /><para />
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
+            </summary>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.Int32)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size<para />
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> and using the provided key size
+            </summary>
+            <param name="keySize">The integer key size to use</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.String,System.String)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification<para />
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
+            The keys can be extracted in xml format from the <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey"/> and <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey"/> properties<para />
+            </summary>
+            <param name="privateKeyXml">The private key xml.</param>
+            <param name="publicKeyXml">The public key xml.</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+            <exception cref="T:System.ArgumentException">thrown when both the public key and private keys a null or empty</exception>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> using the provided keys.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification<para />
+            The keys can be extracted in xml format from the <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PublicKey"/> and <seealso cref="P:JamSoft.Helpers.Crypto.IRsaCrypto.PrivateKey"/> properties<para />
+            </summary>
+            <param name="privateKeyXml">The private key xml.</param>
+            <param name="publicKeyXml">The public key xml.</param>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided RSAParameters objects.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification<para />
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
+            </summary>
+            <param name="privateKey">The private key.</param>
+            <param name="publicKey">The public key.</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided RSAParameters objects.<para />
+            You can provide both keys or just the private key for signing, or just the public key for verification<para />
+            </summary>
+            <param name="privateKey">The private key.</param>
+            <param name="publicKey">The public key.</param>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /><para />
+            Defaults to using <see cref="P:System.Security.Cryptography.HashAlgorithmName.SHA512"/> and <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1"/> with a 2048-bit key<para />
+            </summary>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> using the provided key size, hashing and padding values<para />
+            </summary>
+            <param name="keySize">The integer key size to use</param>
+            <param name="hashAlgorithmName">The hashing algorithm to use</param>
+            <param name="padding">The padding to be used</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Crypto.RsaCryptoFactory.Create(System.Security.Cryptography.RSA)">
+            <summary>
+            Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto" /> and uses the provided RSA implementation
+            </summary>
+            <param name="rsa">The RSA.</param>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="T:JamSoft.Helpers.EnvEx">
             <summary>
@@ -413,7 +413,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Numbers.MathEx.IsEvenNumber(System.Int32)">
             <summary>
-            Determines whether the numer is even.
+            Determines whether the number is even.
             </summary>
             <param name="value">The value.</param>
             <returns>
@@ -422,7 +422,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Numbers.MathEx.IsEvenNumber(System.Decimal)">
             <summary>
-            Determines whether the numer is even.
+            Determines whether the number is even.
             </summary>
             <param name="value">The value.</param>
             <returns>
@@ -482,7 +482,7 @@
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner">
             <summary>
-            An interface to implement mementos (Undo etc)
+            An interface to implement mementos (Undo etc.)
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.IMementoOwner.Save">
@@ -542,7 +542,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.Snapshot">
             <summary>
-            Asks the <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner"></seealso> insance to create an <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMemento"></seealso> instance and stores the memento
+            Asks the <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMementoOwner"></seealso> instance to create an <seealso cref="T:JamSoft.Helpers.Patterns.Memento.IMemento"></seealso> instance and stores the memento
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Memento.MementoManager.Undo">
@@ -556,7 +556,7 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.SuppressNotification">
+        <member name="P:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1._suppressNotification">
             <summary>
             The suppress notification flag when set to true prevents any change notifications.
             </summary>
@@ -576,29 +576,41 @@
             </summary>
             <param name="e">The event args</param>
         </member>
-        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0},System.Boolean,System.Boolean)">
             <summary>
-            Adds the provided collection of <seealso cref="T:System.Collections.Generic.IEnumerable`1"></seealso> and surpresses collection changed events until all objects have been added.<para />
+            Adds the provided collection of <seealso cref="T:System.Collections.Generic.IEnumerable`1"></seealso> and suppresses collection changed events until all objects have been added, then optionally fires one event.<para />
             Once all objects have been added a single <seealso cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"></seealso> is created and the OnCollectionChanged event is fired
             </summary>
-            <param name="list">The collection of obejct to add</param>
+            <param name="list">The collection of object to add</param>
+            <param name="suppressNotifications">A flag to suppress change notifications</param>/// 
+            <param name="notifiyOnceAllAdded"></param>
         </member>
-        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort">
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort(System.Boolean)">
             <summary>
-            Sorts the collection using the the default <seealso cref="T:System.Collections.Generic.Comparer`1"></seealso> comparer
+            Sorts the collection using the default <seealso cref="T:System.Collections.Generic.Comparer`1"></seealso> comparer
             </summary>
+            <param name="suppressNotifications">A flag to suppress change notifications</param>
             <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>
         </member>
-        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort(System.Collections.Generic.IComparer{`0})">
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Add(`0,System.Boolean)">
+            <summary>
+            Adds an item to the collection and optionally suppresses the collection changed events
+            </summary>
+            <param name="item">The item to add to the collection</param>
+            <param name="suppressNotifications">A flag to suppress change notifications</param>
+            <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>
+        </member>
+        <member name="M:JamSoft.Helpers.Patterns.Mvvm.SuperObservableCollection`1.Sort(System.Collections.Generic.IComparer{`0},System.Boolean)">
             <summary>
             Sorts the collection using the provided <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>instance
             </summary>
             <param name="comparer">The comparer.</param>
+            <param name="suppressNotifications">A flag to suppress change notifications</param>
             <seealso cref="T:System.Collections.Generic.IComparer`1"></seealso>
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase">
             <summary>
-            An implementation of a Base View Model for use in Mvvm
+            An implementation of a Base View Model for use in MVVM
             </summary>
         </member>
         <member name="E:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.PropertyChanged">
@@ -620,14 +632,14 @@
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
             <summary>
-            Raises the <see cref="E:PropertyChanged" /> event. Allows the use of a specfic PropertyChangedEventArgs object.  
+            Raises the <see cref="E:PropertyChanged" /> event. Allows the use of a specific PropertyChangedEventArgs object.  
             Is the most performant implementation
             </summary>
             <param name="prop">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.String)">
             <summary>
-            Fires the property changed event using either the <seealso cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute" /> or the provded string property name.
+            Fires the property changed event using either the <seealso cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute" /> or the provided string property name.
             </summary>
             <param name="propertyName">Name of the property.</param>
         </member>
@@ -638,6 +650,11 @@
             <value>
             <c>true</c> if this instance is editable; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="P:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.IsBusy">
+            <summary>
+            Gets or sets the busy state for the view model instance
+            </summary>
         </member>
         <member name="T:JamSoft.Helpers.Patterns.Observer.IObservable">
             <summary>
@@ -702,7 +719,7 @@
         </member>
         <member name="T:JamSoft.Helpers.Serialization.UpperCaseUtf8Encoding">
             <summary>
-            Adds an uppercase UTF-8 XML declaration for conformance
+            Adds an upper-case UTF-8 XML declaration for conformance
             </summary>
             <seealso cref="T:System.Text.UTF8Encoding" />
         </member>
@@ -766,7 +783,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Strings.Extensions.RemoveAllMultiSpace(System.String,System.String,System.Boolean)">
             <summary>
-            Removes all instances of multi-whitespace substrings.
+            Removes all instances of multi white space substrings.
             </summary>
             <param name="input">The input string</param>
             <param name="replacePattern">Optional replace pattern</param>
@@ -808,12 +825,12 @@
         </member>
         <member name="T:JamSoft.Helpers.Ui.Graphics.Colors">
             <summary>
-            Provides helper methods to work with color values
+            Provides helper methods to work with colour values
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32,System.Int32,System.Int32,System.Boolean)">
             <summary>
-            Converts RGB integers to HEX format color string
+            Converts RGB integers to HEX format colour string
             </summary>
             <param name="r">The RED component</param>
             <param name="g">The GREEN component</param>
@@ -823,7 +840,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
             <summary>
-            Converts ARGB integers to HEX format color string
+            Converts ARGB integers to HEX format colour string
             </summary>
             <param name="a">a.</param>
             <param name="r">The r.</param>
@@ -834,7 +851,7 @@
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToHex(System.Int32[],System.Boolean)">
             <summary>
-            Converts RGB or ARGB integer arrays to HEX format color string.
+            Converts RGB or ARGB integer arrays to HEX format colour string.
             </summary>
             <param name="values">The RGB values array</param>
             <param name="prependHash">if set to <c>true</c> [prepend hash].</param>
@@ -845,8 +862,8 @@
             <summary>
             Converts a standard HEX string to <seealso cref="T:System.Drawing.Color"/> struct
             </summary>
-            <param name="hex">The string to convert to a color</param>
-            <returns> Color struct based on the provided hex string</returns>
+            <param name="hex">The string to convert to a colour</param>
+            <returns> Colour struct based on the provided hex string</returns>
             <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
         </member>
         <member name="M:JamSoft.Helpers.Ui.Graphics.Colors.ToArgb(System.String)">
@@ -854,7 +871,7 @@
             Converts a alpha HEX string to <seealso cref="T:System.Drawing.Color"/> struct
             </summary>
             <param name="hex"></param>
-            <returns> Color struct based on the provided hex string</returns>
+            <returns> Colour struct based on the provided hex string</returns>
             <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
         </member>
     </members>

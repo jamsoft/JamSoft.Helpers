@@ -129,7 +129,7 @@ namespace JamSoft.Helpers.Crypto
                 }
                 else
                 {
-                    // make new keys accesible to consumers for storage
+                    // make new keys accessible to consumers for storage
                     SetKeys(rsa);
                 }
 
@@ -190,7 +190,7 @@ namespace JamSoft.Helpers.Crypto
                 }
                 else
                 {
-                    // make new keys accesible to consumers for storage
+                    // make new keys accessible to consumers for storage
                     SetKeys(rsa);
                 }
 

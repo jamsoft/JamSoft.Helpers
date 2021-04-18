@@ -231,6 +231,8 @@ public abstract class ViewModelBase : INotifyPropertyChanged
     ...
 	public bool IsEditable ...
 	...
+    public bool IsBusy ...
+    ...
 	protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
 	{
 	    ...
@@ -243,23 +245,23 @@ An observable collection that mutes change notifications when adding a range of 
 public class SuperObservableCollection<T> : ObservableCollection<T>
 {
     public SuperObservableCollection(IEnumerable<T> coll)
-	{
-	}
+    {
+    }
+
+    public void AddRange(IEnumerable<T> list, bool suppressNotifications = true)
+    {
+        ...
+    }
+
+    public void Sort(bool suppressNotifications = false)
+    {
+        ...
+    }
 	
-    public void AddRange(IEnumerable<T> list)
-	{
-	    ...
-	}
-	
-	public void Sort()
-	{
-	    ...
-	}
-	
-	public void Sort(IComparer<T> comparer)
-	{
-	    ...
-	}
+    public void Sort(IComparer<T> comparer, bool suppressNotifications = false)
+    {
+        ...
+    }
 }
 ```
 ## Observer

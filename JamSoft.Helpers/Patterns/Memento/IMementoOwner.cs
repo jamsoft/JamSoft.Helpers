@@ -1,7 +1,7 @@
 ﻿namespace JamSoft.Helpers.Patterns.Memento
 {
     /// <summary>
-    /// An interface to implement mementos (Undo etc)
+    /// An interface to implement mementos (Undo etc.)
     /// </summary>
     public interface IMementoOwner
     {

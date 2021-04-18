@@ -26,7 +26,7 @@
         public const string Home = "HOME";
 
         /// <summary>
-        /// The tmpdir variable name
+        /// The temp dir variable name
         /// </summary>
         public const string TempDir = "TMPDIR";
 
@@ -36,7 +36,7 @@
         public const string User = "USER";
 
         /// <summary>
-        /// The logname variable name
+        /// The log name variable name
         /// </summary>
         public const string LogName = "LOGNAME";
 

@@ -11,7 +11,7 @@ namespace JamSoft.Helpers.Strings
     public static class Extensions
     {
         /// <summary>
-        /// Removes all instances of multi-whitespace substrings.
+        /// Removes all instances of multi white space substrings.
         /// </summary>
         /// <param name="input">The input string</param>
         /// <param name="replacePattern">Optional replace pattern</param>
@@ -61,6 +61,7 @@ namespace JamSoft.Helpers.Strings
         /// <returns>
         ///   <c>true</c> if is equal to the specified secureStringTwo; otherwise, <c>false</c>.
         /// </returns>
+        [Obsolete("Secure string should not be used for new development see: https://github.com/dotnet/platform-compat/blob/master/docs/DE0001.md and https://docs.microsoft.com/en-us/dotnet/api/system.security.securestring?view=net-5.0")]
         public static bool IsExactlySameAs(this SecureString secureStringOne, SecureString secureStringTwo)
         {
             var bstr1 = IntPtr.Zero;
