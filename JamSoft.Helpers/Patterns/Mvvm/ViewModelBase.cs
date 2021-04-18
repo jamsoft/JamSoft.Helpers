@@ -5,11 +5,12 @@ using System.Runtime.CompilerServices;
 namespace JamSoft.Helpers.Patterns.Mvvm
 {
     /// <summary>
-    /// An implementation of a Base View Model for use in Mvvm
+    /// An implementation of a Base View Model for use in MVVM
     /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         private bool _isEditable;
+        private bool _isBusy;
 
         /// <summary>
         /// Occurs when a property value changes.
@@ -39,7 +40,7 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         }
 
         /// <summary>
-        /// Raises the <see cref="E:PropertyChanged" /> event. Allows the use of a specfic PropertyChangedEventArgs object.  
+        /// Raises the <see cref="E:PropertyChanged" /> event. Allows the use of a specific PropertyChangedEventArgs object.  
         /// Is the most performant implementation
         /// </summary>
         /// <param name="prop">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
@@ -49,7 +50,7 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         }
 
         /// <summary>
-        /// Fires the property changed event using either the <seealso cref="CallerMemberNameAttribute" /> or the provded string property name.
+        /// Fires the property changed event using either the <seealso cref="CallerMemberNameAttribute" /> or the provided string property name.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -67,6 +68,15 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         {
             get => _isEditable;
             set => SetProperty(ref _isEditable, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the busy state for the view model instance
+        /// </summary>
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
         }
     }
 }

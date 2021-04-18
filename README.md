@@ -59,13 +59,13 @@ On Window you can also pass a target parameter of type `EnvironmentVariableTarge
 other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
 
 # RSA Cryptography
-There is a new little class to help digitall sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
+There is a new little class to help digitally sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
 ```
-public interface ICryptoFactory
+public interface IRsaCryptoFactory
 {
 }
 
-container.Register<ICryptoFactory, CryptoFactory>();
+container.Register<IRsaCryptoFactory, RsaCryptoFactory>();
 ```
 You can then use this factory to obtain instances of the service.
 ```
@@ -231,6 +231,8 @@ public abstract class ViewModelBase : INotifyPropertyChanged
     ...
 	public bool IsEditable ...
 	...
+    public bool IsBusy ...
+    ...
 	protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
 	{
 	    ...
@@ -243,23 +245,23 @@ An observable collection that mutes change notifications when adding a range of 
 public class SuperObservableCollection<T> : ObservableCollection<T>
 {
     public SuperObservableCollection(IEnumerable<T> coll)
-	{
-	}
+    {
+    }
+
+    public void AddRange(IEnumerable<T> list, bool suppressNotifications = true)
+    {
+        ...
+    }
+
+    public void Sort(bool suppressNotifications = false)
+    {
+        ...
+    }
 	
-    public void AddRange(IEnumerable<T> list)
-	{
-	    ...
-	}
-	
-	public void Sort()
-	{
-	    ...
-	}
-	
-	public void Sort(IComparer<T> comparer)
-	{
-	    ...
-	}
+    public void Sort(IComparer<T> comparer, bool suppressNotifications = false)
+    {
+        ...
+    }
 }
 ```
 ## Observer

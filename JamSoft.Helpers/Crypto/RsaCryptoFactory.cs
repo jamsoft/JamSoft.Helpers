@@ -4,10 +4,10 @@ using System.Security.Cryptography;
 namespace JamSoft.Helpers.Crypto
 {
     /// <summary>
-    /// Creates instances of the RsaCrypto class and implements <see cref="ICryptoFactory"/><para />
+    /// Creates instances of the RsaCrypto class and implements <see cref="IRsaCryptoFactory"/><para />
     /// Designed as a DI container friendly factory class
     /// </summary>
-    public sealed class CryptoFactory : ICryptoFactory
+    public sealed class RsaCryptoFactory : IRsaCryptoFactory
     {
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto" /><para />

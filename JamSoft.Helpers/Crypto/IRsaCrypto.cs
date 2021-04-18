@@ -27,7 +27,7 @@ namespace JamSoft.Helpers.Crypto
         /// Signs the data.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <returns></returns>
+        /// <returns>The signed data encoded in Base64</returns>
         string SignData(string message);
 
         /// <summary>

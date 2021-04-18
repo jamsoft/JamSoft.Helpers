@@ -6,7 +6,7 @@
 	public static class MathEx
 	{
 		/// <summary>
-		/// Determines whether the numer is even.
+		/// Determines whether the number is even.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns>
@@ -18,7 +18,7 @@
 		}
 
 		/// <summary>
-		/// Determines whether the numer is even.
+		/// Determines whether the number is even.
 		/// </summary>
 		/// <param name="value">The value.</param>
 		/// <returns>

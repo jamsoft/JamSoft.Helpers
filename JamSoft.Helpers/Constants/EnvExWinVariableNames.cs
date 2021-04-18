@@ -66,7 +66,7 @@
         public const string Temp = "TEMP";
 
         /// <summary>
-        /// The tmp variable name
+        /// The temp variable name
         /// </summary>
         public const string Tmp = "TMP";
 

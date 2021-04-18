@@ -29,7 +29,7 @@ namespace JamSoft.Helpers.Patterns.Memento
         }
 
         /// <summary>
-        /// Asks the <seealso cref="IMementoOwner"></seealso> insance to create an <seealso cref="IMemento"></seealso> instance and stores the memento
+        /// Asks the <seealso cref="IMementoOwner"></seealso> instance to create an <seealso cref="IMemento"></seealso> instance and stores the memento
         /// </summary>
         public virtual void Snapshot()
         {

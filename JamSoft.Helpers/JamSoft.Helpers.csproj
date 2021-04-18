@@ -4,13 +4,13 @@
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>0.4.0</Version>
+    <Version>0.4.1</Version>
     <Description>A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.</Description>
     <PackageDescription>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</PackageDescription>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization</PackageTags>
-    <PackageProjectUrl>https://github.com/jamsoft/JamSoft.Helpers</PackageProjectUrl>
+    <PackageProjectUrl>https://jamsoft.github.io/JamSoft.Helpers/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryBranch>master</RepositoryBranch>

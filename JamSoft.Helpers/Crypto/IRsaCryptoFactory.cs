@@ -5,7 +5,7 @@ namespace JamSoft.Helpers.Crypto
     /// <summary>
     /// Facilitates the registration of a factory in a DI container
     /// </summary>
-    public interface ICryptoFactory
+    public interface IRsaCryptoFactory
     {
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto"/> using the provided keys in Xml format.<para />
