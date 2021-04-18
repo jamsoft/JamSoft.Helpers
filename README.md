@@ -248,7 +248,7 @@ public class SuperObservableCollection<T> : ObservableCollection<T>
     {
     }
 
-    public void AddRange(IEnumerable<T> list, bool suppressNotifications = true)
+    public void AddRange(IEnumerable<T> list, bool suppressNotifications = true, bool notifiyOnceAllAdded = true)
     {
         ...
     }
