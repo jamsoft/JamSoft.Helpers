@@ -259,7 +259,7 @@ string pattern = "strinG1";
 
 input.IsExactlySameAs(pattern); // false
 ```
-## Secure Strings Compare
+## Secure Strings Compare (Will be removed in the next release)
 ```csharp
 // #dontdothisinproduction
 var input1 = new SecureString();
