@@ -1,6 +1,6 @@
-# JamSoft.Helpers
+# <img src="https://github.com/jamsoft/JamSoft.Helpers/tree/master/img/logo.png" width="48">JamSoft.Helpers
 
-A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.
+A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library with minimal dependencies.
 
 ![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)
@@ -17,7 +17,7 @@ Install-Package JamSoft.Helpers
 ```
 # xUnit Tests
 
-There is a high level of test coverage as shown in the badge above (around 99%), however, at the moment the pipeline executes on Linux with limited permissions which means some tests cannot be run in this environment.
+There is a high level of test coverage as shown in the badge above (around 97%), however, at the moment the pipeline executes only on Windows which means some tests cannot be run in this environment.
 The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
 
 The following test classes also show basic example implementations and uses of the provided pattern classes.
@@ -25,6 +25,8 @@ The following test classes also show basic example implementations and uses of t
 - ObserverTests
 - MementoTests
 - MyTestViewModel
+- ATestSettingsClass
+- BTestSettingsClass
 
 # Configuration & Settings
 

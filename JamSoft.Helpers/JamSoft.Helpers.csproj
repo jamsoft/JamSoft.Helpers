@@ -9,7 +9,7 @@
     <PackageDescription>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</PackageDescription>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization, configuration</PackageTags>
+    <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization, configuration, hamming, levenshtein, settings</PackageTags>
     <PackageProjectUrl>https://jamsoft.github.io/JamSoft.Helpers/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,7 +23,7 @@
     <PackageId>JamSoft.Helpers</PackageId>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>JamSoft.Helpers.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
