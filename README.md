@@ -1,6 +1,6 @@
-<img align="left" height="50" src="img/logo.png">
+<img align="center" height="50" src="img/logo.png">
 
-# .Helpers
+# JamSoft.Helpers
 
 A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library with minimal dependencies.
 
