@@ -46,14 +46,21 @@ public sealed class MySettings : SettingsBase<MySettings>
 ```
 ### Loading & Access
 
-You can now you can manage your settings at rumetime like:
+Now you can load, save and manage your settings at rumetime like:
 
 ```
 string myDefaultSettingsPath = "C:\Some\location\on\disk";
 MySettings.Load(myDefaultSettingsPath);
 ```
 
-Will load either load the settings from a file called `mysettings.json`, or if no file exists, the defaults are loaded.
+This call will either load the settings from a file called `mysettings.json`, the name is automatically taken from the type name, or if no file exists, the defaults are loaded.
+
+You can also load and save from a provided file name instead of deriving from the type name, such as:
+
+```
+string myDefaultSettingsPath = "C:\Some\location\on\disk";
+MySettings.Load(myDefaultSettingsPath, "custom-name.json");
+```
 
 You can access the values using the instance:
 
