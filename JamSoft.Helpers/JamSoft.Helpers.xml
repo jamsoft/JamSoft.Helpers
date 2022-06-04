@@ -4,6 +4,35 @@
         <name>JamSoft.Helpers</name>
     </assembly>
     <members>
+        <member name="T:JamSoft.Helpers.Configuration.SettingsBase`1">
+            <summary>
+            Provides loading and saving of JSON settings and configuration data at runtime
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:JamSoft.Helpers.Configuration.SettingsBase`1.Instance">
+            <summary>
+            The class instance containing the values
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.Load(System.String,System.String)">
+            <summary>
+            Loads the settings file for the class type found at the provided base path. If no file exists, the defaults are loaded
+            </summary>
+            <param name="basePath">The base settings directory</param>
+            <param name="filename">The settings filename (optional: the type name will be used if this is null, empty or white-space)</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.ResetToDefaults(System.Boolean)">
+            <summary>
+            Returns all properties to their defaults and optionally saves to disk
+            </summary>
+            <param name="saveToDisk">A flag to optionally save to disk (default: True)</param>
+        </member>
+        <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.Save">
+            <summary>
+            Save the current setting to the file they were originally loaded from
+            </summary>
+        </member>
         <member name="T:JamSoft.Helpers.Constants.EnvExLinuxVariableNames">
             <summary>
             Standard variable names for Mac OSX

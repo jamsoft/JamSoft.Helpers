@@ -17,7 +17,7 @@ Install-Package JamSoft.Helpers
 ```
 # xUnit Tests
 
-There is a high level of test coverage as shown in the badge above, however, at the moment the pipeline executes on Linux with limited permissions which means some tests cannot be run in this environment.
+There is a high level of test coverage as shown in the badge above (around 99%), however, at the moment the pipeline executes on Linux with limited permissions which means some tests cannot be run in this environment.
 The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
 
 The following test classes also show basic example implementations and uses of the provided pattern classes.
@@ -25,6 +25,63 @@ The following test classes also show basic example implementations and uses of t
 - ObserverTests
 - MementoTests
 - MyTestViewModel
+
+# Configuration & Settings
+
+Rather than getting embroiled in the convoluted and sometimes awkward user settings infrastructure provided by .NET (*.settings), sometimes you just want to store some values in a file, yes?
+
+The issues and additional complications around user.config and strong names can sometimes get in the way. Using the `SettingsBase<T>` class can bypass this.
+
+## Set Up
+
+Create a POCO class containing your settings properties, default values and inherit `SettingsBase<T>`, such as:
+
+```
+public sealed class MySettings : SettingsBase<MySettings>
+{
+    public string ASetting { get; set; } = "A Default Value";
+}
+```
+### Loading & Access
+
+You can now you can manage your settings at rumetime like:
+
+```
+string myDefaultSettingsPath = "C:\Some\location\on\disk";
+MySettings.Load(myDefaultSettingsPath);
+```
+
+Will load either load the settings from a file called `mysettings.json`, or if no file exists, the defaults are loaded.
+
+You can access the values using the instance:
+
+```
+var theValue = MySettings.Instance.ASetting
+```
+Or
+```
+MySettings.Instance.ASetting = theValue;
+```
+### Saving
+
+Saving the settings is a call to the `Save()` method, like:
+
+```
+MySettings.Save();
+```
+
+This will always save back to the same file the settings were originally loaded from, or if there was no file, the file will be created and the settings saved.
+
+### Reset
+You can easily return back to the defaults by calling the `ResetToDefaults()` method, like:
+```
+MySettings.ResetToDefaults();
+```
+This will reset all settings to their default values and immediately write them to disk. If you do not want to write them to disk, simply pass a `false` to the method.
+```
+MySettings.ResetToDefaults(saveToDisk:false);
+```
+
 
 # Environment Variables
 There are a handful of helper methods and classes for access environment variables on various platforms.
@@ -229,14 +286,14 @@ A very bare bones view model with property changed updates
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
     ...
-	public bool IsEditable ...
-	...
+    public bool IsEditable ...
+    ...
     public bool IsBusy ...
     ...
-	protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
-	{
-	    ...
-	}
+    protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
+    {
+        ...
+    }
 }
 ```
 ## Mvvm - SuperObservableCollection<T>
