@@ -97,6 +97,7 @@ $tf/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+.idea/
 
 # JustCode is a .NET coding add-in
 .JustCode
@@ -218,11 +219,3 @@ FakesAssemblies/
 _Pvt_Extensions
 
 *.msi
-
-SampleSort/Properties/VersionAssemblyInfo.cs
-
-RiffTools/BinaryViewerPortable/Binary Viewer/ProXoft/Binary Viewer/Settings/Binary Viewer_UserSettings.xml
-
-RiffTools/BinaryViewerPortable/Binary Viewer/ProXoft/Binary Viewer/Settings/Binary Viewer_Layout.xml
-
-RiffTools/BinaryViewerPortable/Binary Viewer/ProXoft/Binary Viewer/Log/
