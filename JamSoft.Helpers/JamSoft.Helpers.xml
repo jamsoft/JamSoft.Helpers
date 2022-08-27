@@ -4,6 +4,11 @@
         <name>JamSoft.Helpers</name>
     </assembly>
     <members>
+        <member name="T:JamSoft.Helpers.Collections.CollectionExtensions">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JamSoft.Helpers.Configuration.SettingsBase`1">
             <summary>
             Provides loading and saving of JSON settings and configuration data at runtime
@@ -846,6 +851,25 @@
             <returns>
               <c>true</c> if is equal to the specified secureStringTwo; otherwise, <c>false</c>.
             </returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.ExtensionMethods">
+            <summary>
+            General UI Extension Methods
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.ExtensionMethods.ToHumanReadable(System.Int32)">
+            <summary>
+            Converts an input long value and converts to a human readable representation
+            </summary>
+            <param name="i">the input value</param>
+            <returns>a human readable representation of the input</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.ExtensionMethods.ToHumanReadable(System.Int64)">
+            <summary>
+            Converts an input long value and converts to a human readable representation
+            </summary>
+            <param name="i">the input value</param>
+            <returns>a human readable representation of the input</returns>
         </member>
         <member name="T:JamSoft.Helpers.Ui.Graphics">
             <summary>

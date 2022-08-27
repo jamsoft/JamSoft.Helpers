@@ -26,6 +26,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>JamSoft.Helpers.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
+    <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
