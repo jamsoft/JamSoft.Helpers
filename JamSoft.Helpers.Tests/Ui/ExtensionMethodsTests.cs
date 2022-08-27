@@ -74,5 +74,26 @@ namespace JamSoft.Helpers.Tests.Ui
 			int input = 10000000;
 			Assert.Equal("9.54 Mb", input.ToHumanReadable());
 		}
+		
+		[Fact]
+		public void ConvertDoubleToHumanReadableTime_Minutes_Seconds()
+		{
+			double input = 63;
+			Assert.Equal("00:01:03", input.ToTimeDisplayFromSeconds());
+		}
+		
+		[Fact]
+		public void ConvertDoubleToHumanReadableTime_Hours()
+		{
+			double input = 3657;
+			Assert.Equal("01:00:57", input.ToTimeDisplayFromSeconds());
+		}
+		
+		[Fact]
+		public void ConvertDoubleToHumanReadableTime_Hours_WithMs()
+		{
+			double input = 3657.12;
+			Assert.Equal("01:00:57:120", input.ToTimeDisplayFromSeconds(true));
+		}
 	}
 }

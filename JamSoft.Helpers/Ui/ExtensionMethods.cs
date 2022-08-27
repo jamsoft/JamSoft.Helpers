@@ -65,5 +65,34 @@ namespace JamSoft.Helpers.Ui
 			readable = (readable / 1024);
 			return readable.ToString("0.## ") + suffix;
 		}
+		
+		/// <summary>
+		/// Converts a double value into a human readable time format
+		/// </summary>
+		/// <param name="seconds"></param>
+		/// <param name="withMs"></param>
+		/// <returns></returns>
+		public static string ToTimeDisplayFromSeconds(this double seconds, bool withMs = false)
+		{
+			TimeSpan t = TimeSpan.FromSeconds(seconds);
+			string answer;
+			if (withMs)
+			{
+				answer = string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}",
+					t.Hours,
+					t.Minutes,
+					t.Seconds,
+					t.Milliseconds);
+			}
+			else
+			{
+				answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+					t.Hours,
+					t.Minutes,
+					t.Seconds);
+			}
+
+			return answer;
+		}
 	}
 }

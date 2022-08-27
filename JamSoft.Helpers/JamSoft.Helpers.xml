@@ -6,8 +6,17 @@
     <members>
         <member name="T:JamSoft.Helpers.Collections.CollectionExtensions">
             <summary>
-            
+            Collection extension methods 
             </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Collections.CollectionExtensions.Shuffle``1(System.Collections.Generic.IEnumerable{``0},System.Random)">
+            <summary>
+            Randomising a collection of objects within a collection
+            </summary>
+            <param name="source">the source collection</param>
+            <param name="rng">a provided random number generator</param>
+            <typeparam name="T">the collection object type</typeparam>
+            <returns></returns>
         </member>
         <member name="T:JamSoft.Helpers.Configuration.SettingsBase`1">
             <summary>
@@ -870,6 +879,14 @@
             </summary>
             <param name="i">the input value</param>
             <returns>a human readable representation of the input</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.ExtensionMethods.ToTimeDisplayFromSeconds(System.Double,System.Boolean)">
+            <summary>
+            Converts a double value into a human readable time format
+            </summary>
+            <param name="seconds"></param>
+            <param name="withMs"></param>
+            <returns></returns>
         </member>
         <member name="T:JamSoft.Helpers.Ui.Graphics">
             <summary>
