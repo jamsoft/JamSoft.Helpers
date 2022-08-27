@@ -4,12 +4,12 @@
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Description>A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.</Description>
     <PackageDescription>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</PackageDescription>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization, configuration, hamming, levenshtein, settings</PackageTags>
+    <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization, configuration, hamming, levenshtein, settings, collections</PackageTags>
     <PackageProjectUrl>https://jamsoft.github.io/JamSoft.Helpers/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -27,6 +27,8 @@
     <AssemblyOriginatorKeyFile>JamSoft.Helpers.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageVersion>1.0.2</PackageVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

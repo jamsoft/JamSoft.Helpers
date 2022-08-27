@@ -92,7 +92,18 @@ This will reset all settings to their default values and immediately write them 
 ```
 MySettings.ResetToDefaults(saveToDisk:false);
 ```
-
+# Collections
+## Shuffle Collections
+```csharp
+IEnumerable<int> ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+IEnumerable<int> shuffledInts = ints.Shuffle();
+```
+Or you can provide your own instance of `Random`.
+```csharp
+Random randomiser = new Random();
+IEnumerable<int> ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+IEnumerable<int> shuffledInts = ints.Shuffle(randomiser);
+```
 
 # Environment Variables
 There are a handful of helper methods and classes for access environment variables on various platforms.
