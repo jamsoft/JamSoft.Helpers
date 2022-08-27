@@ -28,7 +28,7 @@
     <PackageVersion>1.0.2</PackageVersion>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
     <FileVersion>1.0.2.0</FileVersion>
-    <PublicSign>true</PublicSign>
+    <PublicSign>false</PublicSign>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
