@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>0.4.2</Version>
+    <Version>1.0.2</Version>
     <Description>A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.</Description>
     <PackageDescription>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</PackageDescription>
     <Copyright>JamSoft Solutions Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization, UI</PackageTags>
+    <PackageTags>strings, percentages, mvvm, observer, patterns, helpers, memento, serialization, configuration, hamming, levenshtein, settings, collections</PackageTags>
     <PackageProjectUrl>https://jamsoft.github.io/JamSoft.Helpers/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,10 +23,12 @@
     <PackageId>JamSoft.Helpers</PackageId>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>JamSoft.Helpers.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>JamSoft.Helpers.Sname.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageVersion>1.0.2</PackageVersion>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <PublicSign>true</PublicSign>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -45,6 +47,10 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="6.0.4" />
   </ItemGroup>
 
 </Project>

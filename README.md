@@ -1,6 +1,8 @@
+<img align="center" height="50" src="img/logo.png">
+
 # JamSoft.Helpers
 
-A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.
+A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library with minimal dependencies.
 
 ![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)
@@ -17,7 +19,7 @@ Install-Package JamSoft.Helpers
 ```
 # xUnit Tests
 
-There is a high level of test coverage as shown in the badge above, however, at the moment the pipeline executes on Linux with limited permissions which means some tests cannot be run in this environment.
+There is a high level of test coverage as shown in the badge above (around 97%), however, at the moment the pipeline executes only on Windows which means some tests cannot be run in this environment.
 The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
 
 The following test classes also show basic example implementations and uses of the provided pattern classes.
@@ -25,6 +27,83 @@ The following test classes also show basic example implementations and uses of t
 - ObserverTests
 - MementoTests
 - MyTestViewModel
+- ATestSettingsClass
+- BTestSettingsClass
+
+# Configuration & Settings
+
+Rather than getting embroiled in the convoluted and sometimes awkward user settings infrastructure provided by .NET (*.settings), sometimes you just want to store some values in a file, yes?
+
+The issues and additional complications around user.config and strong names can sometimes get in the way. Using the `SettingsBase<T>` class can bypass this.
+
+## Set Up
+
+Create a POCO class containing your settings properties, default values and inherit `SettingsBase<T>`, such as:
+
+```
+public sealed class MySettings : SettingsBase<MySettings>
+{
+    public string ASetting { get; set; } = "A Default Value";
+}
+```
+### Loading & Access
+
+Now you can load, save and manage your settings at rumetime like:
+
+```
+string myDefaultSettingsPath = "C:\Some\location\on\disk";
+MySettings.Load(myDefaultSettingsPath);
+```
+
+This call will either load the settings from a file called `mysettings.json`, the name is automatically taken from the type name, or if no file exists, the defaults are loaded.
+
+You can also load and save from a provided file name instead of deriving from the type name, such as:
+
+```
+string myDefaultSettingsPath = "C:\Some\location\on\disk";
+MySettings.Load(myDefaultSettingsPath, "custom-name.json");
+```
+
+You can access the values using the instance:
+
+```
+var theValue = MySettings.Instance.ASetting
+```
+Or
+```
+MySettings.Instance.ASetting = theValue;
+```
+### Saving
+
+Saving the settings is a call to the `Save()` method, like:
+
+```
+MySettings.Save();
+```
+
+This will always save back to the same file the settings were originally loaded from, or if there was no file, the file will be created and the settings saved.
+
+### Reset
+You can easily return back to the defaults by calling the `ResetToDefaults()` method, like:
+```
+MySettings.ResetToDefaults();
+```
+This will reset all settings to their default values and immediately write them to disk. If you do not want to write them to disk, simply pass a `false` to the method.
+```
+MySettings.ResetToDefaults(saveToDisk:false);
+```
+# Collections
+## Shuffle Collections
+```csharp
+IEnumerable<int> ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+IEnumerable<int> shuffledInts = ints.Shuffle();
+```
+Or you can provide your own instance of `Random`.
+```csharp
+Random randomiser = new Random();
+IEnumerable<int> ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+IEnumerable<int> shuffledInts = ints.Shuffle(randomiser);
+```
 
 # Environment Variables
 There are a handful of helper methods and classes for access environment variables on various platforms.
@@ -201,7 +280,7 @@ string pattern = "strinG1";
 
 input.IsExactlySameAs(pattern); // false
 ```
-## Secure Strings Compare
+## Secure Strings Compare (Will be removed in the next release)
 ```csharp
 // #dontdothisinproduction
 var input1 = new SecureString();
@@ -239,14 +318,14 @@ A very bare bones view model with property changed updates
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
     ...
-	public bool IsEditable ...
-	...
+    public bool IsEditable ...
+    ...
     public bool IsBusy ...
     ...
-	protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
-	{
-	    ...
-	}
+    protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
+    {
+        ...
+    }
 }
 ```
 ## Mvvm - SuperObservableCollection<T>
