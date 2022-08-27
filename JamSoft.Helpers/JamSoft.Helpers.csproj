@@ -23,7 +23,6 @@
     <PackageId>JamSoft.Helpers</PackageId>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>JamSoft.Helpers.Sname.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageVersion>1.0.2</PackageVersion>
