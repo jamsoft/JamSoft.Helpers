@@ -122,6 +122,16 @@ int blue = 145;
 
 var c = Graphics.Colors.ToArgb("#FF929191");
 ```
+# Human Readable UI Values
+Converts `integer` and `long` values representing data sizes to human readable form
+```csharp
+int input = 10000000;
+input.ToHumanReadable(); returns "9.54 Mb"
+
+long input = 2000000000000000000;
+input.ToHumanReadable(); returns "1.73 Eb"
+```
+
 # Math Things
 
 ## Even or Odd
