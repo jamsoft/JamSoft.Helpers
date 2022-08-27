@@ -27,4 +27,4 @@ jobs:
       uses: coverallsapp/github-action@v1.1.2
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./**/*.info
+        path-to-lcov: ./JamSoft.Helpers.Tests/TestResults/coverage.net6.0.info
