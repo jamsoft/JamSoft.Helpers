@@ -13,9 +13,14 @@ A collection of general helpers for applications and libraries. The goal is to p
 
 https://jamsoft.github.io/JamSoft.Helpers/
 
-# Install Via Nuget
+# Install
+### Nuget
 ```
 Install-Package JamSoft.Helpers
+```
+### CLI
+```
+dotnet add package JamSoft.Helpers
 ```
 # xUnit Tests
 
@@ -40,7 +45,7 @@ The issues and additional complications around user.config and strong names can 
 
 Create a POCO class containing your settings properties, default values and inherit `SettingsBase<T>`, such as:
 
-```
+```csharp
 public sealed class MySettings : SettingsBase<MySettings>
 {
     public string ASetting { get; set; } = "A Default Value";
@@ -50,7 +55,7 @@ public sealed class MySettings : SettingsBase<MySettings>
 
 Now you can load, save and manage your settings at rumetime like:
 
-```
+```csharp
 string myDefaultSettingsPath = "C:\Some\location\on\disk";
 MySettings.Load(myDefaultSettingsPath);
 ```
@@ -59,25 +64,25 @@ This call will either load the settings from a file called `mysettings.json`, th
 
 You can also load and save from a provided file name instead of deriving from the type name, such as:
 
-```
+```csharp
 string myDefaultSettingsPath = "C:\Some\location\on\disk";
 MySettings.Load(myDefaultSettingsPath, "custom-name.json");
 ```
 
 You can access the values using the instance:
 
-```
-var theValue = MySettings.Instance.ASetting
+```csharp
+var theValue = MySettings.Instance.ASetting;
 ```
 Or
-```
+```csharp
 MySettings.Instance.ASetting = theValue;
 ```
 ### Saving
 
 Saving the settings is a call to the `Save()` method, like:
 
-```
+```csharp
 MySettings.Save();
 ```
 
@@ -85,11 +90,11 @@ This will always save back to the same file the settings were originally loaded 
 
 ### Reset
 You can easily return back to the defaults by calling the `ResetToDefaults()` method, like:
-```
+```csharp
 MySettings.ResetToDefaults();
 ```
 This will reset all settings to their default values and immediately write them to disk. If you do not want to write them to disk, simply pass a `false` to the method.
-```
+```csharp
 MySettings.ResetToDefaults(saveToDisk:false);
 ```
 # Collections
@@ -139,7 +144,7 @@ other than `Process` is passed on a non-Windows platform it will be defaulted to
 
 # RSA Cryptography
 There is a new little class to help digitally sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
-```
+```csharp
 public interface IRsaCryptoFactory
 {
 }
@@ -147,23 +152,23 @@ public interface IRsaCryptoFactory
 container.Register<IRsaCryptoFactory, RsaCryptoFactory>();
 ```
 You can then use this factory to obtain instances of the service.
-```
+```csharp
 var crypto = cryptoFactory.Create();
 ```
 There are many overloads of the create method to control how the service is built and how you want it configued.
 
 You should also wrap each use of this within a using statement such as:
-```
+```csharp
 using(var crypto = cryptoFactory.Create(_privateKey, _publicKey, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1))
 {
    // do your stuff.
 }
 ```
 Once you have created an instance if you do not provide either of the keys, you can obtain the used keys for storage via the two properties, such as:
-```
+```csharp
 var crypto = cryptoFactory.Create();
-var publicKey = sut.PublicKey
-var privateKey = sut.PrivateKey
+var publicKey = sut.PublicKey;
+var privateKey = sut.PrivateKey;
 ```
 # Graphics
 
@@ -202,6 +207,7 @@ int blue = 145;
 var c = Graphics.Colors.ToArgb("#FF929191");
 ```
 # Human Readable UI Values
+### Data Sizes
 Converts `integer` and `long` values representing data sizes to human readable form
 ```csharp
 int input = 10000000;
@@ -209,6 +215,14 @@ input.ToHumanReadable(); returns "9.54 Mb"
 
 long input = 2000000000000000000;
 input.ToHumanReadable(); returns "1.73 Eb"
+```
+### Time
+```csharp
+double input = 3657;
+input.ToTimeDisplayFromSeconds() returns "01:00:57"
+
+double input = 3657.12;
+input.ToTimeDisplayFromSeconds(withMs: true) returns "01:00:57:120"
 ```
 
 # Math Things
