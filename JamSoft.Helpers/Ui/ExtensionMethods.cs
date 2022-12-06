@@ -67,11 +67,11 @@ namespace JamSoft.Helpers.Ui
 		}
 		
 		/// <summary>
-		/// Converts a double value into a human readable time format
+		/// Converts seconds to human readable form
 		/// </summary>
-		/// <param name="seconds"></param>
-		/// <param name="withMs"></param>
-		/// <returns></returns>
+		/// <param name="seconds">the number of seconds to convert</param>
+		/// <param name="withMs">include milliseconds in the output string</param>
+		/// <returns>the time in human readable form xx:xx:xx.xxx</returns>
 		public static string ToTimeDisplayFromSeconds(this double seconds, bool withMs = false)
 		{
 			TimeSpan t = TimeSpan.FromSeconds(seconds);

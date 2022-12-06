@@ -52,43 +52,5 @@ namespace JamSoft.Helpers.Strings
         {
             return string.Compare(theString, input, StringComparison.Ordinal) == 0;
         }
-
-        /// <summary>
-        /// Determines whether secureStringOne is equal to the specified secureStringTwo.
-        /// </summary>
-        /// <param name="secureStringOne">The secureStringOne.</param>
-        /// <param name="secureStringTwo">The secureStringTwo.</param>
-        /// <returns>
-        ///   <c>true</c> if is equal to the specified secureStringTwo; otherwise, <c>false</c>.
-        /// </returns>
-        [Obsolete("Secure string should not be used for new development see: https://github.com/dotnet/platform-compat/blob/master/docs/DE0001.md and https://docs.microsoft.com/en-us/dotnet/api/system.security.securestring?view=net-5.0")]
-        public static bool IsExactlySameAs(this SecureString secureStringOne, SecureString secureStringTwo)
-        {
-            var bstr1 = IntPtr.Zero;
-            var bstr2 = IntPtr.Zero;
-            try
-            {
-                bstr1 = Marshal.SecureStringToBSTR(secureStringOne);
-                bstr2 = Marshal.SecureStringToBSTR(secureStringTwo);
-                int length1 = Marshal.ReadInt32(bstr1, -4);
-                int length2 = Marshal.ReadInt32(bstr2, -4);
-                if (length1 == length2)
-                {
-                    for (int x = 0; x < length1; ++x)
-                    {
-                        byte b1 = Marshal.ReadByte(bstr1, x);
-                        byte b2 = Marshal.ReadByte(bstr2, x);
-                        if (b1 != b2) return false;
-                    }
-                }
-                else return false;
-                return true;
-            }
-            finally
-            {
-                if (bstr2 != IntPtr.Zero) Marshal.ZeroFreeBSTR(bstr2);
-                if (bstr1 != IntPtr.Zero) Marshal.ZeroFreeBSTR(bstr1);
-            }
-        }
     }
 }

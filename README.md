@@ -294,25 +294,6 @@ string pattern = "strinG1";
 
 input.IsExactlySameAs(pattern); // false
 ```
-## Secure Strings Compare (Will be removed in the next release)
-```csharp
-// #dontdothisinproduction
-var input1 = new SecureString();
-foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!".ToCharArray())
-{
-    input1.AppendChar(c);
-}
-
-// #dontdothisinproduction
-var input2 = new SecureString();
-foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!".ToCharArray())
-{
-    input2.AppendChar(c);
-}
-
-input1.IsExactlySameAs(input2); // true
-```
-
 # Serialization
 
 ## XML Encoding Formatting
