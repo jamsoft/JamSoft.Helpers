@@ -934,5 +934,53 @@
             <returns> Colour struct based on the provided hex string</returns>
             <exception cref="T:System.ArgumentException">Thrown when string is invalid length</exception>
         </member>
+        <member name="T:JamSoft.Helpers.Ui.IDirtyMonitoring">
+            <summary>
+            The IDirtyMonitoring
+            </summary>
+        </member>
+        <member name="P:JamSoft.Helpers.Ui.IDirtyMonitoring.IsDirty">
+            <summary>
+            A flag denoting if the object is dirty
+            </summary>
+        </member>
+        <member name="P:JamSoft.Helpers.Ui.IDirtyMonitoring.Hash">
+            <summary>
+            The object hash value
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.IsDirtyMonitoringAttribute">
+            <summary>
+            An attribute to apply to properties in order to monitor them for changes
+            </summary>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.IsDirtyValidator">
+            <summary>
+            A decorator class for dirty monitoring
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.Validate``1(``0,System.Boolean)">
+            <summary>
+            Validates whole instances for dirtiness. If any monitored value has changed IsDirty will be set to True
+            </summary>
+            <param name="obj">The instance to be validated</param>
+            <param name="reset">pass in true to reset validation on the instance</param>
+            <typeparam name="T">The object type</typeparam>
+            <returns>The sample annotated object instance</returns>
+            <remarks>Validate the clean object in order to calculate the clean hash value for the object instance. Subsequent calls will detect if the contents has changes between validations</remarks>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.GetObjectHash``1(``0)">
+            <summary>
+            Gets the object hash from the objects property values.
+            </summary>
+            <returns>An MD5 hash representing the object</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.GetMd5Sum(System.Byte[])">
+            <summary>
+            Gets the MD5 sum from the buffer byte data.
+            </summary>
+            <param name="buffer">The buffer.</param>
+            <returns>a string MD5 value</returns>
+        </member>
     </members>
 </doc>

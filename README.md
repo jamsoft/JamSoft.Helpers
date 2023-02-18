@@ -42,6 +42,7 @@ The following test classes also show basic example implementations and uses of t
 - MyTestViewModel
 - ATestSettingsClass
 - BTestSettingsClass
+- PersonViewModel
 
 # Configuration & Settings
 
@@ -105,6 +106,40 @@ This will reset all settings to their default values and immediately write them 
 ```csharp
 MySettings.ResetToDefaults(saveToDisk:false);
 ```
+# Dirty Object Tracking
+Using the attributes and validators you can track classes with changes, such as view models, in order save new data or update UI state accordingly.
+
+First implement the simple interface on your class, such as:
+```csharp
+public class PersonViewModel : IDirtyMonitoring
+{
+    public string Name { get; set; }
+    [IsDirtyMonitoring]
+    public string DisplayName { get; set; }
+    public bool IsDirty { get; set; }    
+    public string Hash { get; set; }
+}
+```
+In this example only the `DisplayName` property is monitored for changes. After an object has completed being initialised and is in it's "clean" state, validate it.
+```csharp
+IsDirtyValidator.Validate(p);
+```
+Now, at any point in time you can validate it again to detect if the class is dirty.
+```csharp
+p.DisplayName = "Original";
+IsDirtyValidator.Validate(p).IsDirty; // false
+p.DisplayName = "SomedifferentValue";
+IsDirtyValidator.Validate(p).IsDirty; // true
+p.DisplayName = "Original";
+IsDirtyValidator.Validate(p).IsDirty; // false
+```
+In order to restart the whole validation process, simply call the `Validate` method and pass a `true` in the reset parameter.
+```csharp
+IsDirtyValidator.Validate(p, true).IsDirty // false
+```
+
+At the moment this is limited to just informing you that the object is different, not which properties contain new values. This is planned for a future release.
+
 # Collections
 ## Shuffle Collections
 ```csharp
