@@ -3,8 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>1.0.2</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>    
     <Description>A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library.</Description>
     <PackageDescription>A collection of very generalised helpers for applications and libraries. The idea is to provide convienience methods and building blocks. All in a cross-platform .NET Standard 2.0 library.</PackageDescription>
     <Copyright>JamSoft Solutions Ltd</Copyright>
@@ -25,10 +24,15 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <AssemblyOriginatorKeyFile>JamSoft.Helpers.Sname.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <PackageVersion>1.0.2</PackageVersion>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
+    <Version>1.1.0</Version>
+    <PackageVersion>1.1.0</PackageVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <InformationalVersion>1.1.0.0-rel</InformationalVersion>
     <PublicSign>false</PublicSign>
+    <SignAssembly>true</SignAssembly>
+    <LangVersion>10</LangVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,6 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>JamSoft.Helpers.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +52,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

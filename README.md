@@ -15,12 +15,20 @@ https://jamsoft.github.io/JamSoft.Helpers/
 
 # Install
 ### Nuget
-```
-Install-Package JamSoft.Helpers
+```shell
+Install-Package JamSoft.Helpers -Version 1.1.0
 ```
 ### CLI
+```shell
+dotnet add package JamSoft.Helpers --version 1.1.0
 ```
-dotnet add package JamSoft.Helpers
+### Package Reference
+```xml
+<PackageReference Include="JamSoft.Helpers" Version="1.1.0" />
+```
+### Package Reference
+```shell
+paket add JamSoft.Helpers --version 1.1.0
 ```
 # xUnit Tests
 
