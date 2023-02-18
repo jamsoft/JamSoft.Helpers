@@ -7,7 +7,7 @@ stages:
 build:
     stage: build
     script:
-        - "dotnet build JamSoft.Helpers.sln"
+        - "dotnet build JamSoft.Helpers.sln --configuration Debug"
     artifacts:
       paths:
         - bin/
@@ -15,4 +15,4 @@ build:
 test:
     stage: test
     script: 
-        - "dotnet test JamSoft.Helpers.sln"
+        - "dotnet test JamSoft.Helpers.sln --configuration Debug"
