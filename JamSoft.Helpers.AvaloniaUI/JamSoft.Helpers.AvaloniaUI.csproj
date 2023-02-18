@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>10</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Description>A collection of general helpers for AvaloniaUI applications.</Description>
+        <PackageDescription>A collection of general helpers for AvaloniaUI applications.</PackageDescription>
+        <Copyright>JamSoft Solutions Ltd</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>avaloniaui, avalonia, mvvm, patterns, helpers</PackageTags>
+        <PackageProjectUrl>https://jamsoft.github.io/JamSoft.Helpers/</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/jamsoft/JamSoft.Helpers</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryBranch>master</RepositoryBranch>
+        <PackageIcon>JamSoftLogo-Splat513x513.png</PackageIcon>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Company>JamSoft Solutions Ltd</Company>
+        <Authors>JamesGreen</Authors>
+        <Owners>JamesGreen</Owners>
+        <Title>JamSoft AvaloniaUI Helper Library</Title>
+        <PackageId>JamSoft.Helpers.AvaloniaUI</PackageId>
+        <IncludeSymbols>false</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <DelaySign>false</DelaySign>
+        <Version>1.1.0</Version>
+        <PackageVersion>1.1.0</PackageVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <FileVersion>1.1.0.0</FileVersion>
+        <InformationalVersion>1.1.0.0-rel</InformationalVersion>
+        <PublicSign>false</PublicSign>
+        <SignAssembly>false</SignAssembly>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DebugType>none</DebugType>
+      <DocumentationFile>bin\Release\JamSoft.Helpers.AvaloniaUI.xml</DocumentationFile>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+      <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\img\JamSoftLogo-Splat513x513.png">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Avalonia" Version="0.10.18" />
+      <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
+    </ItemGroup>
+
+</Project>
