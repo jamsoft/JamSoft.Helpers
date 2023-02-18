@@ -84,66 +84,6 @@ namespace JamSoft.Helpers.Tests.Strings
         }
 
         [Fact]
-        public void Secure_String_Compare_When_Same_Returns_True()
-        {
-            // #dontdothisinproduction
-            var input1 = new SecureString();
-            foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!#Xzo4nUk0bEOxI1x$!FWrC0Sf71RpN7Y@TSYWA16Q@cxZpOY5RUR!1IhHiBlHM6cW7")
-            {
-                input1.AppendChar(c);
-            }
-
-            // #dontdothisinproduction
-            var input2 = new SecureString();
-            foreach (char c in "QqNK8f#X4t7lZYomTC#c1rFz9^Xl8rAO!#Xzo4nUk0bEOxI1x$!FWrC0Sf71RpN7Y@TSYWA16Q@cxZpOY5RUR!1IhHiBlHM6cW7")
-            {
-                input2.AppendChar(c);
-            }
-
-            Assert.True(input1.IsExactlySameAs(input2));
-        }
-
-        [Fact]
-        public void Secure_String_Compare_When_Different_Returns_False_Same_Length()
-        {
-            // #dontdothisinproduction
-            var input1 = new SecureString();
-            foreach (char c in "QqNK8f#X4t7lZYomTC#".ToCharArray())
-            {
-                input1.AppendChar(c);
-            }
-
-            // #dontdothisinproduction
-            var input2 = new SecureString();
-            foreach (char c in "qqNK8f#X4t7lZYomTC#".ToCharArray())
-            {
-                input2.AppendChar(c);
-            }
-
-            Assert.False(input1.IsExactlySameAs(input2));
-        }
-
-        [Fact]
-        public void Secure_String_Compare_When_Different_Returns_False_Different_Length()
-        {
-            // #dontdothisinproduction
-            var input1 = new SecureString();
-            foreach (char c in "qNK8f#X4t7lZYomT".ToCharArray())
-            {
-                input1.AppendChar(c);
-            }
-
-            // #dontdothisinproduction
-            var input2 = new SecureString();
-            foreach (char c in "qqNK8f#X4t7lZYomT".ToCharArray())
-            {
-                input2.AppendChar(c);
-            }
-
-            Assert.False(input1.IsExactlySameAs(input2));
-        }
-
-        [Fact]
         public void String_Removes_All_MultiSpaces()
         {
             string expected = " QqN#c1rFz9 ^Xl8rAO! #Xzo4nUk0bEOxI1x$ !FWrY@ TSYWA16Q@ cxZpOY5RUR! 1IhHiBlHM6 cW7";

@@ -34,7 +34,7 @@
             Loads the settings file for the class type found at the provided base path. If no file exists, the defaults are loaded
             </summary>
             <param name="basePath">The base settings directory</param>
-            <param name="filename">The settings filename (optional: the type name will be used if this is null, empty or white-space)</param>
+            <param name="filename">The settings filename (including extension) (optional: the type name will be used if this is null, empty or white-space. Creates a file with .json extension)</param>
         </member>
         <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.ResetToDefaults(System.Boolean)">
             <summary>
@@ -851,16 +851,6 @@
             <param name="input"></param>
             <returns><c>true</c> if is equal to the specified input; otherwise, <c>false</c>.</returns>
         </member>
-        <member name="M:JamSoft.Helpers.Strings.Extensions.IsExactlySameAs(System.Security.SecureString,System.Security.SecureString)">
-            <summary>
-            Determines whether secureStringOne is equal to the specified secureStringTwo.
-            </summary>
-            <param name="secureStringOne">The secureStringOne.</param>
-            <param name="secureStringTwo">The secureStringTwo.</param>
-            <returns>
-              <c>true</c> if is equal to the specified secureStringTwo; otherwise, <c>false</c>.
-            </returns>
-        </member>
         <member name="T:JamSoft.Helpers.Ui.ExtensionMethods">
             <summary>
             General UI Extension Methods
@@ -882,11 +872,11 @@
         </member>
         <member name="M:JamSoft.Helpers.Ui.ExtensionMethods.ToTimeDisplayFromSeconds(System.Double,System.Boolean)">
             <summary>
-            Converts a double value into a human readable time format
+            Converts seconds to human readable form
             </summary>
-            <param name="seconds"></param>
-            <param name="withMs"></param>
-            <returns></returns>
+            <param name="seconds">the number of seconds to convert</param>
+            <param name="withMs">include milliseconds in the output string</param>
+            <returns>the time in human readable form xx:xx:xx.xxx</returns>
         </member>
         <member name="T:JamSoft.Helpers.Ui.Graphics">
             <summary>
