@@ -27,7 +27,7 @@ namespace JamSoft.Helpers.Configuration
         /// Loads the settings file for the class type found at the provided base path. If no file exists, the defaults are loaded
         /// </summary>
         /// <param name="basePath">The base settings directory</param>
-        /// <param name="filename">The settings filename (optional: the type name will be used if this is null, empty or white-space)</param>
+        /// <param name="filename">The settings filename (including extension) (optional: the type name will be used if this is null, empty or white-space. Creates a file with .json extension)</param>
         public static void Load(string basePath, string filename = null)
         {
             _basePath = basePath;
