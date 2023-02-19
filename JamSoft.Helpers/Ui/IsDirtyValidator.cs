@@ -19,78 +19,61 @@ public static class IsDirtyValidator
 	/// <summary>
 	/// Validates properties and fields decorated with <see cref="IsDirtyMonitoringAttribute"/> on whole instances for dirtiness. If any monitored value has changed, the IsDirty property will be set to True 
 	/// </summary>
-	/// <param name="obj">The instance to be validated</param>
+	/// <param name="instance">The instance to be validated</param>
 	/// <param name="trackProperties"></param>
 	/// <typeparam name="T">The object type</typeparam>
 	/// <returns>The sample annotated object instance</returns>
 	/// <remarks>Validate the clean object in order to calculate the clean hash value for the object instance. Subsequent calls will detect if the contents has changes between validations</remarks>
-	public static T Validate<T>(T obj, bool trackProperties = false) where T : IDirtyMonitoring, new()
+	public static T Validate<T>(T instance, bool trackProperties = false) where T : IDirtyMonitoring, new()
 	{
-		if (obj != null)
+		if (instance != null)
 		{
 			if (trackProperties)
 			{
-				var objId = obj.GetHashCode();
-				obj.Hash = string.Empty;
-				if (ObjectValueHashStore.ContainsKey(objId))
-				{
-					ObjectValueHashStore.Remove(objId);
-				}
+				StopTrackingObject(instance);
 			}
 		
-			if (string.IsNullOrWhiteSpace(obj.Hash))
+			if (string.IsNullOrWhiteSpace(instance.Hash))
 			{
-				obj.Hash = GetObjectHash(obj, trackProperties);
-				obj.IsDirty = false;
+				instance.Hash = GetObjectHash(instance, trackProperties);
+				instance.IsDirty = false;
 			}
 			else
 			{
-				var newHash = GetObjectHash(obj, trackProperties);
-				obj.IsDirty = !obj.Hash.IsExactlySameAs(newHash);
+				var newHash = GetObjectHash(instance, trackProperties);
+				instance.IsDirty = !instance.Hash.IsExactlySameAs(newHash);
 			}
 		}
 		
-		return obj;
+		return instance;
 	}
 	
 	/// <summary>
 	/// Checks individual values within properties and fields and returns a list of each with changes
 	/// </summary>
 	/// <remarks>For a call to this method to work, the object must have been previously validated with by calling the Validate method with trackProperties set to true</remarks>
-	/// <param name="obj">The object instance to validate</param>
+	/// <param name="instance">The object instance to validate</param>
 	/// <typeparam name="T">The object type</typeparam>
 	/// <returns>Two arrays, one of <see cref="PropertyInfo"/> objects and one of <see cref="FieldInfo"/> objects</returns>
-	public static (PropertyInfo[] properties, FieldInfo[] fields) ValidatePropertiesAndFields<T>(T obj) where T : IDirtyMonitoring, new()
+	public static (PropertyInfo[] properties, FieldInfo[] fields) ValidatePropertiesAndFields<T>(T instance) where T : IDirtyMonitoring, new()
 	{
 		List<PropertyInfo> changedProps = new List<PropertyInfo>();
 		List<FieldInfo> changedFields = new List<FieldInfo>();
 		
-		if (obj != null && !obj.Hash.IsExactlySameAs(GetObjectHash(obj, false)))
+		if (instance != null && !instance.Hash.IsExactlySameAs(GetObjectHash(instance, false)))
 		{
-			var (propertyInfos, fieldInfos) = GetTypeInfo(obj);
-			var objId = obj.GetHashCode();
+			var (propertyInfos, fieldInfos) = GetTypeInfo(instance);
+			var objId = instance.GetHashCode();
 
 			ObjectValueHashStore.TryGetValue(objId, out var objHashes);
 		
 			foreach (var propertyInfo in propertyInfos)
 			{
-				string propValue;
-				object v = propertyInfo.GetValue(obj);
-				if (propertyInfo.PropertyType.IsClass && propertyInfo.PropertyType.Name != "String")
-				{
-					propValue = System.Text.Json.JsonSerializer.Serialize(v);
-				}
-				else
-				{
-					propValue = v?.ToString() ?? string.Empty;
-				}
-				
+				var propValue = GetPropertyValue(instance, propertyInfo);
 				if (objHashes != null)
 				{
 					var newPropHash = GetHash(Encoding.Default.GetBytes(propValue));
-					string oldPropHash;
-				
-					objHashes.TryGetValue(propertyInfo.Name, out oldPropHash);
+					objHashes.TryGetValue(propertyInfo.Name, out var oldPropHash);
 					if (oldPropHash == null || newPropHash.IsExactlySameAs(oldPropHash))
 					{ 
 						continue;
@@ -102,23 +85,11 @@ public static class IsDirtyValidator
 		
 			foreach (var fieldInfo in fieldInfos)
 			{
-				string fieldValue;
-				var v = fieldInfo.GetValue(obj);
-				if (fieldInfo.FieldType.IsClass && fieldInfo.FieldType.Name != "String")
-				{
-					fieldValue = System.Text.Json.JsonSerializer.Serialize(v);
-				}
-				else
-				{
-					fieldValue = v?.ToString() ?? string.Empty;
-				}
-				
+				var fieldValue = GetFieldValue(instance, fieldInfo);
 				if (objHashes != null)
 				{
 					var newFieldHash = GetHash(Encoding.Default.GetBytes(fieldValue));
-					string oldFieldHash;
-				
-					objHashes.TryGetValue(fieldInfo.Name, out oldFieldHash);
+					objHashes.TryGetValue(fieldInfo.Name, out var oldFieldHash);
 					if (oldFieldHash == null || newFieldHash.IsExactlySameAs(oldFieldHash))
 					{ 
 						continue;
@@ -131,51 +102,59 @@ public static class IsDirtyValidator
 
 		return (changedProps.ToArray(), changedFields.ToArray());
 	}
+
+	/// <summary>
+	/// Stops tracking an object by clearing down any stored information and resetting the properties
+	/// </summary>
+	/// <param name="instance">The object to stop tracking</param>
+	/// <typeparam name="T">The object type</typeparam>
+	public static void StopTrackingObject<T>(T instance) where T : IDirtyMonitoring, new()
+	{
+		if (instance == null) return;
+		
+		var objId = instance.GetHashCode();
+		instance.Hash = null;
+		instance.IsDirty = false;
+		if (ObjectValueHashStore.ContainsKey(objId))
+		{
+			ObjectValueHashStore.Remove(objId);
+		}
+	}
 	
 	/// <summary>
 	/// Gets the object hash from the objects property values.
 	/// </summary>
 	/// <returns>An MD5 hash representing the object</returns>
-	private static string GetObjectHash<T>(T obj, bool trackProperties) where T : IDirtyMonitoring
+	private static string GetObjectHash<T>(T instance, bool trackProperties) where T : IDirtyMonitoring
 	{
 		int objId = 0;
 		if (trackProperties)
 		{
-			objId = obj.GetHashCode();
+			objId = instance.GetHashCode();
 			ObjectValueHashStore.Add(objId, null);
 		}
 		
 		string md5;
         try
         {
-            var (propertyInfos, fieldInfos) = GetTypeInfo(obj);
+            var (propertyInfos, fieldInfos) = GetTypeInfo(instance);
             var sb = new StringBuilder();
             
             foreach (var propertyInfo in propertyInfos)
             {
-	            string propValue;
-	            object v = propertyInfo.GetValue(obj);
-	            if (propertyInfo.PropertyType.IsClass && propertyInfo.PropertyType.Name != "String")
-	            {
-		            propValue = System.Text.Json.JsonSerializer.Serialize(v);
-	            }
-	            else
-	            {
-		            propValue = v?.ToString() ?? string.Empty;
-	            }
+	            var propValue = GetPropertyValue(instance, propertyInfo);
 
 	            if (trackProperties)
 	            {
-		            Dictionary<string, string> vals;
-		            if (ObjectValueHashStore.TryGetValue(objId, out vals))
+		            if (ObjectValueHashStore.TryGetValue(objId, out var hashes))
 		            {
-			            if (vals == null)
+			            if (hashes == null)
 			            {
-				            vals = new Dictionary<string, string>();
-				            ObjectValueHashStore[objId] = vals;
+				            hashes = new Dictionary<string, string>();
+				            ObjectValueHashStore[objId] = hashes;
 			            }
 
-			            vals.Add(propertyInfo.Name, GetHash(Encoding.Default.GetBytes(propValue)));
+			            hashes.Add(propertyInfo.Name, GetHash(Encoding.Default.GetBytes(propValue)));
 		            }
 	            }
 	            
@@ -184,29 +163,19 @@ public static class IsDirtyValidator
             
             foreach (var fieldInfo in fieldInfos)
             {
-	            string fieldValue;
-	            object v = fieldInfo.GetValue(obj);
-	            if (fieldInfo.FieldType.IsClass && fieldInfo.FieldType.Name != "String")
-	            {
-		            fieldValue = System.Text.Json.JsonSerializer.Serialize(v);
-	            }
-	            else
-	            {
-		            fieldValue = v?.ToString() ?? string.Empty;
-	            }
+	            var fieldValue = GetFieldValue(instance, fieldInfo);
 	            
 	            if (trackProperties)
 	            {
-		            Dictionary<string, string> vals;
-		            if (ObjectValueHashStore.TryGetValue(objId, out vals))
+		            if (ObjectValueHashStore.TryGetValue(objId, out var hashes))
 		            {
-			            if (vals == null)
+			            if (hashes == null)
 			            {
-				            vals = new Dictionary<string, string>();
-				            ObjectValueHashStore[objId] = vals;
+				            hashes = new Dictionary<string, string>();
+				            ObjectValueHashStore[objId] = hashes;
 			            }
 			            
-			            vals.Add(fieldInfo.Name, GetHash(Encoding.Default.GetBytes(fieldValue)));
+			            hashes.Add(fieldInfo.Name, GetHash(Encoding.Default.GetBytes(fieldValue)));
 		            }
 	            }
 	            
@@ -223,6 +192,38 @@ public static class IsDirtyValidator
 		return md5;
 	}
 
+	private static string GetPropertyValue<T>(T instance, PropertyInfo propertyInfo) where T : IDirtyMonitoring
+	{
+		string propValue;
+		object v = propertyInfo.GetValue(instance);
+		if (propertyInfo.PropertyType.IsClass && propertyInfo.PropertyType.Name != "String")
+		{
+			propValue = System.Text.Json.JsonSerializer.Serialize(v);
+		}
+		else
+		{
+			propValue = v?.ToString() ?? string.Empty;
+		}
+
+		return propValue;
+	}
+	
+	private static string GetFieldValue<T>(T instance, FieldInfo fieldInfo) where T : IDirtyMonitoring
+	{
+		string fieldValue;
+		var v = fieldInfo.GetValue(instance);
+		if (fieldInfo.FieldType.IsClass && fieldInfo.FieldType.Name != "String")
+		{
+			fieldValue = System.Text.Json.JsonSerializer.Serialize(v);
+		}
+		else
+		{
+			fieldValue = v?.ToString() ?? string.Empty;
+		}
+
+		return fieldValue;
+	}
+
 	/// <summary>
 	/// Gets the MD5 sum from the buffer byte data.
 	/// </summary>
@@ -234,9 +235,9 @@ public static class IsDirtyValidator
 		return BitConverter.ToString(hasher.ComputeHash(buffer));
 	}
 
-	private static (IEnumerable<PropertyInfo> propInfos, IEnumerable<FieldInfo> fieldInfos) GetTypeInfo<T>(T obj)
+	private static (IEnumerable<PropertyInfo> propInfos, IEnumerable<FieldInfo> fieldInfos) GetTypeInfo<T>(T instance)
 	{
-		Type t = obj.GetType();
+		Type t = instance.GetType();
 		TypeInfoCache.TryGetValue(t, out Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>> typeInfo);
 		if (typeInfo != null)
 			return (typeInfo.Item1, typeInfo.Item2);
