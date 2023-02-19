@@ -16,19 +16,19 @@ https://jamsoft.github.io/JamSoft.Helpers/
 # Install
 ### Nuget
 ```shell
-Install-Package JamSoft.Helpers -Version 1.1.0
+Install-Package JamSoft.Helpers -Version 1.2.0
 ```
 ### CLI
 ```shell
-dotnet add package JamSoft.Helpers --version 1.1.0
+dotnet add package JamSoft.Helpers --version 1.2.0
 ```
 ### Package Reference
 ```xml
-<PackageReference Include="JamSoft.Helpers" Version="1.1.0" />
+<PackageReference Include="JamSoft.Helpers" Version="1.2.0" />
 ```
 ### Package Reference
 ```shell
-paket add JamSoft.Helpers --version 1.1.0
+paket add JamSoft.Helpers --version 1.2.0
 ```
 # xUnit Tests
 
@@ -133,13 +133,51 @@ IsDirtyValidator.Validate(p).IsDirty; // true
 p.DisplayName = "Original";
 IsDirtyValidator.Validate(p).IsDirty; // false
 ```
-In order to restart the whole validation process, simply call the `Validate` method and pass a `true` in the reset parameter.
+## Property & Field Tracking
+
+As of v1.2.0 it is also possible to track which properties in a given object instance have changed. In order to track properties, call the `Validate` method and pass `True` as the `trackProperties` parameter.
 ```csharp
-IsDirtyValidator.Validate(p, true).IsDirty // false
+IsDirtyValidator.Validate(p, trackProperties:true);
 ```
+Now that the object, its properties and fields have been validated changes can be reported in more detail. Calls to the `ValidatePropertiesAndFields()` method will return collections of `PropertyInfo` and `FieldInfo` objects, such as:
+```csharp
+var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+```
+In the example above the `props` and `fields` collections contain details of the properties and fields that have changed since the previous validation process.
 
-At the moment this is limited to just informing you that the object is different, not which properties contain new values. This is planned for a future release.
+In order to restart the whole validation process, simply call the `Validate` method and pass a `true` in the reset parameter.
 
+To restart this validation process on the same instance, simply re-validate it and pass `True` again. 
+```csharp
+IsDirtyValidator.Validate(p, true);
+```
+## Dirty Monitoring Example Usage
+
+```csharp
+public void LoadPeopleFromDataSource()
+{
+    var vms = Mapper.Map(_dataService.GetPeople());
+    foreach(var vm in vms)
+    {
+        IsDirtyValidator.Validate(p, trackProperties:true);
+        ...
+    }
+}
+
+public void SaveUiState()
+{
+    foreach(var vm in _people)
+    {
+        if(IsDirtyValidator.Validate(vm).IsDirty)
+        {
+            // save logic
+            
+            var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(vm);
+            // more granular save logic
+        }
+    }
+}
+```
 # Collections
 ## Shuffle Collections
 ```csharp

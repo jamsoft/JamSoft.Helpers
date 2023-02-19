@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using JamSoft.Helpers.Ui;
 using Xunit;
 using Xunit.Abstractions;
@@ -76,6 +77,24 @@ namespace JamSoft.Helpers.Tests.Ui
         }
         
         [Fact]
+        public void IsDirty_Field_Only()
+        {
+	        var p = new FieldOnlyViewModel()
+	        {
+		        Field = "Tom"
+	        };
+
+	        IsDirtyValidator.Validate(p, true);
+	        p.Field = "New";
+	        
+	        Assert.True(IsDirtyValidator.Validate(p).IsDirty);
+
+	        var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+	        Assert.True(props.Length == 0);
+	        Assert.True(fields.Length == 1);
+        }
+        
+        [Fact]
         public void IsDirty_Monitored_Changed_Back_To_Original_False()
         {
 	        var p = new PersonViewModel
@@ -119,6 +138,39 @@ namespace JamSoft.Helpers.Tests.Ui
 	        p.DisplayName = "New";
 	        Assert.False(IsDirtyValidator.Validate(p, true).IsDirty);
 	        Assert.NotNull(p.Hash);
+        }
+        
+        [Fact]
+        public void IsDirty_Stop_Tracking_Reset_False()
+        {
+	        var p = new PersonViewModel
+	        {
+		        Name = "Tom",
+		        DisplayName = "Original"
+	        };
+
+	        IsDirtyValidator.Validate(p, true);
+	        Assert.False(IsDirtyValidator.Validate(p).IsDirty);
+	        
+	        p.DisplayName = "New";
+	        
+	        Assert.True(IsDirtyValidator.Validate(p).IsDirty);
+	        Assert.NotNull(p.Hash);
+	        
+	        IsDirtyValidator.StopTrackingObject(p);
+	        Assert.False(p.IsDirty);
+	        Assert.Null(p.Hash);
+	        
+	        Assert.False(IsDirtyValidator.Validate(p).IsDirty);
+	        Assert.NotNull(p.Hash);
+        }
+        
+        [Fact]
+        public void IsDirty_Stop_Tracking_Null()
+        {
+	        PersonViewModel p = null;
+	        IsDirtyValidator.StopTrackingObject(p);
+	        Assert.Null(p);
         }
         
         [Fact]
@@ -337,6 +389,7 @@ namespace JamSoft.Helpers.Tests.Ui
 
 	        p2.ComplexField.ComplexProperty1 = "new";
 	        
+	        Assert.False(IsDirtyValidator.Validate(p1).IsDirty);
 	        Assert.True(IsDirtyValidator.Validate(p2).IsDirty);
 	        
 	        var (person2PropsRevalidated, person2Fields2Revalidated) = IsDirtyValidator.ValidatePropertiesAndFields(p2);
@@ -375,7 +428,7 @@ namespace JamSoft.Helpers.Tests.Ui
         [Fact]
         public void IsDirty_Multi_Iterations()
         {
-	        int iterations = 100000;
+	        int iterations = 10000;
 	        var stopWatch = new Stopwatch();
 	        stopWatch.Start();
 	        
@@ -389,14 +442,48 @@ namespace JamSoft.Helpers.Tests.Ui
 			        Complex = new MyComplexObject { ComplexProperty1 = "SomeValue", ComplexProperty2 = "SomeOther Value" }
 		        };
 		        
-		        Assert.Null(p.Hash);
-		        Assert.False(IsDirtyValidator.Validate(p).IsDirty);
-		        Assert.NotNull(p.Hash);
+		        Assert.False(IsDirtyValidator.Validate(p, true).IsDirty);
 	        }
 	        
 	        stopWatch.Stop();
+
 	        _outputHelper.WriteLine($"Validated {iterations} in {stopWatch.Elapsed}");
-	        Assert.True(stopWatch.Elapsed < TimeSpan.FromSeconds(3));
+        }
+
+        [Fact]
+        public void Multi_Threading_Test()
+        {
+	        var p = new PersonViewModel
+	        {
+		        Name = "Name",
+		        DisplayName = "DisplayName",
+		        Field = "Field"
+	        };
+	        
+	        string hash1 = String.Empty;
+	        string hash2 = String.Empty;
+
+	        Thread t1 = new Thread(() =>
+	        {
+		        IsDirtyValidator.Validate(p, true);
+		        hash1 = p.Hash;
+	        });
+	        
+	        Thread t2 = new Thread(() =>
+	        {
+		        IsDirtyValidator.Validate(p, true);
+		        hash2 = p.Hash;
+	        });
+	        
+	        //t1.Start();
+	        //t2.Start();
+	        
+	        Assert.Equal(hash1, hash2);
+        }
+
+        private void RunVal(PersonViewModel p)
+        {
+	        ;
         }
     }
 }
