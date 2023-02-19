@@ -9,11 +9,29 @@ A collection of general helpers for applications and libraries. The goal is to p
 ![Nuget](https://img.shields.io/nuget/v/JamSoft.Helpers)
 ![GitHub](https://img.shields.io/github/license/jamsoft/JamSoft.Helpers)
 
+## Table of Contents
+* [GitHub Pages Site](#GitHub Pages Site)
+* [Installation](#Installation)
+* [Tests](#Tests)
+* [Configuration](#Configuration)
+* [Dirty Object Tracking](#Dirty Object Tracking)
+* [Collections](#Collections)
+* [Environment Variables](#Environment Variables)
+* [Cryptography](#Cryptography)
+* [Graphics](#Graphics)
+* [Human Readable UI Values](#Human Readable UI Values)
+* [Math Things](#Math Things)
+* [Strings](#Strings)
+* [Serialization](#Serialization)
+* [Mvvm Pattern](#Mvvm)
+* [Observer Pattern](Observer)
+* [Memento Pattern](#Memento)
+
 # GitHub Pages Site
 
 https://jamsoft.github.io/JamSoft.Helpers/
 
-# Install
+# Installation
 ### Nuget
 ```shell
 Install-Package JamSoft.Helpers -Version 1.2.0
@@ -30,7 +48,7 @@ dotnet add package JamSoft.Helpers --version 1.2.0
 ```shell
 paket add JamSoft.Helpers --version 1.2.0
 ```
-# xUnit Tests
+# Tests
 
 There is a high level of test coverage as shown in the badge above (around 97%), however, at the moment the pipeline executes only on Windows which means some tests cannot be run in this environment.
 The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
@@ -44,7 +62,7 @@ The following test classes also show basic example implementations and uses of t
 - BTestSettingsClass
 - PersonViewModel
 
-# Configuration & Settings
+# Configuration
 
 Rather than getting embroiled in the convoluted and sometimes awkward user settings infrastructure provided by .NET (*.settings), sometimes you just want to store some values in a file, yes?
 
@@ -239,7 +257,7 @@ var envValue = EnvEx.GetVariable("MYVARIABLENAME");
 On Window you can also pass a target parameter of type `EnvironmentVariableTarget`. The default for this is `Process` as Linux and OSX do not support this parameter. If anything
 other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
 
-# RSA Cryptography
+# Cryptography
 There is a new little class to help digitally sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
 ```csharp
 public interface IRsaCryptoFactory
@@ -268,7 +286,6 @@ var publicKey = sut.PublicKey;
 var privateKey = sut.PrivateKey;
 ```
 # Graphics
-
 ## Convert to HEX
 ```csharp
 int red = 121;
@@ -338,7 +355,7 @@ int total = 2000;
 
 var percent = value.IsWhatPercentageOf(total) // 25
 ```
-# String Distances
+# Strings
 
 ## Hamming Distance
 Calculates the number of edits required to go from one string to another must be equal lengths to start
@@ -404,7 +421,7 @@ using (var sw = new UppercaseUtf8StringWriter())
 ```
 # Patterns
 
-## Mvvm - ViewModelBase
+## Mvvm
 A very bare bones view model with property changed updates
 ```csharp
 public abstract class ViewModelBase : INotifyPropertyChanged
