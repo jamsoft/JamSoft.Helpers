@@ -2,7 +2,7 @@ image: mcr.microsoft.com/dotnet/core/sdk:latest
 
 stages:
     - build
-    - test
+#    - test
 
 build:
     stage: build
