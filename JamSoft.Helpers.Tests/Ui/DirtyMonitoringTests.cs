@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using JamSoft.Helpers.Ui;
+﻿using JamSoft.Helpers.Ui;
 using Xunit;
 
 namespace JamSoft.Helpers.Tests.Ui

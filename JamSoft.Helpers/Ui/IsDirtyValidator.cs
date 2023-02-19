@@ -9,7 +9,7 @@ using JamSoft.Helpers.Strings;
 namespace JamSoft.Helpers.Ui;
 
 /// <summary>
-/// A utility class for dirty monitoring
+/// A utility class for monitoring objects for changes
 /// </summary>
 public static class IsDirtyValidator
 {
