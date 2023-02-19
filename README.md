@@ -10,24 +10,24 @@ A collection of general helpers for applications and libraries. The goal is to p
 ![GitHub](https://img.shields.io/github/license/jamsoft/JamSoft.Helpers)
 
 ## Table of Contents
-* [GitHub Pages Site](#GitHub Pages Site)
-* [Installation](#Installation)
-* [Tests](#Tests)
-* [Configuration](#Configuration)
-* [Dirty Object Tracking](#Dirty Object Tracking)
-* [Collections](#Collections)
-* [Environment Variables](#Environment Variables)
-* [Cryptography](#Cryptography)
-* [Graphics](#Graphics)
-* [Human Readable UI Values](#Human Readable UI Values)
-* [Math Things](#Math Things)
-* [Strings](#Strings)
-* [Serialization](#Serialization)
-* [Mvvm Pattern](#Mvvm)
-* [Observer Pattern](Observer)
-* [Memento Pattern](#Memento)
+- [Docs](#Docs)
+- [Installation](#Installation)
+- [Tests](#Tests)
+- [Configuration](#Configuration)
+- [Dirty Object Tracking](#Dirty-Object-Tracking)
+- [Collections](#Collections)
+- [Environment Variables](#Environment)
+- [Cryptography](#Cryptography)
+- [Graphics](#Graphics)
+- [Human Readable UI Values](#UI-Values)
+- [Math](#Math)
+- [Strings](#Strings)
+- [Serialization](#Serialization)
+- [Mvvm Pattern](#Mvvm)
+- [Observer Pattern](#Observer)
+- [Memento Pattern](#Memento)
 
-# GitHub Pages Site
+# Docs
 
 https://jamsoft.github.io/JamSoft.Helpers/
 
@@ -225,7 +225,7 @@ IEnumerable<int> ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 IEnumerable<int> shuffledInts = ints.Shuffle(randomiser);
 ```
 
-# Environment Variables
+# Environment
 There are a handful of helper methods and classes for access environment variables on various platforms.
 ## Common Variables
 ```csharp
@@ -320,7 +320,7 @@ int blue = 145;
 
 var c = Graphics.Colors.ToArgb("#FF929191");
 ```
-# Human Readable UI Values
+# UI Values
 ### Data Sizes
 Converts `integer` and `long` values representing data sizes to human readable form
 ```csharp
@@ -339,7 +339,7 @@ double input = 3657.12;
 input.ToTimeDisplayFromSeconds(withMs: true) returns "01:00:57:120"
 ```
 
-# Math Things
+# Math
 
 ## Even or Odd
 Even number detection
