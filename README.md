@@ -109,7 +109,25 @@ MySettings.ResetToDefaults(saveToDisk:false);
 # Dirty Object Tracking
 Using the attributes and validators you can track classes with changes, such as view models, in order save new data or update UI state accordingly.
 
-First implement the simple interface on your class, such as:
+## The Interface
+There are a number of ways of implementing something like such as decorators and so forth, but to keep this as pluggable as possible this feature makes use of an interface to implement on your validatable classes.
+
+```csharp
+public interface IDirtyMonitoring
+{
+    /// <summary>
+    /// A flag denoting if the object is dirty
+    /// </summary>
+    bool IsDirty { get; set; }
+    
+    /// <summary>
+    /// The object hash value
+    /// </summary>
+    string Hash { get; set; }
+}
+```
+
+First implement the interface on your own classes, such as:
 ```csharp
 public class PersonViewModel : IDirtyMonitoring
 {
