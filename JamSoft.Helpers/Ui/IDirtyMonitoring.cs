@@ -1,7 +1,7 @@
 namespace JamSoft.Helpers.Ui;
 
 /// <summary>
-/// The IDirtyMonitoring
+/// The IDirtyMonitoring interface. Implement this on objects you wish to validate.
 /// </summary>
 public interface IDirtyMonitoring
 {

@@ -2,35 +2,53 @@
 
 # JamSoft.Helpers
 
-A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a cross-platform .NET Standard 2.0 library with minimal dependencies.
+A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a unit tested, cross-platform .NET Standard 2.0 library with minimal dependencies.
 
 ![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)
 ![Nuget](https://img.shields.io/nuget/v/JamSoft.Helpers)
 ![GitHub](https://img.shields.io/github/license/jamsoft/JamSoft.Helpers)
 
-# GitHub Pages Site
+## Table of Contents
+- [Docs](#Docs)
+- [Installation](#Installation)
+- [Tests](#Tests)
+- [Configuration](#Configuration)
+- [Dirty Object Tracking](#Dirty-Object-Tracking)
+- [Collections](#Collections)
+- [Environment Variables](#Environment)
+- [Cryptography](#Cryptography)
+- [Graphics](#Graphics)
+- [Human Readable UI Values](#UI-Values)
+- [Math](#Math)
+- [Strings](#Strings)
+- [Serialization](#Serialization)
+- [Mvvm Pattern](#Mvvm)
+- [Observer Pattern](#Observer)
+- [Memento Pattern](#Memento)
+
+# Docs
 
 https://jamsoft.github.io/JamSoft.Helpers/
 
-# Install
+# Installation
 ### Nuget
 ```shell
-Install-Package JamSoft.Helpers -Version 1.1.0
+Install-Package JamSoft.Helpers -Version 1.2.0
 ```
 ### CLI
 ```shell
-dotnet add package JamSoft.Helpers --version 1.1.0
+dotnet add package JamSoft.Helpers --version 1.2.0
 ```
 ### Package Reference
 ```xml
-<PackageReference Include="JamSoft.Helpers" Version="1.1.0" />
+<PackageReference Include="JamSoft.Helpers" Version="1.2.0" />
 ```
 ### Package Reference
 ```shell
-paket add JamSoft.Helpers --version 1.1.0
+paket add JamSoft.Helpers --version 1.2.0
 ```
-# xUnit Tests
+# Tests
 
 There is a high level of test coverage as shown in the badge above (around 97%), however, at the moment the pipeline executes only on Windows which means some tests cannot be run in this environment.
 The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
@@ -44,7 +62,7 @@ The following test classes also show basic example implementations and uses of t
 - BTestSettingsClass
 - PersonViewModel
 
-# Configuration & Settings
+# Configuration
 
 Rather than getting embroiled in the convoluted and sometimes awkward user settings infrastructure provided by .NET (*.settings), sometimes you just want to store some values in a file, yes?
 
@@ -109,7 +127,25 @@ MySettings.ResetToDefaults(saveToDisk:false);
 # Dirty Object Tracking
 Using the attributes and validators you can track classes with changes, such as view models, in order save new data or update UI state accordingly.
 
-First implement the simple interface on your class, such as:
+## The Interface
+There are a number of ways of implementing something like such as decorators and so forth, but to keep this as pluggable as possible this feature makes use of an interface to implement on your validatable classes.
+
+```csharp
+public interface IDirtyMonitoring
+{
+    /// <summary>
+    /// A flag denoting if the object is dirty
+    /// </summary>
+    bool IsDirty { get; set; }
+    
+    /// <summary>
+    /// The object hash value
+    /// </summary>
+    string Hash { get; set; }
+}
+```
+
+First implement the interface on your own classes, such as:
 ```csharp
 public class PersonViewModel : IDirtyMonitoring
 {
@@ -133,13 +169,49 @@ IsDirtyValidator.Validate(p).IsDirty; // true
 p.DisplayName = "Original";
 IsDirtyValidator.Validate(p).IsDirty; // false
 ```
-In order to restart the whole validation process, simply call the `Validate` method and pass a `true` in the reset parameter.
+## Property & Field Tracking
+
+As of v1.2.0 it is also possible to track which properties in a given object instance have changed. In order to track properties, call the `Validate` method and pass `True` as the `trackProperties` parameter.
 ```csharp
-IsDirtyValidator.Validate(p, true).IsDirty // false
+IsDirtyValidator.Validate(p, trackProperties:true);
 ```
+Now that the object, its properties and fields have been validated changes can be reported in more detail. Calls to the `ValidatePropertiesAndFields()` method will return collections of `PropertyInfo` and `FieldInfo` objects, such as:
+```csharp
+var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+```
+In the example above the `props` and `fields` collections contain details of the properties and fields that have changed since the previous validation process.
 
-At the moment this is limited to just informing you that the object is different, not which properties contain new values. This is planned for a future release.
+To restart this validation process on the same instance, simply re-validate it and pass `True` again. 
+```csharp
+IsDirtyValidator.Validate(p, true);
+```
+## Dirty Monitoring Example Usage
 
+```csharp
+public void LoadPeopleFromDataSource()
+{
+    var vms = Mapper.Map(_dataService.GetPeople());
+    foreach(var vm in vms)
+    {
+        IsDirtyValidator.Validate(p, trackProperties:true);
+        ...
+    }
+}
+
+public void SaveUiState()
+{
+    foreach(var vm in _people)
+    {
+        if(IsDirtyValidator.Validate(vm).IsDirty)
+        {
+            // save logic
+            
+            var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(vm);
+            // more granular save logic
+        }
+    }
+}
+```
 # Collections
 ## Shuffle Collections
 ```csharp
@@ -153,7 +225,7 @@ IEnumerable<int> ints = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 IEnumerable<int> shuffledInts = ints.Shuffle(randomiser);
 ```
 
-# Environment Variables
+# Environment
 There are a handful of helper methods and classes for access environment variables on various platforms.
 ## Common Variables
 ```csharp
@@ -185,7 +257,7 @@ var envValue = EnvEx.GetVariable("MYVARIABLENAME");
 On Window you can also pass a target parameter of type `EnvironmentVariableTarget`. The default for this is `Process` as Linux and OSX do not support this parameter. If anything
 other than `Process` is passed on a non-Windows platform it will be defaulted to `Process` to prevent exceptions being raised.
 
-# RSA Cryptography
+# Cryptography
 There is a new little class to help digitally sign data with RSA Cryptography. The main class is created via a factory which can be registered in your DI container of choice.
 ```csharp
 public interface IRsaCryptoFactory
@@ -214,7 +286,6 @@ var publicKey = sut.PublicKey;
 var privateKey = sut.PrivateKey;
 ```
 # Graphics
-
 ## Convert to HEX
 ```csharp
 int red = 121;
@@ -249,7 +320,7 @@ int blue = 145;
 
 var c = Graphics.Colors.ToArgb("#FF929191");
 ```
-# Human Readable UI Values
+# UI Values
 ### Data Sizes
 Converts `integer` and `long` values representing data sizes to human readable form
 ```csharp
@@ -268,7 +339,7 @@ double input = 3657.12;
 input.ToTimeDisplayFromSeconds(withMs: true) returns "01:00:57:120"
 ```
 
-# Math Things
+# Math
 
 ## Even or Odd
 Even number detection
@@ -284,7 +355,7 @@ int total = 2000;
 
 var percent = value.IsWhatPercentageOf(total) // 25
 ```
-# String Distances
+# Strings
 
 ## Hamming Distance
 Calculates the number of edits required to go from one string to another must be equal lengths to start
@@ -350,7 +421,7 @@ using (var sw = new UppercaseUtf8StringWriter())
 ```
 # Patterns
 
-## Mvvm - ViewModelBase
+## Mvvm
 A very bare bones view model with property changed updates
 ```csharp
 public abstract class ViewModelBase : INotifyPropertyChanged
