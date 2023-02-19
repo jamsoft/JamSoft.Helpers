@@ -1,10 +1,39 @@
-﻿using JamSoft.Helpers.Ui;
+﻿using System;
+using System.Diagnostics;
+using JamSoft.Helpers.Ui;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace JamSoft.Helpers.Tests.Ui
 {
     public class DirtyMonitoringTests
     {
+	    private readonly ITestOutputHelper _outputHelper;
+
+	    public DirtyMonitoringTests(ITestOutputHelper outputHelper)
+	    {
+		    _outputHelper = outputHelper;
+	    }
+	    
+	    [Fact]
+	    public void Validate_Null_Object()
+	    {
+		    PersonViewModel p = null;
+		    // ReSharper disable once ExpressionIsAlwaysNull
+		    var obj = IsDirtyValidator.Validate(p);
+		    Assert.Null(obj);
+	    }
+	    
+	    [Fact]
+	    public void Validate_Null_Object_Properties()
+	    {
+		    PersonViewModel p = null;
+		    // ReSharper disable once ExpressionIsAlwaysNull
+		    var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+		    Assert.Empty(props);
+		    Assert.Empty(fields);
+	    }
+	    
         [Fact]
         public void IsDirty_Initial_False()
         {
@@ -127,7 +156,7 @@ namespace JamSoft.Helpers.Tests.Ui
 	        IsDirtyValidator.Validate(p, true);
 	        
 	        p.DisplayName = "New";
-	        p.Address = "Somenew value";
+	        p.Address = "Some New value";
 	        
 	        Assert.True(IsDirtyValidator.Validate(p).IsDirty);
 
@@ -341,6 +370,33 @@ namespace JamSoft.Helpers.Tests.Ui
 	        Assert.Equal("DisplayName", props[0].Name);
 	        
 	        Assert.False(IsDirtyValidator.Validate(p, true).IsDirty);
+        }
+        
+        [Fact]
+        public void IsDirty_Multi_Iterations()
+        {
+	        int iterations = 100000;
+	        var stopWatch = new Stopwatch();
+	        stopWatch.Start();
+	        
+	        for (int i = 0; i < iterations; i++)
+	        {
+		        var p = new PersonViewModel
+		        {
+			        Name = "Tom",
+			        DisplayName = "DisplayName",
+			        Field = "Field",
+			        Complex = new MyComplexObject { ComplexProperty1 = "SomeValue", ComplexProperty2 = "SomeOther Value" }
+		        };
+		        
+		        Assert.Null(p.Hash);
+		        Assert.False(IsDirtyValidator.Validate(p).IsDirty);
+		        Assert.NotNull(p.Hash);
+	        }
+	        
+	        stopWatch.Stop();
+	        _outputHelper.WriteLine($"Validated {iterations} in {stopWatch.Elapsed}");
+	        Assert.True(stopWatch.Elapsed < TimeSpan.FromSeconds(3));
         }
     }
 }

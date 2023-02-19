@@ -956,7 +956,7 @@
         </member>
         <member name="T:JamSoft.Helpers.Ui.IsDirtyValidator">
             <summary>
-            A utility class for dirty monitoring
+            A utility class for monitoring objects for changes
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.Validate``1(``0,System.Boolean)">

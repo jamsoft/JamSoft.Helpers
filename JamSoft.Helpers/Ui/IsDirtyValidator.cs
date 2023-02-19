@@ -14,7 +14,8 @@ namespace JamSoft.Helpers.Ui;
 public static class IsDirtyValidator
 {
 	private static readonly Dictionary<int, Dictionary<string, string>> ObjectValueHashStore = new();
-
+	private static readonly Dictionary<Type, Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>> TypeInfoCache = new();
+	
 	/// <summary>
 	/// Validates properties and fields decorated with <see cref="IsDirtyMonitoringAttribute"/> on whole instances for dirtiness. If any monitored value has changed, the IsDirty property will be set to True 
 	/// </summary>
@@ -66,8 +67,7 @@ public static class IsDirtyValidator
 		
 		if (obj != null && !obj.Hash.IsExactlySameAs(GetObjectHash(obj, false)))
 		{
-			var propertyInfos = obj.GetType().GetProperties().Where(p => p.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null).ToList();
-			var fieldInfos = obj.GetType().GetFields().Where(f => f.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null).ToList();
+			var (propertyInfos, fieldInfos) = GetTypeInfo(obj);
 			var objId = obj.GetHashCode();
 
 			ObjectValueHashStore.TryGetValue(objId, out var objHashes);
@@ -148,8 +148,7 @@ public static class IsDirtyValidator
 		string md5;
         try
         {
-            var propertyInfos = obj.GetType().GetProperties().Where(p => p.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null).ToList();
-            var fieldInfos = obj.GetType().GetFields().Where(f => f.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null).ToList();
+            var (propertyInfos, fieldInfos) = GetTypeInfo(obj);
             var sb = new StringBuilder();
             
             foreach (var propertyInfo in propertyInfos)
@@ -231,15 +230,21 @@ public static class IsDirtyValidator
 	/// <returns>a string MD5 value</returns>
 	private static string GetHash(byte[] buffer)
 	{
-		var md5 = MD5.Create();
-		var hash = md5.ComputeHash(buffer);
-		var sb = new StringBuilder();
+		using var hasher = MD5.Create();
+		return BitConverter.ToString(hasher.ComputeHash(buffer));
+	}
 
-		foreach (byte b in hash)
-		{
-			sb.Append(b.ToString("X2"));
-		}
-
-		return sb.ToString();
+	private static (IEnumerable<PropertyInfo> propInfos, IEnumerable<FieldInfo> fieldInfos) GetTypeInfo<T>(T obj)
+	{
+		Type t = obj.GetType();
+		TypeInfoCache.TryGetValue(t, out Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>> typeInfo);
+		if (typeInfo != null)
+			return (typeInfo.Item1, typeInfo.Item2);
+		
+		var propertyInfos = t.GetProperties().Where(p => p.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null);
+		var fieldInfos = t.GetFields().Where(f => f.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null);
+		var tuple = new Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>(propertyInfos, fieldInfos);
+		TypeInfoCache.Add(t, tuple);
+		return (tuple.Item1, tuple.Item2);
 	}
 }
