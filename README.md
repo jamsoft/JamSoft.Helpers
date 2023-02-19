@@ -145,8 +145,6 @@ var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
 ```
 In the example above the `props` and `fields` collections contain details of the properties and fields that have changed since the previous validation process.
 
-In order to restart the whole validation process, simply call the `Validate` method and pass a `true` in the reset parameter.
-
 To restart this validation process on the same instance, simply re-validate it and pass `True` again. 
 ```csharp
 IsDirtyValidator.Validate(p, true);
