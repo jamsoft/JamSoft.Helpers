@@ -936,7 +936,7 @@
         </member>
         <member name="T:JamSoft.Helpers.Ui.IDirtyMonitoring">
             <summary>
-            The IDirtyMonitoring
+            The IDirtyMonitoring interface. Implement this on objects you wish to validate.
             </summary>
         </member>
         <member name="P:JamSoft.Helpers.Ui.IDirtyMonitoring.IsDirty">

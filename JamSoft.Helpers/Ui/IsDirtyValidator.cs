@@ -13,6 +13,7 @@ namespace JamSoft.Helpers.Ui;
 /// </summary>
 public static class IsDirtyValidator
 {
+	private static readonly List<string> _propertyNameFilterList = new() { "Hash", "IsDirty" };
 	private static readonly Dictionary<int, Dictionary<string, string>> ObjectValueHashStore = new();
 	private static readonly Dictionary<Type, Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>> TypeInfoCache = new();
 	
@@ -241,8 +242,11 @@ public static class IsDirtyValidator
 		TypeInfoCache.TryGetValue(t, out Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>> typeInfo);
 		if (typeInfo != null)
 			return (typeInfo.Item1, typeInfo.Item2);
+
+		var propertyInfos = t.GetProperties().Where(p =>
+			p.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null &&
+			!_propertyNameFilterList.Any(f => p.Name.Equals(f)));
 		
-		var propertyInfos = t.GetProperties().Where(p => p.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null);
 		var fieldInfos = t.GetFields().Where(f => f.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null);
 		var tuple = new Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>(propertyInfos, fieldInfos);
 		TypeInfoCache.Add(t, tuple);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
+using System.Threading.Tasks;
 using JamSoft.Helpers.Ui;
 using Xunit;
 using Xunit.Abstractions;
@@ -169,6 +169,7 @@ namespace JamSoft.Helpers.Tests.Ui
         public void IsDirty_Stop_Tracking_Null()
         {
 	        PersonViewModel p = null;
+	        // ReSharper disable once ExpressionIsAlwaysNull
 	        IsDirtyValidator.StopTrackingObject(p);
 	        Assert.Null(p);
         }
@@ -453,37 +454,59 @@ namespace JamSoft.Helpers.Tests.Ui
         [Fact]
         public void Multi_Threading_Test()
         {
-	        var p = new PersonViewModel
-	        {
-		        Name = "Name",
-		        DisplayName = "DisplayName",
-		        Field = "Field"
-	        };
-	        
 	        string hash1 = String.Empty;
 	        string hash2 = String.Empty;
 
-	        Thread t1 = new Thread(() =>
+	        var t1 = Task.Run(() =>
 	        {
-		        IsDirtyValidator.Validate(p, true);
-		        hash1 = p.Hash;
+		        var p1 = new PersonViewModel
+		        {
+			        Name = "Name",
+			        DisplayName = "DisplayName",
+			        Field = "Field"
+		        };
+		        IsDirtyValidator.Validate(p1, true);
+		        hash1 = p1.Hash;
 	        });
 	        
-	        Thread t2 = new Thread(() =>
+	        Task t2 = Task.Run(() =>
 	        {
-		        IsDirtyValidator.Validate(p, true);
-		        hash2 = p.Hash;
+		        var p2 = new PersonViewModel
+		        {
+			        Name = "Name",
+			        DisplayName = "DisplayName",
+			        Field = "Field"
+		        };
+		        IsDirtyValidator.Validate(p2, true);
+		        hash2 = p2.Hash;
 	        });
 	        
-	        //t1.Start();
-	        //t2.Start();
-	        
-	        Assert.Equal(hash1, hash2);
-        }
+	        Task t = Task.WhenAll(t1, t2);
+	        t.Wait();
 
-        private void RunVal(PersonViewModel p)
+	         _outputHelper.WriteLine($"hash1: {hash1}");
+	         _outputHelper.WriteLine($"hash2: {hash2}");
+	         Assert.Equal(hash1, hash2);
+        }
+        
+        [Fact]
+        public void ValidatePropertiesAndFields_Ignores_Hash_Props_Even_When_Attributed()
         {
-	        ;
+	        var p = new HashPropertyMonitoringViewModel()
+	        {
+		        MyProp = "MyProp"
+	        };
+
+	        IsDirtyValidator.Validate(p, true);
+	        p.MyProp = "New";
+	        
+	        Assert.True(IsDirtyValidator.Validate(p).IsDirty);
+
+	        var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+	        
+	        Assert.True(props.Length == 1);
+	        Assert.True(fields.Length == 0);
+	        Assert.Equal("MyProp", props[0].Name);
         }
     }
 }
