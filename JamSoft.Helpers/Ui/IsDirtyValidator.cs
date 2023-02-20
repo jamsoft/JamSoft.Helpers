@@ -13,8 +13,8 @@ namespace JamSoft.Helpers.Ui;
 /// </summary>
 public static class IsDirtyValidator
 {
-	private static readonly List<string> _propertyNameFilterList = new() { "Hash", "IsDirty" };
-	private static readonly Dictionary<int, Dictionary<string, string>> ObjectValueHashStore = new();
+	private static readonly List<string> PropertyNameFilterList = new() { "Hash", "IsDirty" };
+	private static readonly Dictionary<Guid, Dictionary<string, string>> ObjectValueHashStore = new();
 	private static readonly Dictionary<Type, Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>> TypeInfoCache = new();
 	
 	/// <summary>
@@ -36,13 +36,14 @@ public static class IsDirtyValidator
 		
 			if (string.IsNullOrWhiteSpace(instance.Hash))
 			{
-				instance.Hash = GetObjectHash(instance, trackProperties);
+				var (hash, id) = GetObjectHash(instance, trackProperties);
+				instance.Hash = $"{id}|{hash}";
 				instance.IsDirty = false;
 			}
 			else
 			{
-				var newHash = GetObjectHash(instance, trackProperties);
-				instance.IsDirty = !instance.Hash.IsExactlySameAs(newHash);
+				var newHash = GetObjectHash(instance, trackProperties).hash;
+				instance.IsDirty = !instance.GetIsDirtyHash().IsExactlySameAs(newHash);
 			}
 		}
 		
@@ -61,10 +62,18 @@ public static class IsDirtyValidator
 		List<PropertyInfo> changedProps = new List<PropertyInfo>();
 		List<FieldInfo> changedFields = new List<FieldInfo>();
 		
-		if (instance != null && !instance.Hash.IsExactlySameAs(GetObjectHash(instance, false)))
+		if (instance != null && 
+		    !string.IsNullOrWhiteSpace(instance.Hash) && 
+		    !instance.GetIsDirtyHash().IsExactlySameAs(GetObjectHash(instance, false).hash))
 		{
 			var (propertyInfos, fieldInfos) = GetTypeInfo(instance);
-			var objId = instance.GetHashCode();
+			
+			var objId = instance.GetId();
+			if (objId == Guid.Empty && !string.IsNullOrWhiteSpace(instance.Hash))
+			{
+				objId = Guid.NewGuid();
+				instance.Hash = $"{objId}|{instance.Hash}";
+			}
 
 			ObjectValueHashStore.TryGetValue(objId, out var objHashes);
 		
@@ -113,7 +122,7 @@ public static class IsDirtyValidator
 	{
 		if (instance == null) return;
 		
-		var objId = instance.GetHashCode();
+		var objId = instance.GetId();
 		instance.Hash = null;
 		instance.IsDirty = false;
 		if (ObjectValueHashStore.ContainsKey(objId))
@@ -126,12 +135,18 @@ public static class IsDirtyValidator
 	/// Gets the object hash from the objects property values.
 	/// </summary>
 	/// <returns>An MD5 hash representing the object</returns>
-	private static string GetObjectHash<T>(T instance, bool trackProperties) where T : IDirtyMonitoring
+	private static (string hash, Guid id) GetObjectHash<T>(T instance, bool trackProperties) where T : IDirtyMonitoring
 	{
-		int objId = 0;
+		Guid objId = instance.GetId();
+		if (objId.Equals(Guid.Empty))
+		{
+			objId = Guid.NewGuid();
+			if (!string.IsNullOrWhiteSpace(instance.Hash))
+				instance.Hash = $"{objId}|{instance.Hash}";
+		}
+		
 		if (trackProperties)
 		{
-			objId = instance.GetHashCode();
 			ObjectValueHashStore.Add(objId, null);
 		}
 		
@@ -190,7 +205,7 @@ public static class IsDirtyValidator
 			throw new Exception("Cannot calculate hash.", ex);
 		}
 
-		return md5;
+		return (md5, objId);
 	}
 
 	private static string GetPropertyValue<T>(T instance, PropertyInfo propertyInfo) where T : IDirtyMonitoring
@@ -236,6 +251,26 @@ public static class IsDirtyValidator
 		return BitConverter.ToString(hasher.ComputeHash(buffer));
 	}
 
+	private static Guid GetId<T>(this T instance) where T : IDirtyMonitoring
+	{
+		if (instance == null || 
+		    string.IsNullOrWhiteSpace(instance.Hash) || 
+		    !instance.Hash.Contains('|')) 
+			return Guid.Empty;
+		
+		return Guid.Parse(instance.Hash.Split('|')[0]);
+	}
+	
+	private static string GetIsDirtyHash<T>(this T instance) where T : IDirtyMonitoring
+	{
+		if (instance == null ||
+		    string.IsNullOrWhiteSpace(instance.Hash) || 
+		    !instance.Hash.Contains('|'))
+			return string.Empty;
+		
+		return instance.Hash.Split('|')[1];
+	}
+
 	private static (IEnumerable<PropertyInfo> propInfos, IEnumerable<FieldInfo> fieldInfos) GetTypeInfo<T>(T instance)
 	{
 		Type t = instance.GetType();
@@ -245,7 +280,7 @@ public static class IsDirtyValidator
 
 		var propertyInfos = t.GetProperties().Where(p =>
 			p.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null &&
-			!_propertyNameFilterList.Any(f => p.Name.Equals(f)));
+			!PropertyNameFilterList.Any(f => p.Name.Equals(f)));
 		
 		var fieldInfos = t.GetFields().Where(f => f.GetCustomAttribute(typeof(IsDirtyMonitoringAttribute)) != null);
 		var tuple = new Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>(propertyInfos, fieldInfos);
