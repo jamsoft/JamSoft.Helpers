@@ -35,6 +35,34 @@ namespace JamSoft.Helpers.Tests.Ui
 		    Assert.Empty(fields);
 	    }
 	    
+	    [Fact]
+	    public void ValidateProperties_UnValidated_Object()
+	    {
+		    PersonViewModel p = new PersonViewModel
+		    {
+			    DisplayName = "DisplayName"
+		    };
+
+		    // ReSharper disable once ExpressionIsAlwaysNull
+		    var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+		    Assert.Empty(props);
+		    Assert.Empty(fields);
+	    }
+	    
+	    [Fact]
+	    public void ValidateProperties_UnValidated_Object_NonNull_Hash_String_Property()
+	    {
+		    PersonViewModel p = new PersonViewModel
+		    {
+			    Hash = "DisplayName"
+		    };
+
+		    // ReSharper disable once ExpressionIsAlwaysNull
+		    var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+		    Assert.Empty(props);
+		    Assert.Empty(fields);
+	    }
+	    
         [Fact]
         public void IsDirty_Initial_False()
         {
@@ -429,7 +457,7 @@ namespace JamSoft.Helpers.Tests.Ui
         [Fact]
         public void IsDirty_Multi_Iterations()
         {
-	        int iterations = 10000;
+	        int iterations = 100000;
 	        var stopWatch = new Stopwatch();
 	        stopWatch.Start();
 	        
@@ -466,7 +494,7 @@ namespace JamSoft.Helpers.Tests.Ui
 			        Field = "Field"
 		        };
 		        IsDirtyValidator.Validate(p1, true);
-		        hash1 = p1.Hash;
+		        hash1 = p1.Hash.Split('|')[1];
 	        });
 	        
 	        Task t2 = Task.Run(() =>
@@ -478,7 +506,7 @@ namespace JamSoft.Helpers.Tests.Ui
 			        Field = "Field"
 		        };
 		        IsDirtyValidator.Validate(p2, true);
-		        hash2 = p2.Hash;
+		        hash2 = p2.Hash.Split('|')[1];
 	        });
 	        
 	        Task t = Task.WhenAll(t1, t2);
