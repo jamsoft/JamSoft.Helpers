@@ -13,7 +13,7 @@ namespace JamSoft.Helpers.Ui;
 /// </summary>
 public static class IsDirtyValidator
 {
-	private static readonly List<string> PropertyNameFilterList = new() { "Hash", "IsDirty" };
+	private static readonly HashSet<string> PropertyNameFilterList = new() { "Hash", "IsDirty" };
 	private static readonly Dictionary<Guid, Dictionary<string, string>?> ObjectValueHashStore = new();
 	private static readonly Dictionary<Type, Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>> TypeInfoCache = new();
 	
