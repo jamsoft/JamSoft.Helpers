@@ -13,8 +13,8 @@ namespace JamSoft.Helpers.Crypto
         /// </summary>
         /// <param name="privateKeyXml">The private key Xml.</param>
         /// <param name="publicKeyXml">The public key Xml.</param>
-        /// <returns></returns>
-        IRsaCrypto Create(string privateKeyXml, string publicKeyXml);
+        /// <returns>An instance of <seealso cref="IRsaCrypto"/></returns>
+        IRsaCrypto Create(string? privateKeyXml, string? publicKeyXml);
 
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto"/> using the provided keys.<para />
@@ -26,7 +26,7 @@ namespace JamSoft.Helpers.Crypto
         /// <param name="hashAlgorithmName">The hashing algorithm to use</param>
         /// <param name="padding">The padding to be used</param>
         /// <returns>An instance of <seealso cref="IRsaCrypto"/></returns>
-        IRsaCrypto Create(string privateKeyXml, string publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding);
+        IRsaCrypto Create(string? privateKeyXml, string? publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding);
 
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto"/> using the provided RSAParameters objects.<para />
@@ -34,7 +34,7 @@ namespace JamSoft.Helpers.Crypto
         /// </summary>
         /// <param name="privateKey">The private key.</param>
         /// <param name="publicKey">The public key.</param>
-        /// <returns></returns>
+        /// <returns>An instance of <seealso cref="IRsaCrypto"/></returns>
         IRsaCrypto Create(RSAParameters privateKey, RSAParameters publicKey);
 
         /// <summary>
@@ -52,13 +52,13 @@ namespace JamSoft.Helpers.Crypto
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An instance of <seealso cref="IRsaCrypto"/></returns>
         IRsaCrypto Create();
 
         /// <summary>
         /// Creates an instance of <seealso cref="IRsaCrypto"/>.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An instance of <seealso cref="IRsaCrypto"/></returns>
         IRsaCrypto Create(int keySize);
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace JamSoft.Helpers.Crypto
         /// Creates an instance of <seealso cref="IRsaCrypto"/> and uses the provided RSA implementation
         /// </summary>
         /// <param name="rsa">The RSA.</param>
-        /// <returns></returns>
+        /// <returns>An instance of <seealso cref="IRsaCrypto"/></returns>
         IRsaCrypto Create(RSA rsa);
     }
 }

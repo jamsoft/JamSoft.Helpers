@@ -14,7 +14,7 @@ namespace JamSoft.Helpers.Ui;
 public static class IsDirtyValidator
 {
 	private static readonly List<string> PropertyNameFilterList = new() { "Hash", "IsDirty" };
-	private static readonly Dictionary<Guid, Dictionary<string, string>> ObjectValueHashStore = new();
+	private static readonly Dictionary<Guid, Dictionary<string, string>?> ObjectValueHashStore = new();
 	private static readonly Dictionary<Type, Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>>> TypeInfoCache = new();
 	
 	/// <summary>
@@ -25,7 +25,7 @@ public static class IsDirtyValidator
 	/// <typeparam name="T">The object type</typeparam>
 	/// <returns>The sample annotated object instance</returns>
 	/// <remarks>Validate the clean object in order to calculate the clean hash value for the object instance. Subsequent calls will detect if the contents has changes between validations</remarks>
-	public static T Validate<T>(T instance, bool trackProperties = false) where T : IDirtyMonitoring, new()
+	public static T? Validate<T>(T? instance, bool trackProperties = false) where T : IDirtyMonitoring, new()
 	{
 		if (instance != null)
 		{
@@ -57,7 +57,7 @@ public static class IsDirtyValidator
 	/// <param name="instance">The object instance to validate</param>
 	/// <typeparam name="T">The object type</typeparam>
 	/// <returns>Two arrays, one of <see cref="PropertyInfo"/> objects and one of <see cref="FieldInfo"/> objects</returns>
-	public static (PropertyInfo[] properties, FieldInfo[] fields) ValidatePropertiesAndFields<T>(T instance) where T : IDirtyMonitoring, new()
+	public static (PropertyInfo[] properties, FieldInfo[] fields) ValidatePropertiesAndFields<T>(T? instance) where T : IDirtyMonitoring, new()
 	{
 		List<PropertyInfo> changedProps = new List<PropertyInfo>();
 		List<FieldInfo> changedFields = new List<FieldInfo>();
@@ -118,7 +118,7 @@ public static class IsDirtyValidator
 	/// </summary>
 	/// <param name="instance">The object to stop tracking</param>
 	/// <typeparam name="T">The object type</typeparam>
-	public static void StopTrackingObject<T>(T instance) where T : IDirtyMonitoring, new()
+	public static void StopTrackingObject<T>(T? instance) where T : IDirtyMonitoring, new()
 	{
 		if (instance == null) return;
 		
@@ -251,29 +251,29 @@ public static class IsDirtyValidator
 		return BitConverter.ToString(hasher.ComputeHash(buffer));
 	}
 
-	private static Guid GetId<T>(this T instance) where T : IDirtyMonitoring
+	private static Guid GetId<T>(this T? instance) where T : IDirtyMonitoring
 	{
 		if (instance == null || 
 		    string.IsNullOrWhiteSpace(instance.Hash) || 
-		    !instance.Hash.Contains('|')) 
+		    !instance.Hash!.Contains('|')) 
 			return Guid.Empty;
 		
-		return Guid.Parse(instance.Hash.Split('|')[0]);
+		return Guid.Parse(instance.Hash!.Split('|')[0]);
 	}
 	
-	private static string GetIsDirtyHash<T>(this T instance) where T : IDirtyMonitoring
+	private static string GetIsDirtyHash<T>(this T? instance) where T : IDirtyMonitoring
 	{
 		if (instance == null ||
 		    string.IsNullOrWhiteSpace(instance.Hash) || 
-		    !instance.Hash.Contains('|'))
+		    !instance.Hash!.Contains('|'))
 			return string.Empty;
 		
-		return instance.Hash.Split('|')[1];
+		return instance.Hash!.Split('|')[1];
 	}
 
-	private static (IEnumerable<PropertyInfo> propInfos, IEnumerable<FieldInfo> fieldInfos) GetTypeInfo<T>(T instance)
+	private static (IEnumerable<PropertyInfo> propInfos, IEnumerable<FieldInfo> fieldInfos) GetTypeInfo<T>(T? instance)
 	{
-		Type t = instance.GetType();
+		Type t = instance!.GetType();
 		TypeInfoCache.TryGetValue(t, out Tuple<IEnumerable<PropertyInfo>, IEnumerable<FieldInfo>> typeInfo);
 		if (typeInfo != null)
 			return (typeInfo.Item1, typeInfo.Item2);

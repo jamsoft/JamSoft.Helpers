@@ -13,7 +13,7 @@ namespace JamSoft.Helpers.Crypto
         /// <value>
         /// The private key.
         /// </value>
-        string PrivateKey { get; }
+        string? PrivateKey { get; }
 
         /// <summary>
         /// Gets the public key in XML format.
@@ -21,14 +21,14 @@ namespace JamSoft.Helpers.Crypto
         /// <value>
         /// The public key.
         /// </value>
-        string PublicKey { get; }
+        string? PublicKey { get; }
 
         /// <summary>
         /// Signs the data.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns>The signed data encoded in Base64</returns>
-        string SignData(string message);
+        string? SignData(string message);
 
         /// <summary>
         /// Verifies the signed data.
@@ -43,7 +43,7 @@ namespace JamSoft.Helpers.Crypto
         /// </summary>
         /// <param name="message">The message.</param>
         /// <returns></returns>
-        string SignHash(string message);
+        string? SignHash(string message);
 
         /// <summary>
         /// Verifies the hashed data.

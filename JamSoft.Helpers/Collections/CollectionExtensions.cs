@@ -9,7 +9,7 @@ namespace JamSoft.Helpers.Collections
 	/// </summary>
 	public static class CollectionExtensions
 	{
-		private static readonly Random Random = new Random();
+		private static readonly Random Random = new();
 		
 		/// <summary>
 		/// Randomising a collection of objects within a collection
@@ -18,7 +18,7 @@ namespace JamSoft.Helpers.Collections
 		/// <param name="rng">a provided random number generator</param>
 		/// <typeparam name="T">the collection object type</typeparam>
 		/// <returns></returns>
-		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng = null)
+		public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random? rng = null)
 		{
 			T[] elements = source.ToArray();
 			for (int i = elements.Length - 1; i >= 0; i--)

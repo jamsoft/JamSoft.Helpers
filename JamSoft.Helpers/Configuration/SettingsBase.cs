@@ -9,9 +9,9 @@ namespace JamSoft.Helpers.Configuration
     /// <typeparam name="T"></typeparam>
     public abstract class SettingsBase<T> where T : SettingsBase<T>, new()
     {
-        private static string _filePath;
+        private static string? _filePath;
 
-        private static string _basePath;
+        private static string? _basePath;
 
         /// <summary>
         /// The class instance containing the values
@@ -28,11 +28,11 @@ namespace JamSoft.Helpers.Configuration
         /// </summary>
         /// <param name="basePath">The base settings directory</param>
         /// <param name="filename">The settings filename (including extension) (optional: the type name will be used if this is null, empty or white-space. Creates a file with .json extension)</param>
-        public static void Load(string basePath, string filename = null)
+        public static void Load(string basePath, string? filename = null)
         {
             _basePath = basePath;
-            _filePath = GetLocalFilePath(string.IsNullOrWhiteSpace(filename) ? $"{typeof(T).Name.ToLower(CultureInfo.CurrentCulture)}.json" : filename);
-            Instance = File.Exists(_filePath) ? System.Text.Json.JsonSerializer.Deserialize<T>(File.ReadAllText(_filePath)) : new T();
+            _filePath = GetLocalFilePath((string.IsNullOrWhiteSpace(filename) ? $"{typeof(T).Name.ToLower(CultureInfo.CurrentCulture)}.json" : filename)!);
+            Instance = (File.Exists(_filePath) ? System.Text.Json.JsonSerializer.Deserialize<T>(File.ReadAllText(_filePath)) : new T())!;
         }
 
         /// <summary>

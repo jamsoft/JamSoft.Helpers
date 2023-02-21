@@ -40,7 +40,7 @@ namespace JamSoft.Helpers.Crypto
         /// <param name="publicKeyXml">The public key xml.</param>
         /// <returns>An instance of <see cref="IRsaCrypto"/></returns>
         /// <exception cref="ArgumentException">thrown when both the public key and private keys a null or empty</exception>
-        public IRsaCrypto Create(string privateKeyXml, string publicKeyXml)
+        public IRsaCrypto Create(string? privateKeyXml, string? publicKeyXml)
         {
             return new RsaCrypto(privateKeyXml, publicKeyXml);
         }
@@ -55,7 +55,7 @@ namespace JamSoft.Helpers.Crypto
         /// <param name="hashAlgorithmName">The hashing algorithm to use</param>
         /// <param name="padding">The padding to be used</param>
         /// <returns>An instance of <see cref="IRsaCrypto"/></returns>
-        public IRsaCrypto Create(string privateKeyXml, string publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        public IRsaCrypto Create(string? privateKeyXml, string? publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
         {
             return new RsaCrypto(privateKeyXml, publicKeyXml, hashAlgorithmName, padding);
         }
