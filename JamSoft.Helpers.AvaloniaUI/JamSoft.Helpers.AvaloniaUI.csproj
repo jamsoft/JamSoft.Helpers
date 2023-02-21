@@ -26,11 +26,11 @@
         <IncludeSymbols>false</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <DelaySign>false</DelaySign>
-        <Version>1.1.0</Version>
-        <PackageVersion>1.1.0</PackageVersion>
-        <AssemblyVersion>1.1.0.0</AssemblyVersion>
-        <FileVersion>1.1.0.0</FileVersion>
-        <InformationalVersion>1.1.0.0-rel</InformationalVersion>
+        <Version>1.1.1</Version>
+        <PackageVersion>1.1.1</PackageVersion>
+        <AssemblyVersion>1.1.1.0</AssemblyVersion>
+        <FileVersion>1.1.1.0</FileVersion>
+        <InformationalVersion>1.1.1.0-rel</InformationalVersion>
         <PublicSign>false</PublicSign>
         <SignAssembly>false</SignAssembly>
         <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -58,6 +58,11 @@
     <ItemGroup>
       <PackageReference Include="Avalonia" Version="0.10.18" />
       <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
+      <PackageReference Include="JamSoft.Helpers" Version="1.2.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\JamSoft.Helpers\JamSoft.Helpers.csproj" />
     </ItemGroup>
 
 </Project>

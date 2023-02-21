@@ -1,11 +1,12 @@
-﻿using ReactiveUI;
+﻿using JamSoft.Helpers.Ui;
+using ReactiveUI;
 
 namespace JamSoft.Helpers.AvaloniaUI.Patterns.Mvvm;
 
 /// <summary>
 /// A base view model class for use in AvaloniaUI applications
 /// </summary>
-public abstract class AvaloniaViewModelBase : ReactiveObject
+public abstract class AvaloniaViewModelBase : ReactiveObject, IDirtyMonitoring
 {
     private bool _isEditable;
     private bool _isBusy;
@@ -30,4 +31,14 @@ public abstract class AvaloniaViewModelBase : ReactiveObject
         get => _isBusy;
         set => this.RaiseAndSetIfChanged(ref _isBusy, value);
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public bool IsDirty { get; set; }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public string? Hash { get; set; }
 }

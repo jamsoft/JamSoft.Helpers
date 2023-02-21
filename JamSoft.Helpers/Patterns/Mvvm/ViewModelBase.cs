@@ -15,18 +15,18 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-        public event PropertyChangedEventHandler PropertyChanged;
+        /// <see cref="System.ComponentModel.INotifyPropertyChanged" />
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         /// <summary>
         /// Sets the property value only if the provided value is different from the stored value.<para />
         /// If set to a new value, then the <seealso cref="System.ComponentModel.INotifyPropertyChanged" /> event will be fired
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="storage">The storage.</param>
+        /// <param name="storage">The storage field.</param>
         /// <param name="value">The value.</param>
         /// <param name="propertyName">Name of the property.</param>
-        /// <returns></returns>
+        /// <returns>True when value changes</returns>
         protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
@@ -46,16 +46,16 @@ namespace JamSoft.Helpers.Patterns.Mvvm
         /// <param name="prop">The <see cref="PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnPropertyChanged(PropertyChangedEventArgs prop)
         {
-            PropertyChanged?.Invoke(this, prop);
+            PropertyChanged(this, prop);
         }
 
         /// <summary>
         /// Fires the property changed event using either the <seealso cref="CallerMemberNameAttribute" /> or the provided string property name.
         /// </summary>
         /// <param name="propertyName">Name of the property.</param>
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
         /// <summary>

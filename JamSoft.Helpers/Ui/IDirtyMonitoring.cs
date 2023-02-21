@@ -13,5 +13,5 @@ public interface IDirtyMonitoring
     /// <summary>
     /// The object hash value
     /// </summary>
-    string Hash { get; set; }
+    string? Hash { get; set; }
 }

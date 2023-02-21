@@ -1,8 +1,8 @@
-<img align="center" height="50" src="img/logo.png">
+<img alt="jamsoft-logo" height="90" width="468" src="img/logo.png">
 
 # JamSoft.Helpers
 
-A collection of general helpers for applications and libraries. The goal is to provide convienience methods and core building blocks. All in a unit tested, cross-platform .NET Standard 2.0 library with minimal dependencies.
+A collection of general helpers for applications and libraries. The goal is to provide convenience methods and core building blocks. All in a unit tested, cross-platform .NET Standard 2.0 library with minimal dependencies.
 
 ![.NET Core](https://github.com/jamsoft/JamSoft.Helpers/workflows/.NET%20Core/badge.svg?branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)
@@ -34,19 +34,19 @@ https://jamsoft.github.io/JamSoft.Helpers/
 # Installation
 ### Nuget
 ```shell
-Install-Package JamSoft.Helpers -Version 1.2.1
+Install-Package JamSoft.Helpers -Version 1.2.2
 ```
 ### CLI
 ```shell
-dotnet add package JamSoft.Helpers --version 1.2.1
+dotnet add package JamSoft.Helpers --version 1.2.2
 ```
 ### Package Reference
 ```xml
-<PackageReference Include="JamSoft.Helpers" Version="1.2.1" />
+<PackageReference Include="JamSoft.Helpers" Version="1.2.2" />
 ```
 ### Package Reference
 ```shell
-paket add JamSoft.Helpers --version 1.2.1
+paket add JamSoft.Helpers --version 1.2.2
 ```
 # Tests
 
@@ -80,7 +80,7 @@ public sealed class MySettings : SettingsBase<MySettings>
 ```
 ### Loading & Access
 
-Now you can load, save and manage your settings at rumetime like:
+Now you can load, save and manage your settings at runtime like:
 
 ```csharp
 string myDefaultSettingsPath = "C:\Some\location\on\disk";
@@ -141,7 +141,7 @@ public interface IDirtyMonitoring
     /// <summary>
     /// The object hash value
     /// </summary>
-    string Hash { get; set; }
+    string? Hash { get; set; }
 }
 ```
 
@@ -153,7 +153,7 @@ public class PersonViewModel : IDirtyMonitoring
     [IsDirtyMonitoring]
     public string DisplayName { get; set; }
     public bool IsDirty { get; set; }    
-    public string Hash { get; set; }
+    public string? Hash { get; set; }
 }
 ```
 In this example only the `DisplayName` property is monitored for changes. After an object has completed being initialised and is in it's "clean" state, validate it.
@@ -270,7 +270,7 @@ You can then use this factory to obtain instances of the service.
 ```csharp
 var crypto = cryptoFactory.Create();
 ```
-There are many overloads of the create method to control how the service is built and how you want it configued.
+There are many overloads of the create method to control how the service is built and how you want it configured.
 
 You should also wrap each use of this within a using statement such as:
 ```csharp
@@ -384,7 +384,7 @@ var result = input.DotShortenString(10, 20); // "Thisism...shortening"
 string input = "Thisismylongstringthatneedsshortening";
 var result = input.DotShortenString(10, 20, ";;;"); // "Thisism;;;shortening"
 ```
-## Remove All Multispaces
+## Remove All Multi-spaces
 ```csharp
 var input = "  This  has    too  many  spaces   ";
 input.RemoveAllMultiSpace(); // " This has too many spaces "
@@ -411,7 +411,7 @@ input.IsExactlySameAs(pattern); // false
 # Serialization
 
 ## XML Encoding Formatting
-Adds a strict uppercased UTF-8 to XML declarations
+Adds a strict uppercase UTF-8 to XML declarations
 ```csharp
 using (var sw = new UppercaseUtf8StringWriter())
 {

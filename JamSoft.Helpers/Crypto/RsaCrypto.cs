@@ -9,11 +9,11 @@ namespace JamSoft.Helpers.Crypto
     internal sealed class RsaCrypto : IRsaCrypto
     {
         private bool _disposed;
-        private readonly RSA _rsa;
+        private readonly RSA? _rsa;
 
-        public string PrivateKey { get; private set; }
+        public string? PrivateKey { get; private set; }
 
-        public string PublicKey { get; private set; }
+        public string? PublicKey { get; private set; }
 
         private RSAParameters _privateKey;
         private RSAParameters _publicKey;
@@ -26,14 +26,14 @@ namespace JamSoft.Helpers.Crypto
             Dispose(false);
         }
 
-        public RsaCrypto(string privateKeyXml, string publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        public RsaCrypto(string? privateKeyXml, string? publicKeyXml, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
             : this(privateKeyXml, publicKeyXml)
         {
             _hashAlgorithmName = hashAlgorithmName;
             _rsaSignaturePadding = padding;
         }
 
-        public RsaCrypto(string privateKeyXml, string publicKeyXml)
+        public RsaCrypto(string? privateKeyXml, string? publicKeyXml)
         {
             if (string.IsNullOrEmpty(privateKeyXml) &&
                 string.IsNullOrEmpty(publicKeyXml))
@@ -65,7 +65,7 @@ namespace JamSoft.Helpers.Crypto
         {
             if (privateKey.IsNull() && publicKey.IsNull())
             {
-                throw new ArgumentException($"Ctor requires at least one key, {nameof(privateKey)} and {nameof(publicKey)} are null or empty");
+                throw new ArgumentException($"Ctor requires at least one key, {nameof(privateKey)} and {nameof(publicKey)} are null, empty or missing parameters");
             }
 
             _privateKey = privateKey;
@@ -97,7 +97,6 @@ namespace JamSoft.Helpers.Crypto
         public RsaCrypto(RSA rsa)
         {
             _rsa = rsa;
-
             SetKeys(_rsa);
         }
 
@@ -110,7 +109,7 @@ namespace JamSoft.Helpers.Crypto
             PublicKey = RsaParamToString(_publicKey);
         }
 
-        public string SignData(string message)
+        public string? SignData(string message)
         {
             if (string.IsNullOrEmpty(message))
             {
@@ -171,7 +170,7 @@ namespace JamSoft.Helpers.Crypto
             return success;
         }
 
-        public string SignHash(string message)
+        public string? SignHash(string message)
         {
             if (string.IsNullOrEmpty(message))
             {
@@ -239,7 +238,7 @@ namespace JamSoft.Helpers.Crypto
         }
 
         // ToXmlString() is not supported in .Net Core 2.x so have implemented for compatibility
-        private string RsaParamToString(RSAParameters p)
+        private string? RsaParamToString(RSAParameters p)
         {
             var sw = new StringWriter();
             var xs = new XmlSerializer(typeof(RSAParameters));
@@ -247,7 +246,7 @@ namespace JamSoft.Helpers.Crypto
             return sw.ToString();
         }
 
-        private RSAParameters StringToRsaParam(string p)
+        private RSAParameters StringToRsaParam(string? p)
         {
             var sr = new StringReader(p);
             var xs = new XmlSerializer(typeof(RSAParameters));

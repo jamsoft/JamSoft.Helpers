@@ -35,17 +35,20 @@
             </summary>
             <param name="basePath">The base settings directory</param>
             <param name="filename">The settings filename (including extension) (optional: the type name will be used if this is null, empty or white-space. Creates a file with .json extension)</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.ResetToDefaults(System.Boolean)">
             <summary>
             Returns all properties to their defaults and optionally saves to disk
             </summary>
             <param name="saveToDisk">A flag to optionally save to disk (default: True)</param>
+            <exception cref="T:System.InvalidOperationException" />
         </member>
         <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.Save">
             <summary>
             Save the current setting to the file they were originally loaded from
             </summary>
+            <exception cref="T:System.InvalidOperationException" />
         </member>
         <member name="T:JamSoft.Helpers.Constants.EnvExLinuxVariableNames">
             <summary>
@@ -274,7 +277,7 @@
             </summary>
             <param name="privateKeyXml">The private key Xml.</param>
             <param name="publicKeyXml">The public key Xml.</param>
-            <returns></returns>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
@@ -295,7 +298,7 @@
             </summary>
             <param name="privateKey">The private key.</param>
             <param name="publicKey">The public key.</param>
-            <returns></returns>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Security.Cryptography.RSAParameters,System.Security.Cryptography.RSAParameters,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
@@ -313,13 +316,13 @@
             <summary>
             Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/>.
             </summary>
-            <returns></returns>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Int32)">
             <summary>
             Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/>.
             </summary>
-            <returns></returns>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="M:JamSoft.Helpers.Crypto.IRsaCryptoFactory.Create(System.Int32,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
@@ -336,7 +339,7 @@
             Creates an instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/> and uses the provided RSA implementation
             </summary>
             <param name="rsa">The RSA.</param>
-            <returns></returns>
+            <returns>An instance of <seealso cref="T:JamSoft.Helpers.Crypto.IRsaCrypto"/></returns>
         </member>
         <member name="T:JamSoft.Helpers.Crypto.RsaCryptoFactory">
             <summary>
@@ -660,7 +663,7 @@
             <summary>
             Occurs when a property value changes.
             </summary>
-            <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" />
+            <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.SetProperty``1(``0@,``0,System.String)">
             <summary>
@@ -668,10 +671,10 @@
             If set to a new value, then the <seealso cref="T:System.ComponentModel.INotifyPropertyChanged" /> event will be fired
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="storage">The storage.</param>
+            <param name="storage">The storage field.</param>
             <param name="value">The value.</param>
             <param name="propertyName">Name of the property.</param>
-            <returns></returns>
+            <returns>True when value changes</returns>
         </member>
         <member name="M:JamSoft.Helpers.Patterns.Mvvm.ViewModelBase.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
             <summary>
