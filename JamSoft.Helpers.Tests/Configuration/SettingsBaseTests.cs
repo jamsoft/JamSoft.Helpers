@@ -1,35 +1,35 @@
-﻿using System.IO;
-using JamSoft.Helpers.Configuration;
+﻿using System;
+using System.IO;
 using Xunit;
 
 namespace JamSoft.Helpers.Tests.Configuration
 {
-    public sealed class ATestSettingsClass : SettingsBase<ATestSettingsClass>
-    {
-        public string ASetting { get; set; } = "ADefault";
-    }
-
-    public sealed class BTestSettingsClass : SettingsBase<BTestSettingsClass>
-    {
-        public string BSetting { get; set; } = "BDefault";
-    }
-
     public class SettingsBaseTests
     {
         [Fact]
         public void Init()
         {
-            DeleteSettingsFiles();
-
             var s = new ATestSettingsClass();
             Assert.Equal("ADefault", s.ASetting);
-
-            DeleteSettingsFiles();
         }
-
+        
+        [Fact]
+        public void Init_Load_Null_Base_Path_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => ATestSettingsClass.Load(null));
+        }
+        
+        [Fact]
+        public void Init_Load_Empty_Base_Path_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => ATestSettingsClass.Load(string.Empty));
+        }
+        
         [Fact]
         public void Set_Save()
         {
+            DeleteSettingsFiles();
+            
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory);
             
             Assert.Equal("ADefault", ATestSettingsClass.Instance.ASetting);
@@ -50,6 +50,8 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Set_Save_Recall()
         {
+            DeleteSettingsFiles();
+            
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory);
 
             Assert.Equal("ADefault", ATestSettingsClass.Instance.ASetting);
@@ -72,6 +74,8 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Multi_Settings_Files_Do_Not_Collide_Dirs()
         {
+            DeleteSettingsFiles();
+            
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory);
             BTestSettingsClass.Load(TestHelpers.AssemblyDirectory);
 
@@ -93,6 +97,8 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Custom_File_Name_Used()
         {
+            DeleteSettingsFiles();
+            
             string testFileName = "test-file.json";
 
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory, testFileName);
@@ -115,6 +121,8 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Custom_File_Name_Used_Load_Default_Has_Default_Values()
         {
+            DeleteSettingsFiles();
+            
             string testFileName = "test-file.json";
 
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory, testFileName);
@@ -137,6 +145,8 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Custom_File_Name_Used_Load_Has_Stored_Values()
         {
+            DeleteSettingsFiles();
+            
             string testFileName = "test-file.json";
 
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory, testFileName);
@@ -163,6 +173,8 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Set_Save_Reset_Auto_Save()
         {
+            DeleteSettingsFiles();
+            
             ATestSettingsClass.Load(TestHelpers.AssemblyDirectory);
 
             Assert.Equal("ADefault", ATestSettingsClass.Instance.ASetting);
@@ -217,13 +229,21 @@ namespace JamSoft.Helpers.Tests.Configuration
 
             DeleteSettingsFiles();
         }
-
+        
         private void DeleteSettingsFiles()
         {
             foreach (string sFile in Directory.GetFiles(TestHelpers.AssemblyDirectory, "*.json"))
             {
                 File.Delete(sFile);
             }
+        }
+    }
+
+    public class SettingsBaseWrapper : MarshalByRefObject
+    {
+        public void CallSave()
+        {
+            ATestSettingsClass.Save();
         }
     }
 }
