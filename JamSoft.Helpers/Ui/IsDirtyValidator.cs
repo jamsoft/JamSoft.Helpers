@@ -108,6 +108,8 @@ public static class IsDirtyValidator
 					changedFields.Add(fieldInfo);
 				}
 			}
+
+			instance.IsDirty = !(changedProps.Any() && changedFields.Any());
 		}
 
 		return (changedProps.ToArray(), changedFields.ToArray());
