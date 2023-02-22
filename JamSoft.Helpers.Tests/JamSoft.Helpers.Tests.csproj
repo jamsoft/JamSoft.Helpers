@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\JamSoft.Helpers.AvaloniaUI\JamSoft.Helpers.AvaloniaUI.csproj" />
       <ProjectReference Include="..\JamSoft.Helpers\JamSoft.Helpers.csproj" />
     </ItemGroup>
 

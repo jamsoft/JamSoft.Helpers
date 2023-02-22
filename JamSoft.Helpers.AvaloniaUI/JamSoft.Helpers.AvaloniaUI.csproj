@@ -44,7 +44,7 @@
       <DebugType>none</DebugType>
       <DocumentationFile>bin\Release\JamSoft.Helpers.AvaloniaUI.xml</DocumentationFile>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-      <DebugSymbols>true</DebugSymbols>
+      <DebugSymbols>false</DebugSymbols>
     </PropertyGroup>
 
     <ItemGroup>
@@ -58,7 +58,6 @@
     <ItemGroup>
       <PackageReference Include="Avalonia" Version="0.10.18" />
       <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
-      <PackageReference Include="JamSoft.Helpers" Version="1.2.1" />
     </ItemGroup>
     
     <ItemGroup>
