@@ -17,24 +17,30 @@
         <vm:MainWindowSampleAppViewModel/>
     </Design.DataContext>
 
-    <Grid RowDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto, Auto, *">
         
         <StackPanel Orientation="Horizontal" Spacing="20">
             <Border Classes="ButtonGroupBorder">
                 <Button x:Name="LoadPeopleButton">Load People</Button>
             </Border>
             <Border Classes="ButtonGroupBorder">
-                <Button x:Name="ValidatePeopleButton">Check IsDirty</Button>
+                <Button x:Name="ValidatePeopleButton">IsDirty</Button>
             </Border>
             <Border Classes="ButtonGroupBorder">
                 <StackPanel Orientation="Horizontal" Spacing="20">
-                    <Button x:Name="ValidatePropertiesButton">Start Tracking Properties</Button>
-                    <Button x:Name="ReValidatePropertiesButton">Recheck Properties</Button>
+                    <Button x:Name="ValidatePropertiesButton">Track Properties</Button>
+                    <Button x:Name="ReValidatePropertiesButton">Recheck</Button>
                 </StackPanel>
             </Border>
         </StackPanel>
         
-        <DataGrid x:Name="PeopleGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="0,20">
+        <StackPanel Grid.Row="1" Spacing="5" Margin="0,10">
+            <TextBlock>1. Load some data and click the IsDirty button.</TextBlock>
+            <TextBlock>2. Load some data and click the IsDirty button, edit a cell in the DataGrid and click the IsDirty button again.</TextBlock>
+            <TextBlock>3. Load some data and click the Track Properties button, edit a cell in the DataGrid and click the Recheck button, the edited property will be shown in the Changed Properties column.</TextBlock>
+        </StackPanel>
+        
+        <DataGrid x:Name="PeopleGrid" Grid.Row="2" AutoGenerateColumns="False" Margin="0,20">
             <DataGrid.Resources>
                 <converters:IsDirtyColorConverter x:Key="IsDirtyColorConverter"/>
                 <converters:MemberInfoConverter x:Key="MemberInfoConverter"/>
