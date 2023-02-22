@@ -215,9 +215,9 @@ namespace JamSoft.Helpers.Tests.Ui
 	        IsDirtyValidator.Validate(p, true);
 	        p.DisplayName = "New";
 	        
-	        Assert.True(IsDirtyValidator.Validate(p).IsDirty);
-
 	        var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+	        
+	        Assert.True(p.IsDirty);
 	        
 	        Assert.True(props.Length == 1);
 	        Assert.True(fields.Length == 0);
