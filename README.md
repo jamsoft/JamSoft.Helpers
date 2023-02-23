@@ -62,6 +62,10 @@ The following test classes also show basic example implementations and uses of t
 - BTestSettingsClass
 - PersonViewModel
 
+# Sample Application
+
+A sample AvaloniaUI application is now also included in the Sample directory.
+
 # Configuration
 
 Rather than getting embroiled in the convoluted and sometimes awkward user settings infrastructure provided by .NET (*.settings), sometimes you just want to store some values in a file, yes?
