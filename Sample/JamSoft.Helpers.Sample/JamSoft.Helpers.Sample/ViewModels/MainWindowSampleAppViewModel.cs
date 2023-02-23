@@ -10,12 +10,12 @@ namespace JamSoft.Helpers.Sample.ViewModels;
 
 public class MainWindowSampleAppViewModel : SampleAppViewModelBase, IActivatableViewModel
 {
-    private ObservableAsPropertyHelper<SuperObservableCollection<PersonViewModel>> _people;
+    private readonly ObservableAsPropertyHelper<SuperObservableCollection<PersonViewModel>> _people;
 
     public MainWindowSampleAppViewModel()
     {
         Activator = new ViewModelActivator();
-        this.WhenActivated((CompositeDisposable disposables) =>
+        this.WhenActivated(disposables =>
         {
             /* handle activation */
             Disposable
@@ -69,8 +69,6 @@ public class MainWindowSampleAppViewModel : SampleAppViewModelBase, IActivatable
             }
         });
     }
-
-
 
     private async Task<SuperObservableCollection<PersonViewModel>> LoadPeople()
     {

@@ -5,6 +5,7 @@
                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                            xmlns:reactiveUi="http://reactiveui.net"
                            xmlns:converters="clr-namespace:JamSoft.Helpers.Sample.Converters"
+                           xmlns:converters1="clr-namespace:JamSoft.Helpers.AvaloniaUI.Converters;assembly=JamSoft.Helpers.AvaloniaUI"
                            mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
                            x:Class="JamSoft.Helpers.Sample.Views.MainWindow"
                            Icon="/Assets/avalonia-logo.ico"
@@ -35,14 +36,14 @@
         </StackPanel>
         
         <StackPanel Grid.Row="1" Spacing="5" Margin="0,10">
-            <TextBlock>1. Load some data and click the IsDirty button.</TextBlock>
+            <TextBlock>1. Load some data and click the IsDirty button. All are set to IsDirty=False</TextBlock>
             <TextBlock>2. Load some data and click the IsDirty button, edit a cell in the DataGrid and click the IsDirty button again.</TextBlock>
             <TextBlock>3. Load some data and click the Track Properties button, edit a cell in the DataGrid and click the Recheck button, the edited property will be shown in the Changed Properties column.</TextBlock>
         </StackPanel>
         
         <DataGrid x:Name="PeopleGrid" Grid.Row="2" AutoGenerateColumns="False" Margin="0,20">
             <DataGrid.Resources>
-                <converters:IsDirtyColorConverter x:Key="IsDirtyColorConverter"/>
+                <converters1:IsDirtyColorConverter x:Key="IsDirtyColorConverter"/>
                 <converters:MemberInfoConverter x:Key="MemberInfoConverter"/>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -53,9 +54,7 @@
                 <DataGridTextColumn Header="Post Zip Code" Binding="{Binding PostZipCode}" />
                 <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Header="Some Field" Binding="{Binding SomeField}" />
-                
                 <DataGridCheckBoxColumn Header="Is Dirty?" Binding="{Binding IsDirty}" />
-                <DataGridTextColumn Header="Hash" Binding="{Binding Hash}" />
                 <DataGridTextColumn Header="Changed Properties" Binding="{Binding ChangedProperties, Converter={StaticResource MemberInfoConverter}, Mode=OneWay}" />
             </DataGrid.Columns>
             <DataGrid.Styles>

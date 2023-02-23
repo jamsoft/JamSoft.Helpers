@@ -12,25 +12,29 @@ public partial class MainWindow : ReactiveWindow<MainWindowSampleAppViewModel>
         InitializeComponent();
         this.WhenActivated(disposables => 
         {
+#pragma warning disable CS8634
+#pragma warning disable CS8631
             this.BindCommand(ViewModel,
-                    x => x.LoadPeopleCommand,
+                    x => x!.LoadPeopleCommand,
                     x => x.LoadPeopleButton)
                 .DisposeWith(disposables);
             
             this.BindCommand(ViewModel,
-                    x => x.ValidatePeopleCommand,
+                    x => x!.ValidatePeopleCommand,
                     x => x.ValidatePeopleButton)
                 .DisposeWith(disposables);
             
             this.BindCommand(ViewModel,
-                    x => x.ValidatePropertiesCommand,
+                    x => x!.ValidatePropertiesCommand,
                     x => x.ValidatePropertiesButton)
                 .DisposeWith(disposables);
             
             this.BindCommand(ViewModel,
-                    x => x.ReValidatePropertiesCommand,
+                    x => x!.ReValidatePropertiesCommand,
                     x => x.ReValidatePropertiesButton)
                 .DisposeWith(disposables);
+#pragma warning restore CS8631
+#pragma warning restore CS8634
             
             this.OneWayBind(ViewModel,
                     x => x.People,
