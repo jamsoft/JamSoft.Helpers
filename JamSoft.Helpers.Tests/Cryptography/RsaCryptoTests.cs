@@ -79,7 +79,7 @@ namespace JamSoft.Helpers.Tests.Cryptography
         [Fact]
         public void Ctr_Factory_Rsa()
         {
-            var sut = new RsaCryptoFactory().Create(new RSACryptoServiceProvider(512));
+            var sut = new RsaCryptoFactory().Create(new RSACryptoServiceProvider(1024));
             Assert.NotNull(sut);
         }
 
