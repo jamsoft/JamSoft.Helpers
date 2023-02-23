@@ -1,50 +1,9 @@
-# JamSoft.Helpers.AvaloniaUI
+﻿using System.Reflection;
+using JamSoft.Helpers.Ui;
+using ReactiveUI;
 
-A collection of general helpers for AvaloniaUI applications.
+namespace JamSoft.Helpers.AvaloniaUI.Patterns.Mvvm;
 
-# Install
-### Nuget
-```
-Install-Package JamSoft.Helpers.AvaloniaUI
-```
-### CLI
-```
-dotnet add package JamSoft.Helpers.AvaloniaUI
-```
-# Patterns
-
-## Mvvm - ViewModelBase
-A very bare bones view model with property changed updates
-```csharp
-public abstract class ViewModelBase : ReactiveObject
-{
-    private bool _isEditable;
-    private bool _isBusy;
-    
-    /// <summary>
-    /// Gets or sets a value indicating whether this instance is editable.
-    /// </summary>
-    /// <value>
-    /// <c>true</c> if this instance is editable; otherwise, <c>false</c>.
-    /// </value>
-    public bool IsEditable
-    {
-        get => _isEditable;
-        set => this.RaiseAndSetIfChanged(ref _isEditable, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the busy state for the view model instance
-    /// </summary>
-    public bool IsBusy
-    {
-        get => _isBusy;
-        set => this.RaiseAndSetIfChanged(ref _isBusy, value);
-    }
-}
-```
-## Mvvm - ViewModelBase
-```csharp
 /// <summary>
 /// A base view model class for use in AvaloniaUI applications with validation 
 /// </summary>
@@ -128,45 +87,3 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
         IsDirtyValidator.StopTrackingObject(this);
     }
 }
-```
-### IsDirty Color Converter
-```csharp
-/// <summary>
-/// A binding helper for IsDirty UI Feedback
-/// </summary>
-public class IsDirtyColorConverter : IValueConverter
-{
-	/// <summary>
-	/// The IsDirty=False color
-	/// </summary>
-	public SolidColorBrush FalseColor { get; set; } = new SolidColorBrush(Color.Parse("#B8FFB8"));
-
-	/// <summary>
-	/// The IsDirty=True color
-	/// </summary>
-	public SolidColorBrush TrueColor { get; set; } = new SolidColorBrush(Color.Parse("#FF8D8D"));
-	
-	/// <inheritdoc cref="IValueConverter.Convert"/>
-	public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
-	{
-		if (value != null)
-		{
-			switch (value)
-			{
-				case true:
-					return TrueColor;
-				case false:
-					return FalseColor;
-			}
-		}
-
-		return FalseColor;
-	}
-
-	/// <inheritdoc cref="IValueConverter.ConvertBack"/>
-	public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
-	{
-		return null;
-	}
-}
-```
