@@ -2,7 +2,13 @@
 
 A collection of general helpers for AvaloniaUI applications.
 
-# Install
+## Table of Contents
+- [Installation](#Installation)
+- [Mvvm ViewModelBase](#Mvvm-ViewModelBase)
+- [IsDirty Color Converter](#IsDirty-Color-Converter)
+- [Mvvm ValidatableAvaloniaViewModelBase](#Mvvm-ValidatableAvaloniaViewModelBase)
+
+# Installation
 ### Nuget
 ```
 Install-Package JamSoft.Helpers.AvaloniaUI
@@ -13,10 +19,10 @@ dotnet add package JamSoft.Helpers.AvaloniaUI
 ```
 # Patterns
 
-## Mvvm - ViewModelBase
+## Mvvm ViewModelBase
 A very bare bones view model with property changed updates
 ```csharp
-public abstract class ViewModelBase : ReactiveObject
+public abstract class AvaloniaViewModelBase : ReactiveObject
 {
     private bool _isEditable;
     private bool _isBusy;
@@ -43,7 +49,7 @@ public abstract class ViewModelBase : ReactiveObject
     }
 }
 ```
-## Mvvm - ViewModelBase
+## Mvvm ValidatableAvaloniaViewModelBase
 ```csharp
 /// <summary>
 /// A base view model class for use in AvaloniaUI applications with validation 

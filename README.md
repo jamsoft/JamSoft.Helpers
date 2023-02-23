@@ -50,8 +50,8 @@ paket add JamSoft.Helpers --version 1.2.3
 ```
 # Tests
 
-There is a high level of test coverage as shown in the badge above (around 97%), however, at the moment the pipeline executes only on Windows which means some tests cannot be run in this environment.
-The library has been fully tested on Windows 10, OSX Catalina and Fedora 31.
+There is a high level of test coverage as shown in the badge, however, at the moment the pipeline executes only on Windows which means some tests cannot be run in this environment.
+The library has been fully tested on Windows 10, 11, OSX Catalina, MacOS, and Fedora 31.
 
 The following test classes also show basic example implementations and uses of the provided pattern classes.
 
