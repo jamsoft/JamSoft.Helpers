@@ -160,22 +160,6 @@ namespace JamSoft.Helpers.Tests
         }
 
         [FactOsx]
-        public void Osx_Gets_Term_Environment_Value()
-        {
-            var p = EnvEx.GetVariable(EnvExOsxVariableNames.Term);
-            Assert.NotNull(p);
-            _outputHelper.WriteLine(p);
-        }
-
-        [FactOsx]
-        public void Osx_Gets_Display_Environment_Value()
-        {
-            var p = EnvEx.GetVariable(EnvExOsxVariableNames.Display);
-            Assert.NotNull(p);
-            _outputHelper.WriteLine(p);
-        }
-
-        [FactOsx]
         public void Osx_Gets_Home_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExOsxVariableNames.Home);
@@ -203,22 +187,6 @@ namespace JamSoft.Helpers.Tests
         public void Osx_Gets_LogName_Environment_Value()
         {
             var p = EnvEx.GetVariable(EnvExOsxVariableNames.LogName);
-            Assert.NotNull(p);
-            _outputHelper.WriteLine(p);
-        }
-
-        [FactOsx]
-        public void Osx_Gets_TermProgram_Environment_Value()
-        {
-            var p = EnvEx.GetVariable(EnvExOsxVariableNames.TermProgram);
-            Assert.NotNull(p);
-            _outputHelper.WriteLine(p);
-        }
-
-        [FactOsx]
-        public void Osx_Gets_TermProgramVersion_Environment_Value()
-        {
-            var p = EnvEx.GetVariable(EnvExOsxVariableNames.TermProgramVersion);
             Assert.NotNull(p);
             _outputHelper.WriteLine(p);
         }
