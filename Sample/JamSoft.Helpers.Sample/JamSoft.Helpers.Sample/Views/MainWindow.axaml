@@ -10,60 +10,82 @@
                            x:Class="JamSoft.Helpers.Sample.Views.MainWindow"
                            Icon="/Assets/avalonia-logo.ico"
                            Title="JamSoft.Helpers.Sample"
-                           Padding="20">
+                           Padding="20"
+                           Closed="TopLevel_OnClosed">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowSampleAppViewModel/>
     </Design.DataContext>
+    
+    <TabControl>
 
-    <Grid RowDefinitions="Auto, Auto, *">
-        
-        <StackPanel Orientation="Horizontal" Spacing="20">
-            <Border Classes="ButtonGroupBorder">
-                <Button x:Name="LoadPeopleButton">Load People</Button>
-            </Border>
-            <Border Classes="ButtonGroupBorder">
-                <Button x:Name="ValidatePeopleButton">IsDirty</Button>
-            </Border>
-            <Border Classes="ButtonGroupBorder">
-                <StackPanel Orientation="Horizontal" Spacing="20">
-                    <Button x:Name="ValidatePropertiesButton">Track Properties</Button>
-                    <Button x:Name="ReValidatePropertiesButton">Recheck</Button>
+        <TabItem Header="Dirty Monitoring">
+            <Grid RowDefinitions="Auto, Auto, *">
+                
+                <StackPanel Classes="ToolBar">
+                    <Border Classes="ButtonGroupBorder">
+                        <Button x:Name="LoadPeopleButton">Load People</Button>
+                    </Border>
+                    <Border Classes="ButtonGroupBorder">
+                        <Button x:Name="ValidatePeopleButton">IsDirty</Button>
+                    </Border>
+                    <Border Classes="ButtonGroupBorder">
+                        <StackPanel Orientation="Horizontal" Spacing="20">
+                            <Button x:Name="ValidatePropertiesButton">Track Properties</Button>
+                            <Button x:Name="ReValidatePropertiesButton">Recheck</Button>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
-            </Border>
-        </StackPanel>
+                
+                <StackPanel Grid.Row="1" Spacing="5" Margin="0,10">
+                    <TextBlock>1. Load some data and click the IsDirty button. All are set to IsDirty=False</TextBlock>
+                    <TextBlock>2. Load some data and click the IsDirty button, edit a cell in the DataGrid and click the IsDirty button again.</TextBlock>
+                    <TextBlock>3. Load some data and click the Track Properties button, edit a cell in the DataGrid and click the Recheck button, the edited property will be shown in the Changed Properties column.</TextBlock>
+                </StackPanel>
+                
+                <DataGrid x:Name="PeopleGrid" Grid.Row="2" AutoGenerateColumns="False" Margin="0,20">
+                    <DataGrid.Resources>
+                        <converters1:IsDirtyColorConverter x:Key="IsDirtyColorConverter"/>
+                        <converters:MemberInfoConverter x:Key="MemberInfoConverter"/>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Address 1" Binding="{Binding AddressLine1}" />
+                        <DataGridTextColumn Header="Address 2" Binding="{Binding AddressLine2}" />
+                        <DataGridTextColumn Header="City" Binding="{Binding City}" />
+                        <DataGridTextColumn Header="Post Zip Code" Binding="{Binding PostZipCode}" />
+                        <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" />
+                        <DataGridTextColumn Header="Some Field" Binding="{Binding SomeField}" />
+                        <DataGridCheckBoxColumn Header="Is Dirty?" Binding="{Binding IsDirty}" />
+                        <DataGridTextColumn Header="Changed Properties" Binding="{Binding ChangedProperties, Converter={StaticResource MemberInfoConverter}, Mode=OneWay}" />
+                    </DataGrid.Columns>
+                    <DataGrid.Styles>
+                        <Style Selector="DataGridCell">
+                            <Setter Property="Background" 
+                                    Value="{Binding IsDirty, Converter={StaticResource IsDirtyColorConverter}}" />
+                        </Style>
+                    </DataGrid.Styles>            
+                </DataGrid>
+            </Grid>
+        </TabItem>
         
-        <StackPanel Grid.Row="1" Spacing="5" Margin="0,10">
-            <TextBlock>1. Load some data and click the IsDirty button. All are set to IsDirty=False</TextBlock>
-            <TextBlock>2. Load some data and click the IsDirty button, edit a cell in the DataGrid and click the IsDirty button again.</TextBlock>
-            <TextBlock>3. Load some data and click the Track Properties button, edit a cell in the DataGrid and click the Recheck button, the edited property will be shown in the Changed Properties column.</TextBlock>
-        </StackPanel>
-        
-        <DataGrid x:Name="PeopleGrid" Grid.Row="2" AutoGenerateColumns="False" Margin="0,20">
-            <DataGrid.Resources>
-                <converters1:IsDirtyColorConverter x:Key="IsDirtyColorConverter"/>
-                <converters:MemberInfoConverter x:Key="MemberInfoConverter"/>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Address 1" Binding="{Binding AddressLine1}" />
-                <DataGridTextColumn Header="Address 2" Binding="{Binding AddressLine2}" />
-                <DataGridTextColumn Header="City" Binding="{Binding City}" />
-                <DataGridTextColumn Header="Post Zip Code" Binding="{Binding PostZipCode}" />
-                <DataGridTextColumn Header="Phone Number" Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn Header="Some Field" Binding="{Binding SomeField}" />
-                <DataGridCheckBoxColumn Header="Is Dirty?" Binding="{Binding IsDirty}" />
-                <DataGridTextColumn Header="Changed Properties" Binding="{Binding ChangedProperties, Converter={StaticResource MemberInfoConverter}, Mode=OneWay}" />
-            </DataGrid.Columns>
-            <DataGrid.Styles>
-                <Style Selector="DataGridCell">
-                    <Setter Property="Background" 
-                            Value="{Binding IsDirty, Converter={StaticResource IsDirtyColorConverter}}" />
-                </Style>
-            </DataGrid.Styles>            
-        </DataGrid>
-    </Grid>
-
+        <TabItem Header="SettingsBase">
+            <Grid RowDefinitions="Auto, *" ColumnDefinitions="*,*">
+                <StackPanel Classes="ToolBar">
+                    <Border Classes="ButtonGroupBorder">
+                        <Button x:Name="SaveSettings">Save Settings</Button>
+                    </Border>
+                    <Border Classes="ButtonGroupBorder">
+                        <Button x:Name="ResetSettings">Reset</Button>
+                    </Border>
+                </StackPanel>
+                
+                <TextBox Grid.Row="1" Text="{Binding AStringValue}" Grid.Column="0" VerticalAlignment="Center" />
+                
+                <TextBox Grid.Row="1" Text="{Binding SettingsFileContents}" Grid.Column="1" VerticalAlignment="Center" />
+            </Grid>
+        </TabItem>
+    </TabControl>
 </reactiveUi:ReactiveWindow>

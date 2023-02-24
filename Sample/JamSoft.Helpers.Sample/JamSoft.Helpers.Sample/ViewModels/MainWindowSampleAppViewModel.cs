@@ -1,4 +1,5 @@
-﻿using System.Reactive;
+﻿using System.IO;
+using System.Reactive;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using Avalonia.Threading;
@@ -11,6 +12,8 @@ namespace JamSoft.Helpers.Sample.ViewModels;
 public class MainWindowSampleAppViewModel : SampleAppViewModelBase, IActivatableViewModel
 {
     private readonly ObservableAsPropertyHelper<SuperObservableCollection<PersonViewModel>> _people;
+    private string _aStringValue;
+    private string _settingsFileContents;
 
     public MainWindowSampleAppViewModel()
     {
@@ -28,14 +31,63 @@ public class MainWindowSampleAppViewModel : SampleAppViewModelBase, IActivatable
         ValidatePropertiesCommand = ReactiveCommand.CreateFromTask(ValidateProperties);
         ReValidatePropertiesCommand = ReactiveCommand.CreateFromTask(ReValidateProperties);
         
+        SaveSettingsFileCommand = ReactiveCommand.CreateFromTask(SaveSettingsFile);
+        ResetSettingsFileCommand = ReactiveCommand.CreateFromTask(ResetSettingsFile);
+        
         _people = LoadPeopleCommand.ToProperty(this, x => x.People, scheduler: RxApp.MainThreadScheduler);
+
+        AStringValue = SampleAppSettings.Instance.AStringValue;
     }
-    
+
+    public ReactiveCommand<Unit, Unit> ResetSettingsFileCommand { get; set; }
+
+    public ReactiveCommand<Unit,Unit> SaveSettingsFileCommand { get; }
+
     public ReactiveCommand<Unit, SuperObservableCollection<PersonViewModel>> LoadPeopleCommand { get; }
     public ReactiveCommand<Unit, Unit> ValidatePeopleCommand { get; }
     public ReactiveCommand<Unit, Unit> ValidatePropertiesCommand { get; }
     
     public ReactiveCommand<Unit, Unit> ReValidatePropertiesCommand { get; }
+
+    public string AStringValue
+    {
+        get => _aStringValue;
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _aStringValue, value);
+            SampleAppSettings.Instance.AStringValue = value;
+        }
+    }
+
+    public string SettingsFileContents
+    {
+        get => _settingsFileContents;
+        set => this.RaiseAndSetIfChanged(ref _settingsFileContents, value);
+    }
+
+    private Task SaveSettingsFile()
+    {
+        return Task.Run(async () =>
+        {
+            SampleAppSettings.Save();
+            SettingsFileContents = await ReadSettingsFileContents();
+        });
+    }
+
+    private async Task<string> ReadSettingsFileContents()
+    {
+        return await File.ReadAllTextAsync(Path.Combine(EnvEx.WhereAmI(), "sampleappsettings.json"));
+    }
+
+    private Task ResetSettingsFile()
+    {
+        return Task.Run(async () =>
+        {
+            SampleAppSettings.ResetToDefaults();
+            AStringValue = SampleAppSettings.Instance.AStringValue;
+            SettingsFileContents = await ReadSettingsFileContents();
+        });
+    }
 
     private Task ValidateProperties()
     {

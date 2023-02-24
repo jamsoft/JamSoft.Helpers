@@ -1,5 +1,7 @@
+using System;
 using System.Reactive.Disposables;
 using Avalonia.ReactiveUI;
+using JamSoft.Helpers.Sample.Models;
 using JamSoft.Helpers.Sample.ViewModels;
 using ReactiveUI;
 
@@ -40,6 +42,21 @@ public partial class MainWindow : ReactiveWindow<MainWindowSampleAppViewModel>
                     x => x.People,
                     x => x.PeopleGrid.Items)
                 .DisposeWith(disposables);
+            
+            this.BindCommand(ViewModel,
+                    x => x!.SaveSettingsFileCommand,
+                    x => x.SaveSettings)
+                .DisposeWith(disposables);
+            
+            this.BindCommand(ViewModel,
+                    x => x!.ResetSettingsFileCommand,
+                    x => x.ResetSettings)
+                .DisposeWith(disposables);            
         });
+    }
+
+    private void TopLevel_OnClosed(object? sender, EventArgs e)
+    {
+        SampleAppSettings.Save();
     }
 }

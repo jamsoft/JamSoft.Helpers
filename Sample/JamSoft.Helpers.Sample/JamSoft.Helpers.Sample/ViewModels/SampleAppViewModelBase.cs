@@ -2,4 +2,7 @@
 
 namespace JamSoft.Helpers.Sample.ViewModels;
 
-public class SampleAppViewModelBase : AvaloniaViewModelBase { }
+public class SampleAppViewModelBase : AvaloniaViewModelBase
+{
+    // your apps base view model bits
+}
