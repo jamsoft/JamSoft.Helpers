@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using JamSoft.Helpers.Sample.Models;
 using JamSoft.Helpers.Sample.ViewModels;
 using JamSoft.Helpers.Sample.Views;
 
@@ -15,6 +16,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        SampleAppSettings.Load(EnvEx.WhereAmI());
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
