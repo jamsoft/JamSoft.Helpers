@@ -1,4 +1,4 @@
-<img alt="jamsoft-logo" height="90" width="468" src="img/logo.png">
+![jamsoft-logo](https://github.com/jamsoft/jamsoft.helpers/blob/master/img/logo.png?raw=true)
 
 # JamSoft.Helpers
 
@@ -8,6 +8,7 @@ A collection of general helpers for applications and libraries. The goal is to p
 [![Coverage Status](https://coveralls.io/repos/github/jamsoft/JamSoft.Helpers/badge.svg?branch=master)](https://coveralls.io/github/jamsoft/JamSoft.Helpers?branch=master)
 ![Nuget](https://img.shields.io/nuget/v/JamSoft.Helpers)
 ![GitHub](https://img.shields.io/github/license/jamsoft/JamSoft.Helpers)
+[![CodeFactor](https://www.codefactor.io/repository/github/jamsoft/jamsoft.helpers/badge)](https://www.codefactor.io/repository/github/jamsoft/jamsoft.helpers)
 
 ## Table of Contents
 - [Docs](#Docs)
