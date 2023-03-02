@@ -16,7 +16,7 @@ namespace JamSoft.Helpers.Tests.Patterns
         [Fact]
         public void MementoManager_Undo_Without_Snapshots()
         {
-            var originalState = "Super-duper-super-puper-super.";
+            var originalState = "Super-duper-super-duper-super.";
 
             // Client code.
             var originator = new Originator(originalState, _outputHelper);
@@ -28,7 +28,7 @@ namespace JamSoft.Helpers.Tests.Patterns
         [Fact]
         public void MementoManager_State_Management()
         {
-            var originalState = "Super-duper-super-puper-super.";
+            var originalState = "Super-duper-super-duper-super.";
 
             // Client code.
             var originator = new Originator(originalState, _outputHelper);
@@ -57,7 +57,6 @@ namespace JamSoft.Helpers.Tests.Patterns
 
             caretaker.Undo();
             Assert.Equal(secondEditState, originator.WhatIsMyState());
-
 
             caretaker.Undo();
             Assert.Equal(firstEditState, originator.WhatIsMyState());
