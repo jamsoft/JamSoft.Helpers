@@ -85,5 +85,7 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
     public virtual void StopTracking()
     {
         IsDirtyValidator.StopTrackingObject(this);
+        ChangedProperties = null;
+        ChangedFields = null;
     }
 }

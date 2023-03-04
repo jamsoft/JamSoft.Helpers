@@ -12,12 +12,12 @@ public class IsDirtyColorConverter : IValueConverter
 	/// <summary>
 	/// The IsDirty=False color
 	/// </summary>
-	public SolidColorBrush FalseColor { get; set; } = new SolidColorBrush(Color.Parse("#B8FFB8"));
+	public SolidColorBrush FalseColor { get; set; } = new SolidColorBrush(Color.FromRgb(184, 255, 184));
 
 	/// <summary>
 	/// The IsDirty=True color
 	/// </summary>
-	public SolidColorBrush TrueColor { get; set; } = new SolidColorBrush(Color.Parse("#FF8D8D"));
+	public SolidColorBrush TrueColor { get; set; } = new SolidColorBrush(Color.FromRgb(255, 141, 141));
 	
 	/// <inheritdoc cref="IValueConverter.Convert"/>
 	public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
