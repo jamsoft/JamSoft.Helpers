@@ -35,19 +35,19 @@ https://jamsoft.github.io/JamSoft.Helpers/
 # Installation
 ### Nuget
 ```shell
-Install-Package JamSoft.Helpers -Version 1.2.3
+Install-Package JamSoft.Helpers -Version 1.2.4
 ```
 ### CLI
 ```shell
-dotnet add package JamSoft.Helpers --version 1.2.3
+dotnet add package JamSoft.Helpers --version 1.2.4
 ```
 ### Package Reference
 ```xml
-<PackageReference Include="JamSoft.Helpers" Version="1.2.3" />
+<PackageReference Include="JamSoft.Helpers" Version="1.2.4" />
 ```
 ### Package Reference
 ```shell
-paket add JamSoft.Helpers --version 1.2.3
+paket add JamSoft.Helpers --version 1.2.4
 ```
 # Tests
 
