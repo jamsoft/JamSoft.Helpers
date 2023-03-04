@@ -24,11 +24,11 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <AssemblyOriginatorKeyFile>JamSoft.Helpers.Sname.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <Version>1.2.3</Version>
-    <PackageVersion>1.2.3</PackageVersion>
-    <AssemblyVersion>1.2.3.0</AssemblyVersion>
-    <FileVersion>1.2.3.0</FileVersion>
-    <InformationalVersion>1.2.3.0-rel</InformationalVersion>
+    <Version>1.2.4</Version>
+    <PackageVersion>1.2.4</PackageVersion>
+    <AssemblyVersion>1.2.4.0</AssemblyVersion>
+    <FileVersion>1.2.4.0</FileVersion>
+    <InformationalVersion>1.2.4.0-rel</InformationalVersion>
     <PublicSign>false</PublicSign>
     <LangVersion>10</LangVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -56,7 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="6.0.4" />
+    <PackageReference Include="System.Text.Json" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
