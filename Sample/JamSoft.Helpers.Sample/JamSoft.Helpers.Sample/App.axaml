@@ -6,8 +6,12 @@
         <local:ViewLocator/>
     </Application.DataTemplates>
 
+    <Application.Resources>
+        <SolidColorBrush x:Key="TabItemHeaderSelectedPipeFill" Color="#e28743"/>
+    </Application.Resources>
+    
     <Application.Styles>
-        <FluentTheme Mode="Light"/>
+        <FluentTheme Mode="Dark"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         
         <Style Selector="Border.ButtonGroupBorder">
@@ -19,6 +23,42 @@
         <Style Selector="StackPanel.ToolBar">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Spacing" Value="20" />
+        </Style>
+        
+        <!-- <Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe"> -->
+        <!--     <Setter Property="Background" Value="#e28743"/> -->
+        <!-- </Style> -->
+        
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#e28743" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Padding" Value="{DynamicResource ButtonPadding}" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentPresenter x:Name="PART_ContentPresenter"
+                                      Background="{TemplateBinding Background}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      Content="{TemplateBinding Content}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Padding="{TemplateBinding Padding}"
+                                      RecognizesAccessKey="True"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        
+        <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#e1a77c" />
+            <Setter Property="BorderBrush" Value="#e1a77c" />
+            <Setter Property="TextBlock.Foreground" Value="Black" />
         </Style>
         
     </Application.Styles>

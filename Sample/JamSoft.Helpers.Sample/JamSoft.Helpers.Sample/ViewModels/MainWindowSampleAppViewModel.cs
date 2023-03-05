@@ -12,8 +12,8 @@ namespace JamSoft.Helpers.Sample.ViewModels;
 public class MainWindowSampleAppViewModel : SampleAppViewModelBase, IActivatableViewModel
 {
     private readonly ObservableAsPropertyHelper<SuperObservableCollection<PersonViewModel>> _people;
-    private string _aStringValue;
-    private string _settingsFileContents;
+    private string? _aStringValue;
+    private string? _settingsFileContents;
 
     public MainWindowSampleAppViewModel()
     {
@@ -49,17 +49,17 @@ public class MainWindowSampleAppViewModel : SampleAppViewModelBase, IActivatable
     
     public ReactiveCommand<Unit, Unit> ReValidatePropertiesCommand { get; }
 
-    public string AStringValue
+    public string? AStringValue
     {
         get => _aStringValue;
         set
         {
             this.RaiseAndSetIfChanged(ref _aStringValue, value);
-            SampleAppSettings.Instance.AStringValue = value;
+            SampleAppSettings.Instance.AStringValue = value!;
         }
     }
 
-    public string SettingsFileContents
+    public string? SettingsFileContents
     {
         get => _settingsFileContents;
         set => this.RaiseAndSetIfChanged(ref _settingsFileContents, value);
