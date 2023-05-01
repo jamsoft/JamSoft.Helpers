@@ -28,9 +28,6 @@ A collection of general helpers for applications and libraries. The goal is to p
 - [Observer Pattern](#Observer)
 - [Memento Pattern](#Memento)
 
-# TODO
-string count certain character instances.
-
 # Docs
 
 https://jamsoft.github.io/JamSoft.Helpers/
