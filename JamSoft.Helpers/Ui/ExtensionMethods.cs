@@ -94,5 +94,15 @@ namespace JamSoft.Helpers.Ui
 
 			return answer;
 		}
+
+		/// <summary>
+		/// Return the simplest form of time hh:mm in 24 hour format
+		/// </summary>
+		/// <param name="time">The input <see cref="TimeSpan"/> instance</param>
+		/// <returns>A string representation in the form, such as 16:45</returns>
+		public static string GetTime(this TimeSpan time)
+		{
+			return time.ToString(@"hh\:mm");
+		}
 	}
 }
