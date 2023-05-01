@@ -156,9 +156,34 @@ To create instances of validators in 1.3.0 things have changed a bit. It's no lo
 ```csharp
 services.RegisterLazySingleton(() => DirtyValidatorFactory.Create());
 ```
+Then once you have everything registered at runtime this can be resolved for constructor injection.
+```csharp
+public class MyClass
+{
+    private IDirtyValidator _dirtyValidator;
+    
+    public MyClass(IDirtyValidator dirtyValidator) // easier to mock in tests etc
+    {
+        _dirtyValidator = dirtyValidator;
+        ...
+    }
+    ...
+}
+```
+
 Or you can simply call the factory directly.
 ```csharp
-_isDirtyValidator = DirtyValidatorFactory.Create();
+public class MyClass
+{
+    private IDirtyValidator _dirtyValidator;
+    
+    public MyClass()
+    {
+        _isDirtyValidator = DirtyValidatorFactory.Create();
+        ...
+    }
+    ...
+}
 ```
 Obviously you could also wire this up in your favourite DI container.
 ## Usage
