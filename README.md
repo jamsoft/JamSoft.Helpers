@@ -28,6 +28,9 @@ A collection of general helpers for applications and libraries. The goal is to p
 - [Observer Pattern](#Observer)
 - [Memento Pattern](#Memento)
 
+# TODO
+string count certain character instances.
+
 # Docs
 
 https://jamsoft.github.io/JamSoft.Helpers/
@@ -149,7 +152,16 @@ public interface IDirtyMonitoring
     string? Hash { get; set; }
 }
 ```
-
+To create instances of validators in 1.3.0 things have changed a bit. It's no longer a state class and is now instantiated from a factory, such as:
+```csharp
+services.RegisterLazySingleton(() => DirtyValidatorFactory.Create());
+```
+Or you can simply call the factory directly.
+```csharp
+_isDirtyValidator = DirtyValidatorFactory.Create();
+```
+Obviously you could also wire this up in your favourite DI container.
+## Usage
 First implement the interface on your own classes, such as:
 ```csharp
 public class PersonViewModel : IDirtyMonitoring
@@ -163,32 +175,32 @@ public class PersonViewModel : IDirtyMonitoring
 ```
 In this example only the `DisplayName` property is monitored for changes. After an object has completed being initialised and is in it's "clean" state, validate it.
 ```csharp
-IsDirtyValidator.Validate(p);
+_isDirtyValidator.Validate(p);
 ```
 Now, at any point in time you can validate it again to detect if the class is dirty.
 ```csharp
 p.DisplayName = "Original";
-IsDirtyValidator.Validate(p).IsDirty; // false
+_isDirtyValidator.Validate(p).IsDirty; // false
 p.DisplayName = "SomedifferentValue";
-IsDirtyValidator.Validate(p).IsDirty; // true
+_isDirtyValidator.Validate(p).IsDirty; // true
 p.DisplayName = "Original";
-IsDirtyValidator.Validate(p).IsDirty; // false
+_isDirtyValidator.Validate(p).IsDirty; // false
 ```
 ## Property & Field Tracking
 
 As of v1.2.0 it is also possible to track which properties in a given object instance have changed. In order to track properties, call the `Validate` method and pass `True` as the `trackProperties` parameter.
 ```csharp
-IsDirtyValidator.Validate(p, trackProperties:true);
+_isDirtyValidator.Validate(p, trackProperties:true);
 ```
 Now that the object, its properties and fields have been validated changes can be reported in more detail. Calls to the `ValidatePropertiesAndFields()` method will return collections of `PropertyInfo` and `FieldInfo` objects, such as:
 ```csharp
-var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(p);
+var (props, fields) = _isDirtyValidator.ValidatePropertiesAndFields(p);
 ```
 In the example above the `props` and `fields` collections contain details of the properties and fields that have changed since the previous validation process.
 
 To restart this validation process on the same instance, simply re-validate it and pass `True` again. 
 ```csharp
-IsDirtyValidator.Validate(p, true);
+_isDirtyValidator.Validate(p, true);
 ```
 ## Dirty Monitoring Example Usage
 
@@ -198,7 +210,7 @@ public void LoadPeopleFromDataSource()
     var vms = Mapper.Map(_dataService.GetPeople());
     foreach(var vm in vms)
     {
-        IsDirtyValidator.Validate(p, trackProperties:true);
+        _isDirtyValidator.Validate(p, trackProperties:true);
         ...
     }
 }
@@ -207,15 +219,31 @@ public void SaveUiState()
 {
     foreach(var vm in _people)
     {
-        if(IsDirtyValidator.Validate(vm).IsDirty)
+        if(_isDirtyValidator.Validate(vm).IsDirty)
         {
             // save logic
             
-            var (props, fields) = IsDirtyValidator.ValidatePropertiesAndFields(vm);
+            var (props, fields) = _isDirtyValidator.ValidatePropertiesAndFields(vm);
             // more granular save logic
         }
     }
 }
+```
+## Managing Hashes
+
+The property containing the hash store is now exposed (since v1.2.5) so you can better manage the resources in use. You can simple set the property to a new empty collection or clear the existing one.
+
+```csharp
+_isDirtyValidator.ObjectValueHashStore = new();
+```
+
+Or you can perform a complete reset using the provided method with the option of clearing down the cached type data:
+```csharp
+_isDirtyValidator.Reset(); // clearTypeInfo:false
+```
+```csharp
+// will clear any cached type info
+_isDirtyValidator.Reset(clearTypeInfo:true);
 ```
 # Collections
 ## Shuffle Collections
@@ -342,6 +370,9 @@ input.ToTimeDisplayFromSeconds() returns "01:00:57"
 
 double input = 3657.12;
 input.ToTimeDisplayFromSeconds(withMs: true) returns "01:00:57:120"
+
+TimeSpan input = new TimeSpan(16, 45, 0);
+input.GetTime() returns "16:45"
 ```
 
 # Math
