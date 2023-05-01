@@ -881,6 +881,13 @@
             <param name="withMs">include milliseconds in the output string</param>
             <returns>the time in human readable form xx:xx:xx.xxx</returns>
         </member>
+        <member name="M:JamSoft.Helpers.Ui.ExtensionMethods.GetTime(System.TimeSpan)">
+            <summary>
+            Return the simplest form of time hh:mm in 24 hour format
+            </summary>
+            <param name="time">The input <see cref="T:System.TimeSpan"/> instance</param>
+            <returns>A string representation in the form, such as 16:45</returns>
+        </member>
         <member name="T:JamSoft.Helpers.Ui.Graphics">
             <summary>
             Provides helper methods for UI tasks
@@ -952,6 +959,77 @@
             The object hash value
             </summary>
         </member>
+        <member name="T:JamSoft.Helpers.Ui.IDirtyValidator">
+            <summary>
+            The IDirtyValidator interface
+            </summary>
+        </member>
+        <member name="P:JamSoft.Helpers.Ui.IDirtyValidator.ObjectValueHashStore">
+            <summary>
+            The Object value hash store
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IDirtyValidator.Validate``1(``0,System.Boolean)">
+            <summary>
+            Validates properties and fields decorated with <see cref="T:JamSoft.Helpers.Ui.IsDirtyMonitoringAttribute"/> on whole instances for dirtiness. If any monitored value has changed, the IsDirty property will be set to True 
+            </summary>
+            <param name="instance">The instance to be validated</param>
+            <param name="trackProperties"></param>
+            <typeparam name="T">The object type</typeparam>
+            <returns>The sample annotated object instance</returns>
+            <remarks>Validate the clean object in order to calculate the clean hash value for the object instance. Subsequent calls will detect if the contents has changes between validations</remarks>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IDirtyValidator.ValidatePropertiesAndFields``1(``0)">
+            <summary>
+            Checks individual values within properties and fields and returns a list of each with changes
+            </summary>
+            <remarks>For a call to this method to work, the object must have been previously validated with by calling the Validate method with trackProperties set to true</remarks>
+            <param name="instance">The object instance to validate</param>
+            <typeparam name="T">The object type</typeparam>
+            <returns>Two arrays, one of <see cref="T:System.Reflection.PropertyInfo"/> objects and one of <see cref="T:System.Reflection.FieldInfo"/> objects</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IDirtyValidator.Reset(System.Boolean)">
+            <summary>
+            Resets all tracking data
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IDirtyValidator.StopTrackingObject``1(``0)">
+            <summary>
+            Stops tracking an object by clearing down any stored information and resetting the properties
+            </summary>
+            <param name="instance">The object to stop tracking</param>
+            <typeparam name="T">The object type</typeparam>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.DirtyValidatorFactory">
+            <summary>
+            A factory class that creates dirty validators
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.DirtyValidatorFactory.Create">
+            <summary>
+            Create a new dirty validator
+            </summary>
+            <returns>A new <see cref="T:JamSoft.Helpers.Ui.IDirtyValidator"/> instance</returns>
+        </member>
+        <member name="T:JamSoft.Helpers.Ui.IsDirtyExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IsDirtyExtensions.GetId(JamSoft.Helpers.Ui.IDirtyMonitoring)">
+            <summary>
+            
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IsDirtyExtensions.GetIsDirtyHash(JamSoft.Helpers.Ui.IDirtyMonitoring)">
+            <summary>
+            
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
         <member name="T:JamSoft.Helpers.Ui.IsDirtyMonitoringAttribute">
             <summary>
             An attribute to apply to properties in order to monitor them for changes
@@ -960,6 +1038,11 @@
         <member name="T:JamSoft.Helpers.Ui.IsDirtyValidator">
             <summary>
             A utility class for monitoring objects for changes
+            </summary>
+        </member>
+        <member name="P:JamSoft.Helpers.Ui.IsDirtyValidator.ObjectValueHashStore">
+            <summary>
+            The Object value hash store
             </summary>
         </member>
         <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.Validate``1(``0,System.Boolean)">
@@ -980,6 +1063,11 @@
             <param name="instance">The object instance to validate</param>
             <typeparam name="T">The object type</typeparam>
             <returns>Two arrays, one of <see cref="T:System.Reflection.PropertyInfo"/> objects and one of <see cref="T:System.Reflection.FieldInfo"/> objects</returns>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.Reset(System.Boolean)">
+            <summary>
+            Resets all tracking data
+            </summary>
         </member>
         <member name="M:JamSoft.Helpers.Ui.IsDirtyValidator.StopTrackingObject``1(``0)">
             <summary>

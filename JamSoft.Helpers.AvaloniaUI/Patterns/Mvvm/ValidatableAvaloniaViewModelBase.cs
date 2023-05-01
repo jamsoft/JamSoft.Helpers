@@ -13,11 +13,19 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
     private IEnumerable<PropertyInfo>? _changedProperties;
     private IEnumerable<FieldInfo>? _changedFields;
     private string? _hash;
+    
+    /// <summary>
+    /// The validator instance 
+    /// </summary>
+    protected IDirtyValidator _isDirtyValidator;
 
     /// <summary>
     /// Default ctor
     /// </summary>
-    public ValidatableAvaloniaViewModelBase() { }
+    public ValidatableAvaloniaViewModelBase()
+    {
+        _isDirtyValidator = DirtyValidatorFactory.Create();
+    }
 
     /// <summary>
     /// <inheritdoc cref="IDirtyMonitoring.IsDirty"/>
@@ -60,7 +68,7 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
     /// </summary>
     public virtual void Validate()
     {
-        IsDirtyValidator.Validate(this);
+        _isDirtyValidator.Validate(this);
     }
     
     /// <summary>
@@ -68,7 +76,7 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
     /// </summary>
     public virtual void StartValidateAndTrack()
     {
-        IsDirtyValidator.Validate(this, true);
+        _isDirtyValidator.Validate(this, true);
     }
     
     /// <summary>
@@ -76,7 +84,7 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
     /// </summary>
     public virtual void GetChanged()
     {
-        (ChangedProperties, ChangedFields) = IsDirtyValidator.ValidatePropertiesAndFields(this);
+        (ChangedProperties, ChangedFields) = _isDirtyValidator.ValidatePropertiesAndFields(this);
     }
 
     /// <summary>
@@ -84,7 +92,7 @@ public class ValidatableAvaloniaViewModelBase : AvaloniaViewModelBase, IDirtyMon
     /// </summary>
     public virtual void StopTracking()
     {
-        IsDirtyValidator.StopTrackingObject(this);
+        _isDirtyValidator.StopTrackingObject(this);
         ChangedProperties = null;
         ChangedFields = null;
     }

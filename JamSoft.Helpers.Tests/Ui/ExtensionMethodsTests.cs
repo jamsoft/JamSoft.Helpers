@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 using JamSoft.Helpers.Ui;
 
 namespace JamSoft.Helpers.Tests.Ui
@@ -94,6 +95,13 @@ namespace JamSoft.Helpers.Tests.Ui
 		{
 			double input = 3657.12;
 			Assert.Equal("01:00:57:120", input.ToTimeDisplayFromSeconds(true));
+		}
+		
+		[Fact]
+		public void ConvertTimeSpan_Hours_Minutes()
+		{
+			TimeSpan input = new TimeSpan(16, 45, 0);
+			Assert.Equal("16:45", input.GetTime());
 		}
 	}
 }
