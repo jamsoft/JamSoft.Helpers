@@ -854,6 +854,17 @@
             <param name="input"></param>
             <returns><c>true</c> if is equal to the specified input; otherwise, <c>false</c>.</returns>
         </member>
+        <member name="T:JamSoft.Helpers.Ui.DirtyValidatorFactory">
+            <summary>
+            A factory class that creates dirty validators
+            </summary>
+        </member>
+        <member name="M:JamSoft.Helpers.Ui.DirtyValidatorFactory.Create">
+            <summary>
+            Create a new dirty validator
+            </summary>
+            <returns>A new <see cref="T:JamSoft.Helpers.Ui.IDirtyValidator"/> instance</returns>
+        </member>
         <member name="T:JamSoft.Helpers.Ui.ExtensionMethods">
             <summary>
             General UI Extension Methods
@@ -999,17 +1010,6 @@
             </summary>
             <param name="instance">The object to stop tracking</param>
             <typeparam name="T">The object type</typeparam>
-        </member>
-        <member name="T:JamSoft.Helpers.Ui.DirtyValidatorFactory">
-            <summary>
-            A factory class that creates dirty validators
-            </summary>
-        </member>
-        <member name="M:JamSoft.Helpers.Ui.DirtyValidatorFactory.Create">
-            <summary>
-            Create a new dirty validator
-            </summary>
-            <returns>A new <see cref="T:JamSoft.Helpers.Ui.IDirtyValidator"/> instance</returns>
         </member>
         <member name="T:JamSoft.Helpers.Ui.IsDirtyExtensions">
             <summary>
