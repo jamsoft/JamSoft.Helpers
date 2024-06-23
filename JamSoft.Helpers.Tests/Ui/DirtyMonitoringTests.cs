@@ -511,7 +511,7 @@ namespace JamSoft.Helpers.Tests.Ui
 		}
 
 		[Fact]
-		public void Multi_Threading_Test()
+		public async Task Multi_Threading_Test()
 		{
 			var isDirtyValidator = CreateSut();
 			string hash1 = String.Empty;
@@ -541,8 +541,7 @@ namespace JamSoft.Helpers.Tests.Ui
 				hash2 = p2.Hash.Split('|')[1];
 			});
 
-			Task t = Task.WhenAll(t1, t2);
-			t.Wait();
+			await Task.WhenAll(t1, t2);
 
 			_outputHelper.WriteLine($"hash1: {hash1}");
 			_outputHelper.WriteLine($"hash2: {hash2}");
