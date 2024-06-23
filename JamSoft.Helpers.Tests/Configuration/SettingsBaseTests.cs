@@ -16,7 +16,7 @@ namespace JamSoft.Helpers.Tests.Configuration
         [Fact]
         public void Init_Load_Null_Base_Path_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => ATestSettingsClass.Load(null));
+            Assert.Throws<ArgumentNullException>(() => ATestSettingsClass.Load(null!));
         }
         
         [Fact]

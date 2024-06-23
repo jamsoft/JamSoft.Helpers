@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace JamSoft.Helpers.Configuration
 {
@@ -8,8 +10,25 @@ namespace JamSoft.Helpers.Configuration
     /// Provides loading and saving of JSON settings and configuration data at runtime
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class SettingsBase<T> where T : SettingsBase<T>, new()
+    public abstract class SettingsBase<T> : JsonSerializerContext  where T : SettingsBase<T>, new()
     {
+        /// <summary>
+        /// Default constructor providing default <see cref="JsonSerializerOptions"/> instance
+        /// </summary>
+        public SettingsBase() 
+            : base(null)
+        {
+        }
+        
+        /// <summary>
+        /// Constructor providing custom <see cref="JsonSerializerOptions"/> instance
+        /// </summary>
+        /// <param name="settings"></param>
+        public SettingsBase(JsonSerializerOptions settings) 
+            : base(settings)
+        {
+        }
+        
         // ReSharper disable once StaticMemberInGenericType
         private static string? _filePath;
 
@@ -38,7 +57,7 @@ namespace JamSoft.Helpers.Configuration
             
             _basePath = basePath;
             _filePath = GetLocalFilePath((string.IsNullOrWhiteSpace(filename) ? $"{typeof(T).Name.ToLower(CultureInfo.CurrentCulture)}.json" : filename)!);
-            Instance = (File.Exists(_filePath) ? System.Text.Json.JsonSerializer.Deserialize<T>(File.ReadAllText(_filePath)) : new T())!;
+            Instance = (File.Exists(_filePath) ? JsonSerializer.Deserialize<T>(File.ReadAllText(_filePath)) : new T())!;
         }
 
         /// <summary>
@@ -65,7 +84,7 @@ namespace JamSoft.Helpers.Configuration
             if (string.IsNullOrWhiteSpace(_filePath))
                 throw new InvalidOperationException("No file specified, ensure you have previously called the Load method");
             
-            string json = System.Text.Json.JsonSerializer.Serialize(Instance);
+            string json = JsonSerializer.Serialize(Instance);
             var settingsPath = Path.GetDirectoryName(_filePath);
             if (settingsPath != null)
             {
