@@ -24,17 +24,6 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.#ctor">
-            <summary>
-            Default constructor providing default <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance
-            </summary>
-        </member>
-        <member name="M:JamSoft.Helpers.Configuration.SettingsBase`1.#ctor(System.Text.Json.JsonSerializerOptions)">
-            <summary>
-            Constructor providing custom <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance
-            </summary>
-            <param name="settings"></param>
-        </member>
         <member name="P:JamSoft.Helpers.Configuration.SettingsBase`1.Instance">
             <summary>
             The class instance containing the values
