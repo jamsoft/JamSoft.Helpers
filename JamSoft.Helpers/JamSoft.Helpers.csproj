@@ -33,7 +33,6 @@
     <LangVersion>10</LangVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Nullable>enable</Nullable>
-    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
