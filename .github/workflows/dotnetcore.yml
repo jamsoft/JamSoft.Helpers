@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '8.0.x'
     - name: Install dependencies
       run: dotnet restore
     - name: Build
@@ -27,4 +27,4 @@ jobs:
       uses: coverallsapp/github-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./JamSoft.Helpers.Tests/TestResults/coverage.net6.0.info
+        path-to-lcov: ./JamSoft.Helpers.Tests/TestResults/coverage.net8.0.info
